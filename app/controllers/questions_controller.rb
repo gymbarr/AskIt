@@ -8,12 +8,32 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(title: params[:title], body: params[:body])
+    @question = Question.new(question_params)
 
     if @question.save
-      redirect_to questions_path
+      redirect_to questions_path, notice: 'Question was successfully created!'
     else
       render 'new'
     end
+  end
+
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:id])
+    
+    if @question.update(question_params)
+      redirect_to questions_path, notice: 'Question was successfully updated!'
+    else
+      render 'edit'
+    end
+  end
+
+  private
+
+  def question_params
+    params.require(:question).permit(:title, :body)
   end
 end
