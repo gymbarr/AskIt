@@ -15,3 +15,14 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+// send a message by enter key
+submit_message = function() {
+  $('#answer_body').on('keydown', function(e) {
+    if (e.keyCode == 13) {
+      $('button').click();
+      // remove value to not submit the entered message twice
+      e.target.value = "";
+    };
+  });
+};
