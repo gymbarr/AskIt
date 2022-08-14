@@ -2,8 +2,8 @@
 
 <% @questions.each do |question| %>
   <h2><%= question.title %></h2>
-  <time datetime="<%= format_created_at(question.created_at) %>">
-    <%= format_created_at(question.created_at) %>
+  <time datetime="<%= format_timestamp(question.created_at) %>">
+    <%= format_timestamp(question.created_at) %>
   </time>
   <p><%= question.body %></p>
   <br>
