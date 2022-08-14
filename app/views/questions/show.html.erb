@@ -1,8 +1,8 @@
 <h1>Question info</h1>
 
 <h2><%= @question.title %></h2>
-<time datetime="<%= @question.formatted_created_at %>">
-  <%= @question.formatted_created_at %>
+<time datetime="<%= format_created_at(@question.created_at) %>">
+  <%= format_created_at(@question.created_at) %>
 </time>
 <p><%= @question.body %></p>
 
