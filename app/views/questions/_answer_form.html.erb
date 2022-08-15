@@ -1,5 +1,5 @@
 <%= form_with model: [@question, @answer] do |f| %>
-  <div class="input-group mb-3">
+  <div class="input-group my-3">
     <%= f.text_area :body, required: true, placeholder: "Type an answer...", class:"form-control" %>
     <%= f.submit @answer.new_record? ? "Enter" : "Update", class:"btn btn-outline-primary" %>
   </div>

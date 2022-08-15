@@ -1,0 +1,6 @@
+<%= form_with model: [@question, @comment] do |f| %>
+  <div class="input-group my-3">
+    <%= f.text_area :body, required: true, placeholder: "Type a comment...", class:"form-control" %>
+    <%= f.submit @comment.new_record? ? "Enter" : "Update", class:"btn btn-outline-primary" %>
+  </div>
+<% end %>
