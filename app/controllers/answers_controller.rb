@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
     answer = current_question.answers.build(answer_params)
 
     if answer.save
-      redirect_to question_path(current_question)
+      redirect_to question_path(current_question), notice: 'Answer was successfully added to the question!'
     end
   end
 
