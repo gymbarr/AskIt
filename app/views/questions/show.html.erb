@@ -22,6 +22,13 @@
   <div id="answer_form_<%= answer.id %>">
 
   </div>
+
+  <% answer.comments.each do |comment| %>
+    <time datetime="<%= format_timestamp(comment.created_at) %>">
+      <%= format_timestamp(answer.created_at) %>
+    </time>
+    <p><%= comment.body %></p>
+  <% end %>
 <% end %>
 
 <%= render 'answer_form' %>
