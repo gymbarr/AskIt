@@ -1,15 +1,28 @@
 <h1>All questions</h1>
 
 <% @questions.each do |question| %>
-  <h2><%= question.title %></h2>
-  <time datetime="<%= format_timestamp(question.created_at) %>">
-    <%= format_timestamp(question.created_at) %>
-  </time>
-  <p><%= question.body %></p>
-  <br>
-  <%= link_to 'Show', question_path(question) %>
-  <%= link_to 'Edit', edit_question_path(question) %>
-  <%= link_to 'Delete', question_path(question), method: :delete, data: { confirm: "Are you sure?" } %>
+  <div class="py-3">
+    <div class="card">
+      <div class="card-header">
+        <time datetime="<%= format_timestamp(question.created_at) %>">
+          <%= format_timestamp(question.created_at) %>
+        </time>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= question.title %></h5>
+        <p class="card-text"><%= question.body %></p>
+        <%= link_to 'Show', question_path(question), class:"btn btn-outline-primary" %>
+        <%= link_to 'Edit', edit_question_path(question), class:"btn btn-outline-primary" %>
+        <%= link_to 'Delete', question_path(question), method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger" %>
+      </div>
+      <div class="card-footer text-muted">
+        2 days ago
+      </div>
+    </div>
+  </div>
 <% end %>
 
-<p><%= link_to 'New question', new_question_path %></p>
+<div class="pb-3">
+  <%= link_to 'New question', new_question_path, class:"btn btn-outline-primary" %>
+</div>
+
