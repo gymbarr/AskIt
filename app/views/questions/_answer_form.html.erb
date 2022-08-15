@@ -1,0 +1,7 @@
+<%= form_with model: [@question, @answer] do |f| %>
+  <div>
+    <%= f.text_area :body, required: true, placeholder: "Type an answer..." %>
+  </div>
+
+  <%= f.submit @answer.new_record? ? "Enter" : "Update" %>
+<% end %>

@@ -1,12 +1,28 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: %i[destroy]
-  before_action :set_question, only: %i[create destroy]
+  before_action :set_answer, only: %i[edit update destroy]
+  before_action :set_question, only: %i[create edit update destroy]
 
   def create
     answer = @question.answers.build(answer_params)
 
     if answer.save
       redirect_to question_path(@question), notice: 'Answer was successfully added to the question!'
+    else
+      render 'questions/show'
+    end
+  end
+
+  def edit
+    @answers = @question.answers
+
+    respond_to do |format|
+      format.js { render partial: 'questions/answer_form' }
+    end
+  end
+
+  def update
+    if @answer.update(answer_params)
+      redirect_to question_path(@question), notice: 'Answer was successfully updated!'
     else
       render 'questions/show'
     end
