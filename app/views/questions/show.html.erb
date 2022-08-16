@@ -19,6 +19,8 @@
   </div>
 </div>
 
+<%= render 'answer_form' %>
+
 <h2 class="py-3">Answers</h2>
 
 <% @answers.each do |answer| %>
@@ -28,8 +30,6 @@
       <p class="card-text"><%= answer.body %></p>
       <p class="card-text"><small class="text-muted"><%= format_timestamp(answer.created_at) %></small></p>
 
-      <%= link_to 'Reply', edit_question_answer_path(@question, answer), 
-                          remote: true, class:"btn btn-outline-primary btn-sm" %>
       <%= link_to 'Edit', edit_question_answer_path(@question, answer), 
                           remote: true, class:"btn btn-outline-primary btn-sm" %>
       <%= link_to 'Delete', question_answer_path(@question, answer), method: :delete, 
@@ -55,8 +55,6 @@
             <p class="card-text"><%= comment.body %></p>
             <p class="card-text"><small class="text-muted"><%= format_timestamp(comment.created_at) %></small></p>
 
-            <%= link_to 'Reply', edit_question_comment_path(@question, comment), 
-                                remote: true, class:"btn btn-outline-primary btn-sm" %>
             <%= link_to 'Edit', edit_question_comment_path(@question, comment), 
                                 remote: true, class:"btn btn-outline-primary btn-sm" %>
             <%= link_to 'Delete', question_comment_path(@question, comment), method: :delete, 
@@ -72,10 +70,5 @@
 
       <%= render 'comment_form', answer_id: answer.id %>
     </div>
-
   </div>
-  
 <% end %>
-
-
-<%= render 'answer_form' %>

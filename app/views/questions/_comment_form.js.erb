@@ -1,6 +1,6 @@
 <% @comments.each do |comment| %>
   <% if @comment == comment %>
-    document.querySelector('#comment_form_<%= comment.id %>').innerHTML = '<%= escape_javascript(render 'questions/comment_form.html') %>'
+    document.querySelector('#comment_form_<%= comment.id %>').innerHTML = '<%= escape_javascript(render 'questions/comment_form.html', answer_id: @answer.id) %>'
   <% else %>
     document.querySelector('#comment_form_<%= comment.id %>').innerHTML = ''
   <% end %>
