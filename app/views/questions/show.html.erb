@@ -34,13 +34,14 @@
                           remote: true, class:"btn btn-outline-primary btn-sm" %>
       <%= link_to 'Delete', question_answer_path(@question, answer), method: :delete, 
                             data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger btn-sm" %>
+      
+      <%# displaying editing form for answer with ajax (see _answer_form.js.erb) %>
+      <div id="answer_form_<%= answer.id %>">
+
+      </div>
     </div>
   </div>
 
-  <%# displaying editing form for answer with ajax (see _answer_form.js.erb) %>
-  <div id="answer_form_<%= answer.id %>">
-
-  </div>
 
   <%# displaying comment for answers %>
   <div class="row">
@@ -60,15 +61,18 @@
                                 remote: true, class:"btn btn-outline-primary btn-sm" %>
             <%= link_to 'Delete', question_comment_path(@question, comment), method: :delete, 
                                   data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger btn-sm" %>
+          
+            <%# displaying editing or replying form for comment with ajax (see _comment_form.js.erb) %>
+            <div id="comment_form_<%= comment.id %>">
+
+            </div>
           </div>
         </div>
-      
-        <%# displaying editing or replying form for comment with ajax (see _comment_form.js.erb) %>
-        <div id="comment_form_<%= comment.id %>">
-
-        </div>
       <% end %> 
+
+      <%= render 'comment_form', answer_id: answer.id %>
     </div>
+
   </div>
   
 <% end %>

@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   resources :questions do
-    resources :answers, only: %i[create edit update destroy]
-    resources :comments, only: %i[new create edit update destroy]
+    resources :answers, except: %i[new index show]
+    resources :comments, except: %i[new index show]
   end
 
 end
