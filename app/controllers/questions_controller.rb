@@ -2,11 +2,13 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: %i[show edit update destroy]
 
   def index
-    @questions = Question.all
+    @pagy, @questions = pagy Question.order(created_at: :desc)
   end
 
   def show
-    @answers = @question.answers
+    @pagy, @answers = pagy @question.answers.order(created_at: :desc)
+    @page = params[:page]
+
     @answer = Answer.new
     @comment = Comment.new
   end

@@ -13,7 +13,7 @@ class AnswersController < ApplicationController
   end
 
   def edit
-    @answers = @question.answers
+    @pagy, @answers = pagy @question.answers.order(created_at: :desc), page: params[:page]
 
     respond_to do |format|
       format.js { render partial: 'questions/answer_form' }
