@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  include ActionView::RecordIdentifier
+
   before_action :set_answer, only: %i[edit update destroy]
   before_action :set_question, only: %i[create edit update destroy]
 
@@ -6,7 +8,7 @@ class AnswersController < ApplicationController
     answer = @question.answers.build(answer_params)
 
     if answer.save
-      redirect_to question_path(@question, anchor: "answer-#{answer.id}"), notice: 'Answer was successfully added to the question!'
+      redirect_to question_path(@question, anchor: dom_id(answer)), notice: 'Answer was successfully added to the question!'
     else
       render 'questions/show'
     end
@@ -22,7 +24,7 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update(answer_params)
-      redirect_to question_path(@question, anchor: "answer-#{@answer.id}"), notice: 'Answer was successfully updated!'
+      redirect_to question_path(@question, anchor: dom_id(@answer)), notice: 'Answer was successfully updated!'
     else
       render 'questions/show'
     end

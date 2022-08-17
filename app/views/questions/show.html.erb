@@ -26,7 +26,7 @@
 <% end %>
 
 <% @answers.each do |answer| %>
-  <div class="card mt-3" id="answer-<%= answer.id %>">
+  <div class="card mt-3" id="<%= dom_id(answer) %>">
     <div class="card-body">
       <h5 class="card-title">Username</h5>
       <p class="card-text"><%= answer.body %></p>
@@ -51,7 +51,7 @@
     </div>
     <div class="col-11">
       <% answer.comments.each do |comment| %>
-        <div class="card mt-2" id="comment-<%= comment.id %>">
+        <div class="card mt-2" id="<%= dom_id(comment) %>">
           <div class="card-body">
             <h6 class="card-title">Username</h6>
             <p class="card-text"><%= comment.body %></p>

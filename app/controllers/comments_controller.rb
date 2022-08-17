@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include ActionView::RecordIdentifier
+
   before_action :set_question
   before_action :set_answer, only: %i[create]
   before_action :set_comment, except: %i[create]
@@ -7,7 +9,7 @@ class CommentsController < ApplicationController
     comment = @answer.comments.build(comment_params)
 
     if comment.save
-      redirect_to question_path(@question, anchor: "comment-#{comment.id}"), notice: 'Comment was successfully added to the answer!'
+      redirect_to question_path(@question, anchor: dom_id(comment)), notice: 'Comment was successfully added to the answer!'
     else
       render 'questions/show'
     end
@@ -24,7 +26,7 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to question_path(@question, anchor: "comment-#{@comment.id}"), notice: 'Comment was successfully updated!'
+      redirect_to question_path(@question, anchor: dom_id(comment)), notice: 'Comment was successfully updated!'
     else
       render 'questions/show'
     end
