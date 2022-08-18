@@ -45,12 +45,12 @@ class QuestionsController < ApplicationController
   end
 
   def vote_up
-    @question.vote_by voter: current_user, vote: 'like'
+    @question&.vote_by voter: current_user, vote: 'like'
     redirect_to question_path(@question)
   end
 
   def vote_down
-    @question.vote_by voter: current_user, vote: 'bad'
+    @question&.vote_by voter: current_user, vote: 'bad'
     redirect_to question_path(@question)
   end
 

@@ -36,12 +36,12 @@ class AnswersController < ApplicationController
   end
 
   def vote_up
-    @answer.vote_by voter: current_user, vote: 'like'
+    @answer&.vote_by voter: current_user, vote: 'like'
     redirect_to question_path(@question, anchor: dom_id(@answer))
   end
 
   def vote_down
-    @answer.vote_by voter: current_user, vote: 'bad'
+    @answer&.vote_by voter: current_user, vote: 'bad'
     redirect_to question_path(@question, anchor: dom_id(@answer))
   end
 
