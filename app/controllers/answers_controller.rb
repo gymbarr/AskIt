@@ -5,12 +5,12 @@ class AnswersController < ApplicationController
   before_action :set_question, only: %i[create edit update destroy]
 
   def create
-    answer = @question.answers.build(answer_params)
+    answer = current_user.answers.build(answer_params)
 
     if answer.save
       redirect_to question_path(@question, anchor: dom_id(answer)), notice: 'Answer was successfully added to the question!'
     else
-      render 'questions/show'
+      redirect_to question_path(@question), alert: 'Something went wrong'
     end
   end
 
@@ -26,7 +26,7 @@ class AnswersController < ApplicationController
     if @answer.update(answer_params)
       redirect_to question_path(@question, anchor: dom_id(@answer)), notice: 'Answer was successfully updated!'
     else
-      render 'questions/show'
+      redirect_to question_path(@question), alert: 'Something went wrong'
     end
   end
 
@@ -38,7 +38,7 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body, :question_id)
   end
 
   def set_answer

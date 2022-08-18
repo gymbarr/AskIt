@@ -8,9 +8,7 @@
   <div class="py-3">
     <div class="card">
       <div class="card-header">
-        <time datetime="<%= format_timestamp(question.created_at) %>">
-          <%= format_timestamp(question.created_at) %>
-        </time>
+        <%= question.user.username %>
       </div>
       <div class="card-body">
         <h5 class="card-title"><%= question.title %></h5>
@@ -20,7 +18,7 @@
         <%= link_to 'Delete', question_path(question), method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger" %>
       </div>
       <div class="card-footer text-muted">
-        2 days ago
+        <%= format_timestamp(question.created_at) %>
       </div>
     </div>
   </div>
