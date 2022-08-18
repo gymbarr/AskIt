@@ -1,8 +1,8 @@
 class AnswersController < ApplicationController
   include ActionView::RecordIdentifier
 
-  before_action :set_answer, only: %i[edit update destroy]
-  before_action :set_question, only: %i[create edit update destroy]
+  before_action :set_answer, except: %i[create]
+  before_action :set_question
 
   def create
     answer = current_user.answers.build(answer_params)
@@ -33,6 +33,16 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     redirect_to question_path(@question), notice: 'Answer was successfully deleted!'
+  end
+
+  def vote_up
+    @answer.vote_by voter: current_user, vote: 'like'
+    redirect_to question_path(@question, anchor: dom_id(@answer))
+  end
+
+  def vote_down
+    @answer.vote_by voter: current_user, vote: 'bad'
+    redirect_to question_path(@question, anchor: dom_id(@answer))
   end
 
   private

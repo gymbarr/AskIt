@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[show edit update destroy]
+  before_action :set_question_for_vote, only: %i[vote_up vote_down]
 
   def index
     @pagy, @questions = pagy Question.order(created_at: :desc)
@@ -30,6 +31,7 @@ class QuestionsController < ApplicationController
   def edit; end
 
   def update
+    byebug
     if @question.update(question_params)
       redirect_to questions_path, notice: 'Question was successfully updated!'
     else
@@ -43,13 +45,11 @@ class QuestionsController < ApplicationController
   end
 
   def vote_up
-    @question = Question.find(params[:question_id])
     @question.vote_by voter: current_user, vote: 'like'
     redirect_to question_path(@question)
   end
 
   def vote_down
-    @question = Question.find(params[:question_id])
     @question.vote_by voter: current_user, vote: 'bad'
     redirect_to question_path(@question)
   end
@@ -62,5 +62,9 @@ class QuestionsController < ApplicationController
 
   def set_question
     @question = Question.find(params[:id])
+  end
+
+  def set_question_for_vote
+    @question = Question.find(params[:question_id])
   end
 end

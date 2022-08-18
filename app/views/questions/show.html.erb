@@ -5,16 +5,27 @@
     <div class="card-header">
       <%= @question.user.username %>
     </div>
+
     <div class="card-body">
       <h5 class="card-title"><%= @question.title %></h5>
       <p class="card-text"><%= @question.body %></p>
       <%= link_to 'Edit', edit_question_path(@question), class:"btn btn-outline-primary" %>
       <%= link_to 'Delete', question_path(@question), method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger" %>
     </div>
+
     <div class="card-footer text-muted">
       <%= format_timestamp(@question.created_at) %>
-      <%= render 'vote' %>
+      <div class="py-2"> 
+        Rating: <%= @question.weighted_score %>
+        <% if !current_user.voted_for? @question %>
+          <span class="ps-3">
+            <span class="pe-2"><%= link_to (fa_icon "arrow-up"), question_vote_up_path(@question), class: "btn btn-secondary" %></span>
+            <%= link_to (fa_icon "arrow-down"), question_vote_down_path(@question), class: "btn btn-secondary" %>
+          </span>
+        <% end %> 
+      </div>
     </div>
+
   </div>
 </div>
 
@@ -29,13 +40,27 @@
     <div class="card-body">
       <h5 class="card-title"><%= answer.user.username %></h5>
       <p class="card-text"><%= answer.body %></p>
-      <p class="card-text"><small class="text-muted"><%= format_timestamp(answer.created_at) %></small></p>
 
       <%= link_to 'Edit', edit_question_answer_path(@question, answer, page: @page),
                           remote: true, class:"btn btn-outline-primary btn-sm" %>
       <%= link_to 'Delete', question_answer_path(@question, answer), method: :delete, 
                             data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger btn-sm" %>
       
+      <p class="card-text mt-3"><small class="text-muted"><%= format_timestamp(answer.created_at) %></small></p>
+      
+      <div class="py-2"> 
+        Rating: <%= answer.weighted_score %>
+        <% if !current_user.voted_for? answer %>
+          <span class="ps-3">
+            <span class="pe-2"><%= link_to (fa_icon "arrow-up"), 
+                                    question_answer_vote_up_path(@question, answer), 
+                                    class: "btn btn-secondary" %></span>
+            <%= link_to (fa_icon "arrow-down"), question_answer_vote_down_path(@question, answer), 
+                                                class: "btn btn-secondary" %>
+          </span>
+        <% end %>
+      </div>
+
       <%# displaying editing form for answer with ajax (see _answer_form.js.erb) %>
       <div id="answer_form_<%= answer.id %>">
 

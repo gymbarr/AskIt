@@ -1,6 +1,6 @@
 class Question < ApplicationRecord
   belongs_to :user
-  has_many :answers
+  has_many :answers, dependent: :destroy
   acts_as_votable
   
   validates :title, presence: true, length: { minimum: 2 }

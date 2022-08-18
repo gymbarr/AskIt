@@ -1,9 +1,0 @@
-<div class="py-2"> 
-Rating: <%= @question.weighted_score %>
-
-<% if !current_user.voted_for? @question %>
-  <span class="ps-3">
-    <span class="pe-2"><%= link_to (fa_icon "arrow-up"), question_vote_up_path(@question), class: "btn btn-secondary" %></span>
-    <%= link_to (fa_icon "arrow-down"), question_vote_down_path(@question), class: "btn btn-secondary" %>
-  </span>
-<% end %> 

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
-  has_many :questions
-  has_many :answers
-  has_many :comments
+  has_many :questions, dependent: :destroy
+  has_many :answers, dependent: :destroy
+  has_many :comments, dependent: :destroy
   acts_as_voter
   
   before_save { self.email = email.downcase }
