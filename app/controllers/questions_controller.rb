@@ -18,12 +18,12 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.build(question_params)
 
     if @question.save
       redirect_to question_path(@question), notice: 'Question was successfully created!'
     else
-      render 'new'
+      redirect_to new_question_path, alert: 'Something went wrong'
     end
   end
 
@@ -33,13 +33,25 @@ class QuestionsController < ApplicationController
     if @question.update(question_params)
       redirect_to questions_path, notice: 'Question was successfully updated!'
     else
-      render 'edit'
+      redirect_to edit_question_path, alert: 'Something went wrong'
     end
   end
 
   def destroy
     @question.destroy
     redirect_to questions_path, notice: 'Question was successfully deleted!'
+  end
+
+  def vote_up
+    @question = Question.find(params[:question_id])
+    @question.vote_by voter: current_user, vote: 'like'
+    redirect_to question_path(@question)
+  end
+
+  def vote_down
+    @question = Question.find(params[:question_id])
+    @question.vote_by voter: current_user, vote: 'bad'
+    redirect_to question_path(@question)
   end
 
   private

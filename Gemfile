@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'pagy', '~> 5.10'
+gem 'acts_as_votable'
+gem "font-awesome-rails"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
