@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_18_134714) do
+ActiveRecord::Schema.define(version: 2022_08_19_071701) do
 
   create_table "answers", force: :cascade do |t|
     t.text "body"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 2022_08_18_134714) do
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.integer "answer_id"
@@ -30,6 +36,11 @@ ActiveRecord::Schema.define(version: 2022_08_18_134714) do
     t.integer "user_id", null: false
     t.index ["answer_id"], name: "index_comments_on_answer_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "question_categories", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "category_id"
   end
 
   create_table "questions", force: :cascade do |t|
