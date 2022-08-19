@@ -4,6 +4,9 @@
   <div class="card">
     <div class="card-header">
       <%= @question.user.username %>
+      <% if @question.categories.any? %>
+        <%= render @question.categories %>
+      <% end %>
     </div>
 
     <div class="card-body">

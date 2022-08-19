@@ -7,6 +7,12 @@
     <%= f.label :body, class:"form-label" %>
     <%= f.text_area :body, required: true, minlength: 2, placeholder: "Body", class:"form-control" %>
   </div>
+  <div class="mb-3">
+    <%= f.label :category_id, class:"form-label" %>
+    <%= f.collection_select(:category_ids, Category.all, :id, :name, 
+                          options = { :prompt => "Choose categories from the listed below" },
+                          class: "form-select") %>
+  </div>
 
   <%= f.submit @question.new_record? ? "Create" : "Update", class:"btn btn-outline-primary" %>
 <% end %>

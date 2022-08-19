@@ -1,4 +1,4 @@
-Class CategoriesController < ApplicationController
+class CategoriesController < ApplicationController
   before_action :set_category, only: [:edit, :update, :destroy, :show]
 
   def new
@@ -49,4 +49,4 @@ Class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
   end
 
-  end
+end

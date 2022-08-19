@@ -31,7 +31,6 @@ class QuestionsController < ApplicationController
   def edit; end
 
   def update
-    byebug
     if @question.update(question_params)
       redirect_to questions_path, notice: 'Question was successfully updated!'
     else
@@ -57,7 +56,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, :category_ids)
   end
 
   def set_question

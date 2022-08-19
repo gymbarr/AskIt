@@ -9,7 +9,11 @@
     <div class="card">
       <div class="card-header">
         <%= question.user.username %>
+        <% if question.categories.any? %>
+          <%= render question.categories %>
+        <% end %>
       </div>
+
       <div class="card-body">
         <h5 class="card-title"><%= question.title %></h5>
         <p class="card-text"><%= question.body %></p>
@@ -19,6 +23,7 @@
           <%= link_to 'Delete', question_path(question), method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger" %>
         <% end %>
       </div>
+
       <div class="card-footer text-muted">
         <%= format_timestamp(question.created_at) %>
       </div>
