@@ -5,3 +5,8 @@
     <%= link_to "Edit category", edit_category_path(@category), class:"btn btn-outline-primary" %>
   </div>
 <% end %>
+
+<%# displaying the category questions by rendering page questions and sent to it the @category.questions parameter (see show method in categories_controller) %>
+<%= render 'questions/question' %>
+
+<%== pagination @pagy %>

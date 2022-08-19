@@ -36,7 +36,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    # @articles = @category.articles.paginate(page: params[:page], per_page: 5)
+    @pagy, @questions = pagy @category.questions.order(created_at: :desc)
   end
 
   private
