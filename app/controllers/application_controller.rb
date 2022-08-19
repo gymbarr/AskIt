@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def notificate_subscribers_new_question(question)
     category = question.categories.first
-    subscriptions = category.subscriptions
+    subscriptions = category&.subscriptions
     return if category.blank? || subscriptions.blank?
 
     subscriptions.each do |subscription|
