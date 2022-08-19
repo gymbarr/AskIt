@@ -10,6 +10,9 @@
       <div class="card-body mt-2">
         <h5 class="card-title"><%= link_to category.name, category_path(category) %></h5>
         <%= pluralize(category.questions.count, "question") %>
+        <% if already_subscribed?(category) %>
+          <br><span class="badge rounded-pill text-bg-secondary">Subscribed</span>
+        <% end %>
       </div>
     </div>
   </div>
