@@ -3,6 +3,13 @@
 <% if logged_in? %>
   <div class="pt-4">
     <%= link_to "Edit category", edit_category_path(@category), class:"btn btn-outline-primary" %>
+    <% if already_subscribed?(@category) %>
+      <%= link_to 'Unsubscribe', category_subscription_path(@category), method: :delete, 
+                              class: "btn btn-danger" %>
+    <% else %>
+      <%= link_to 'Subscribe', category_subscriptions_path(@category), method: :post, 
+                              class: "btn btn-warning" %>
+    <% end %>
   </div>
 <% end %>
 

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     get 'answers/:id/vote_down', to: 'answers#vote_down', as: 'answer_vote_down'
   end
 
-  resources :categories
+  resources :categories do
+    resources :subscriptions, only: %i[create destroy]
+  end
 
 end
