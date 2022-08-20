@@ -1,21 +1,18 @@
 class AnswersController < ApplicationController
   include ActionView::RecordIdentifier
 
-  before_action :set_answer, except: %i[create]
-  before_action :set_question
-
   def create
     answer = current_user.answers.build(answer_params)
 
     if answer.save
-      redirect_to question_path(@question, anchor: dom_id(answer)), notice: 'Answer was successfully added to the question!'
+      redirect_to question_path(question, anchor: dom_id(answer)), notice: 'Answer was successfully added to the question!'
     else
-      redirect_to question_path(@question), alert: 'Something went wrong'
+      redirect_to question_path(question), alert: 'Something went wrong'
     end
   end
 
   def edit
-    @pagy, @answers = pagy @question.answers.order(created_at: :desc), page: params[:page]
+    @pagy, @answers = pagy question.answers.order(created_at: :desc), page: params[:page]
 
     respond_to do |format|
       format.js { render partial: 'questions/answer_form' }
@@ -23,26 +20,26 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if @answer.update(answer_params)
-      redirect_to question_path(@question, anchor: dom_id(@answer)), notice: 'Answer was successfully updated!'
+    if answer.update(answer_params)
+      redirect_to question_path(question, anchor: dom_id(answer)), notice: 'Answer was successfully updated!'
     else
-      redirect_to question_path(@question), alert: 'Something went wrong'
+      redirect_to question_path(question), alert: 'Something went wrong'
     end
   end
 
   def destroy
-    @answer.destroy
-    redirect_to question_path(@question), notice: 'Answer was successfully deleted!'
+    answer.destroy
+    redirect_to question_path(question), notice: 'Answer was successfully deleted!'
   end
 
   def vote_up
-    @answer&.vote_by voter: current_user, vote: 'like'
-    redirect_to question_path(@question, anchor: dom_id(@answer))
+    answer.vote_by voter: current_user, vote: 'like'
+    redirect_to question_path(question, anchor: dom_id(answer))
   end
 
   def vote_down
-    @answer&.vote_by voter: current_user, vote: 'bad'
-    redirect_to question_path(@question, anchor: dom_id(@answer))
+    answer.vote_by voter: current_user, vote: 'bad'
+    redirect_to question_path(question, anchor: dom_id(answer))
   end
 
   private
@@ -51,11 +48,11 @@ class AnswersController < ApplicationController
     params.require(:answer).permit(:body, :question_id)
   end
 
-  def set_answer
-    @answer = Answer.find(params[:id])
+  def answer
+    @answer ||= Answer.find(params[:id])
   end
 
-  def set_question
-    @question = Question.find(params[:question_id])
+  def question
+    question ||= Question.find(params[:question_id])
   end
 end

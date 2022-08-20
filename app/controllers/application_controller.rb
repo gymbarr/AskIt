@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def notificate_subscribers_new_question(question)
+    # TODO: realization through question.subscribers
     category = question.categories.first
     subscriptions = category&.subscriptions
     return if category.blank? || subscriptions.blank?

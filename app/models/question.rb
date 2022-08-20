@@ -3,6 +3,7 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :question_categories, dependent: :destroy
   has_many :categories, through: :question_categories
+  has_many :subscribers, -> { distinct }, through: :categories
   acts_as_votable
   
   validates :title, presence: true, length: { minimum: 2 }
