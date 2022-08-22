@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   include ActionView::RecordIdentifier
+  before_action :answer, only: %i[edit]
 
   def create
     answer = current_user.answers.build(answer_params)
@@ -53,6 +54,6 @@ class AnswersController < ApplicationController
   end
 
   def question
-    question ||= Question.find(params[:question_id])
+    @question ||= Question.find(params[:question_id])
   end
 end
