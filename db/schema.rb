@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_19_114506) do
+ActiveRecord::Schema.define(version: 2022_08_22_133755) do
 
   create_table "answers", force: :cascade do |t|
     t.text "body"
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 2022_08_19_114506) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.string "type"
+    t.text "body"
+    t.string "repliable_type"
+    t.integer "repliable_id"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["repliable_type", "repliable_id"], name: "index_replies_on_repliable_type_and_repliable_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
