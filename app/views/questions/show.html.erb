@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<%= render 'answer_form' %>
+<%= render 'reply_form', { reply: @answer, answer: nil } %>
 
 <% if !@answers.empty? %>
   <h2 class="py-3">Answers</h2>
@@ -69,7 +69,7 @@
       </div>
 
       <%# displaying editing form for answer with ajax (see _answer_form.js.erb) %>
-      <div id="answer_form_<%= answer.id %>">
+      <div id="reply_form_<%= answer.id %>">
 
       </div>
     </div>
@@ -95,14 +95,14 @@
             <% end %>
 
             <%# displaying editing or replying form for comment with ajax (see _comment_form.js.erb) %>
-            <div id="comment_form_<%= comment.id %>">
+            <div id="reply_form_<%= comment.id %>">
 
             </div>
           </div>
         </div>
       <% end %> 
 
-      <%= render 'comment_form', answer_id: answer.id %>
+      <%= render 'reply_form', { reply: @comment, answer: answer } %>
     </div>
   </div>
 <% end %>

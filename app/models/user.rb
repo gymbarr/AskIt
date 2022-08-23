@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :replies, dependent: :destroy
+  # has_many :answers
+  # has_many :comments
   has_many :subscriptions, dependent: :destroy
   acts_as_voter
 

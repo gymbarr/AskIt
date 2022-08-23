@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
     @pagy, @answers = pagy question.answers.order(created_at: :desc), page: params[:page]
 
     respond_to do |format|
-      format.js { render partial: 'questions/answer_form', locals: { objs: @answers, obj: @answer } }
+      format.js { render partial: 'questions/reply_form', locals: { replies: @answers, obj: @answer } }
     end
   end
 

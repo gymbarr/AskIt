@@ -1,0 +1,12 @@
+<%= form_with model: [@question, reply] do |f| %>
+  <div class="input-group my-3">
+    <% if reply.class == Answer %>
+      <%= f.text_area :body, required: true, placeholder: "Type an answer...", class:"form-control" %>
+    <% elsif reply.class == Comment %>
+      <%= f.text_field :body, required: true, placeholder: "Type a comment...", class:"form-control" %>
+    <% end %>
+
+    <%= hidden_field_tag :answer_id, answer&.id %>
+    <%= f.submit reply.new_record? ? "Enter" : "Update", class:"btn btn-outline-primary" %>
+  </div>
+<% end %>

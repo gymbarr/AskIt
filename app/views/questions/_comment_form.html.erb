@@ -1,7 +1,0 @@
-<%= form_with model: [@question, @comment] do |f| %>
-  <div class="input-group my-3">
-    <%= f.text_field :body, required: true, placeholder: "Type a comment...", class:"form-control" %>
-    <%= f.hidden_field :answer_id, value: answer_id %>
-    <%= f.submit @comment.new_record? ? "Enter" : "Update", class:"btn btn-outline-primary" %>
-  </div>
-<% end %>

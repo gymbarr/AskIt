@@ -1,0 +1,8 @@
+<% replies.each do |reply| %>
+  <% if obj == reply %>
+    document.querySelector('#reply_form_<%= reply.id %>').innerHTML = 
+      '<%= escape_javascript(render 'questions/reply_form.html', { answer: @answer, reply: obj }) %>'
+  <% else %>
+    document.querySelector('#reply_form_<%= reply.id %>').innerHTML = ''
+  <% end %>
+<% end %>

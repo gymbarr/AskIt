@@ -5,7 +5,9 @@ class CommentsController < ApplicationController
   before_action :comment, only: %i[edit]
 
   def create
-    comment = current_user.comments.build(comment_params)
+    # comment = current_user.comments.build(comment_params)
+    comment = answer.comments.build(comment_params)
+    comment.user = current_user
 
     if comment.save
       redirect_to question_path(question, anchor: dom_id(comment)), notice: 'Comment was successfully added to the answer!'
@@ -15,11 +17,11 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @answer = comment.answer
+    @answer = comment.reply
     @comments = @answer.comments
 
     respond_to do |format|
-      format.js { render partial: 'questions/comment_form' }
+      format.js { render partial: 'questions/reply_form', locals: { replies: @comments, obj: @comment } }
     end
   end
 
@@ -39,11 +41,15 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :answer_id)
+    params.require(:comment).permit(:body)
   end
 
   def comment
     @comment ||= Comment.find(params[:id])
+  end
+
+  def answer
+    @answer ||= Answer.find(params[:answer_id])
   end
 
   def question
