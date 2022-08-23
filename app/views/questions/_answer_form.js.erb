@@ -1,5 +1,5 @@
-<% @answers.each do |answer| %>
-  <% if @answer == answer %>
+<% objs.each do |answer| %>
+  <% if obj == answer %>
     document.querySelector('#answer_form_<%= answer.id %>').innerHTML = '<%= escape_javascript(render 'questions/answer_form.html') %>'
   <% else %>
     document.querySelector('#answer_form_<%= answer.id %>').innerHTML = ''

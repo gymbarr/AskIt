@@ -3,7 +3,8 @@ class AnswersController < ApplicationController
   before_action :answer, only: %i[edit]
 
   def create
-    answer = current_user.answers.build(answer_params)
+    answer = question.answers.build(answer_params)
+    answer.user = current_user
 
     if answer.save
       redirect_to question_path(question, anchor: dom_id(answer)), notice: 'Answer was successfully added to the question!'
@@ -16,7 +17,7 @@ class AnswersController < ApplicationController
     @pagy, @answers = pagy question.answers.order(created_at: :desc), page: params[:page]
 
     respond_to do |format|
-      format.js { render partial: 'questions/answer_form' }
+      format.js { render partial: 'questions/answer_form', locals: { objs: @answers, obj: @answer } }
     end
   end
 
@@ -46,7 +47,7 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:body, :question_id)
+    params.require(:answer).permit(:body)
   end
 
   def answer

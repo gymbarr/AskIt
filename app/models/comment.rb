@@ -1,2 +1,2 @@
-class Comment < ApplicationRecord
+class Comment < Reply
 end
