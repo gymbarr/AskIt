@@ -46,6 +46,11 @@
       <h5 class="card-title"><%= answer.user.username %></h5>
       <p class="card-text"><%= answer.body %></p>
 
+      <%# <%= link_to 'Reply', question_path(@question, anchor: dom_id(answer, :new_comment)), %>
+                          <%# #  class:"btn btn-outline-primary btn-sm" %>
+
+      <%= link_to 'Reply', new_question_comment_path(@question, answer_id: answer),
+                           remote: true, class:"btn btn-outline-primary btn-sm" %>
       <% if owner?(answer) %>
         <%= link_to 'Edit', edit_question_answer_path(@question, answer, page: @page),
                             remote: true, class:"btn btn-outline-primary btn-sm" %>
@@ -102,7 +107,11 @@
         </div>
       <% end %> 
 
-      <%= render 'reply_form', { reply: @comment, answer: answer } %>
+      <%# <%= render 'reply_form', { reply: @comment, answer: answer } %>
+
+      <div id="new_reply_form_<%= answer.id %>">
+
+      </div>
     </div>
   </div>
 <% end %>

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :questions do
     resources :answers, except: %i[new index show]
-    resources :comments, except: %i[new index show]
+    resources :comments, except: %i[index show]
     
     get 'vote_up', to: 'questions#vote_up'
     get 'vote_down', to: 'questions#vote_down'

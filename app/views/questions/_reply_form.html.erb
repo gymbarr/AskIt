@@ -3,7 +3,8 @@
     <% if reply.class == Answer %>
       <%= f.text_area :body, required: true, placeholder: "Type an answer...", class:"form-control" %>
     <% elsif reply.class == Comment %>
-      <%= f.text_field :body, required: true, placeholder: "Type a comment...", class:"form-control" %>
+      <%= f.text_field :body, autofocus: true, required: true, 
+                       placeholder: "Type a comment...", class:"form-control", id: "new_comment_field" %>
     <% end %>
 
     <%= hidden_field_tag :answer_id, answer&.id %>

@@ -4,8 +4,16 @@ class CommentsController < ApplicationController
   before_action :question, only: %i[edit]
   before_action :comment, only: %i[edit]
 
+  def new
+    @answers = question.answers
+    @comment = Comment.new
+
+    respond_to do |format|
+      format.js { render partial: 'questions/new_reply_form', locals: { replies: @answers, obj: answer } }
+    end
+  end
+
   def create
-    # comment = current_user.comments.build(comment_params)
     comment = answer.comments.build(comment_params)
     comment.user = current_user
 
