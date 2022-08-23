@@ -21,7 +21,7 @@ class QuestionsController < ApplicationController
     question = current_user.questions.build(question_params)
 
     if question.save
-      notificate_subscribers_new_question(question)
+      notify_subscribers_new_question(question)
       redirect_to question_path(question), notice: 'Question was successfully created!'
     else
       redirect_to new_question_path, alert: 'Something went wrong'

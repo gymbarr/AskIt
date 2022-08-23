@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     current_user.subscriptions.where(category_id: category.id).first
   end
 
-  def notificate_subscribers_new_question(question)
+  def notify_subscribers_new_question(question)
     # TODO: realization through question.subscribers
     category = question.categories.first
     subscriptions = category&.subscriptions
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     subscriptions.each do |subscription|
       user = subscription.user
       category = subscription.category
-      NotificateSubscribersMailer.with(user: user, category: category).notificate_subscriber.deliver_later
+      NotifySubscribersMailer.with(user: user, category: category).notify_subscriber.deliver_later
     end
   end
 end

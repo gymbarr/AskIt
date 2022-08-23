@@ -1,5 +1,5 @@
-class NotificateSubscribersMailer < ApplicationMailer
-  def notificate_subscriber
+class NotifySubscribersMailer < ApplicationMailer
+  def notify_subscriber
     @user = params[:user]
     @category = params[:category]
 
