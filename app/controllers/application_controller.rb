@@ -11,19 +11,17 @@ class ApplicationController < ActionController::Base
   end
 
   def already_subscribed?(category)
-    current_user.subscriptions.where(category_id: category.id).first
+    category.subscribers.find_by_id(current_user.id)
   end
 
   def notify_subscribers_new_question(question)
     # TODO: realization through question.subscribers
+    subscribers = question.subscribers
     category = question.categories.first
-    subscriptions = category&.subscriptions
-    return if category.blank? || subscriptions.blank?
+    return if subscribers.blank? || category.blank?
 
-    subscriptions.each do |subscription|
-      user = subscription.user
-      category = subscription.category
-      NotifySubscribersMailer.with(user: user, category: category).notify_subscriber.deliver_later
+    subscribers.each do |subscriber|
+      NotifySubscribersMailer.with(user: subscriber, category: category, question: question).notify_subscriber.deliver_now
     end
   end
 end

@@ -10,8 +10,6 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    subscription = Subscription.find_by(user_id: current_user, category_id: category)
-
     if subscription.destroy
       redirect_to category_path(category), notice: 'Unsubscribed!'
     else
@@ -20,6 +18,10 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+
+  def subscription
+    @subscription ||= Subscription.find(params[:id])
+  end
 
   def category
     @category ||= Category.find(params[:category_id])

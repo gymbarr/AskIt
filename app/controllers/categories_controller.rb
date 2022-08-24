@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :category, only: %i[edit]
+  before_action :category, only: %i[edit show]
 
   def new
     @category = Category.new
@@ -36,6 +36,7 @@ class CategoriesController < ApplicationController
 
   def show
     @pagy, @questions = pagy category.questions.order(created_at: :desc)
+    @subscription = Subscription.find_by(user_id: current_user, category_id: category)
   end
 
   private
