@@ -1,4 +1,4 @@
-class NotifySubscribersMailer < ApplicationMailer
+class UserMailer < ApplicationMailer
   def notify_subscriber
     @user = params[:user]
     @category = params[:category]
@@ -6,4 +6,6 @@ class NotifySubscribersMailer < ApplicationMailer
 
     mail to: @user.email, subject: "New question in the #{@category.name} category! | AskIt"
   end
+
+  def notify_user_replied; end
 end

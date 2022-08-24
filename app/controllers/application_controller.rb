@@ -13,15 +13,4 @@ class ApplicationController < ActionController::Base
   def already_subscribed?(category)
     category.subscribers.find_by_id(current_user.id)
   end
-
-  def notify_subscribers_new_question(question)
-    # TODO: realization through question.subscribers
-    subscribers = question.subscribers
-    category = question.categories.first
-    return if subscribers.blank? || category.blank?
-
-    subscribers.each do |subscriber|
-      NotifySubscribersMailer.with(user: subscriber, category: category, question: question).notify_subscriber.deliver_now
-    end
-  end
 end
