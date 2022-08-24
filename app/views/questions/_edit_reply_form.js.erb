@@ -6,3 +6,13 @@
     document.querySelector('#reply_form_<%= reply.id %>').innerHTML = ''
   <% end %>
 <% end %>
+
+<% if obj.class == Answer %>
+  fullNameEle = document.getElementById('edit_answer_area');
+<% elsif obj.class == Comment %>
+  fullNameEle = document.getElementById('edit_comment_area');
+<% end %>
+
+fullNameEle.focus();
+length = fullNameEle.value.length;
+fullNameEle.setSelectionRange(length, length);

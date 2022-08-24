@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     @comments = @answer.comments
 
     respond_to do |format|
-      format.js { render partial: 'questions/reply_form', locals: { replies: @comments, obj: @comment } }
+      format.js { render partial: 'questions/edit_reply_form', locals: { replies: @comments, obj: @comment } }
     end
   end
 

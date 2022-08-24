@@ -1,11 +1,24 @@
 <%= form_with model: [@question, reply] do |f| %>
   <div class="input-group my-3">
     <% if reply.class == Answer %>
-      <%= f.text_area :body, required: true, placeholder: "Type an answer...", class:"form-control" %>
-    <% elsif reply.class == Comment %>
-      <%= f.text_field :body, autofocus: true, required: true, 
-                       placeholder: "Type a comment...", class:"form-control", id: "new_comment_field" %>
+      <% if reply.new_record? %>
+        <%= f.text_area :body, required: true, 
+                        placeholder: "Leave an answer...", class:"form-control" %>
+      <% else %>
+        <%= f.text_area :body, required: true, 
+                      placeholder: "Leave an answer...", class:"form-control", id: "edit_answer_area" %>
+      <% end %>
     <% end %>
+
+      <% if reply.class == Comment %>
+        <% if reply.new_record? %>
+          <%= f.text_area :body, required: true, 
+                          placeholder: "Leave a comment...", class:"form-control", id: "new_comment_area" %> 
+        <% else %>
+          <%= f.text_area :body, required: true, 
+                          placeholder: "Leave a comment...", class:"form-control", id: "edit_comment_area" %> 
+        <% end %>
+      <% end %>       
 
     <%= hidden_field_tag :answer_id, answer&.id %>
     <%= f.submit reply.new_record? ? "Enter" : "Update", class:"btn btn-outline-primary" %>
