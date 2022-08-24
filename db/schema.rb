@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_22_140531) do
+ActiveRecord::Schema.define(version: 2022_08_24_104819) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2022_08_22_140531) do
   create_table "question_categories", force: :cascade do |t|
     t.integer "question_id"
     t.integer "category_id"
+    t.index ["question_id", "category_id"], name: "index_question_categories_on_question_id_and_category_id", unique: true
   end
 
   create_table "questions", force: :cascade do |t|
