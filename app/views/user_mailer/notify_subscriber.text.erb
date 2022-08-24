@@ -1,8 +1,12 @@
-Hi, <%= @user.username %>, it's the admin of AskIt 
+Hi, <%= @user.username %>, it's the admin of AskIt
 and we have something interesting for you!
 ===============================================
  
-There are more new questions in the <%= @category.name %> category!
-Check our site for them!
+There is a new questions in the <%= @category.name %> category!
+Check it out:
+<%= link_to nil, question_url(@question) %>
  
+Check new questions in the category <%= @category.name %>:
+<%= link_to nil, category_url(@category) %>
+
 Thanks for staying with us and have a great day!

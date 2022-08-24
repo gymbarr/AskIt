@@ -7,6 +7,8 @@ class AnswersController < ApplicationController
     answer.user = current_user
 
     if answer.save
+      # send notification to the author of question
+      NewReplyMailSender.call(question, answer) unless question.user == answer.user
       redirect_to question_path(question, anchor: dom_id(answer)), notice: 'Answer was successfully added to the question!'
     else
       redirect_to question_path(question), alert: 'Something went wrong'
