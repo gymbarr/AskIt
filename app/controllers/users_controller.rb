@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to questions_path, notice: "You've successfully signed up!"
+      redirect_to questions_path, notice: t('.success')
     else
       render 'new'
     end

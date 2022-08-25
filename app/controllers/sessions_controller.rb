@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
 
-      redirect_to questions_path, notice: 'Signed in successfully'
+      redirect_to questions_path, notice: t('.success')
     else
-      flash.now[:alert] = 'Incorrect email or password'
+      flash.now[:alert] = t('.alert')
       render 'new'
     end
   end

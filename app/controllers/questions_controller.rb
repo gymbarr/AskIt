@@ -24,9 +24,9 @@ class QuestionsController < ApplicationController
 
     if question.save
       SubscriptionMailSender.call(question)
-      redirect_to question_path(question), notice: 'Question was successfully created!'
+      redirect_to question_path(question), notice: t('.success')
     else
-      redirect_to new_question_path, alert: 'Something went wrong'
+      redirect_to new_question_path, alert: t('.alert')
     end
   end
 
@@ -34,9 +34,9 @@ class QuestionsController < ApplicationController
 
   def update
     if question.update(question_params)
-      redirect_to question_path(question), notice: 'Question was successfully updated!'
+      redirect_to question_path(question), notice: t('.success')
     else
-      redirect_to edit_question_path(question), alert: 'Something went wrong'
+      redirect_to edit_question_path(question), alert: t('.alert')
     end
   end
 

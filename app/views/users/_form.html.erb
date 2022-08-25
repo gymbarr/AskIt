@@ -1,16 +1,20 @@
 <%= form_with model: @user do |f| %>
   <div class="mb-3">
-    <%= f.text_field :username, required: true, placeholder: "Username", class:"form-control form-control-lg" %>
+    <%= f.text_field :username, required: true, placeholder: t('users.new.username'),
+                     class:"form-control form-control-lg" %>
   </div>
   <div class="mb-3">
-    <%= f.email_field :email, required: true, placeholder: "Email", class:"form-control form-control-lg" %>
-    <div class="form-text">We'll never share your email with anyone else.</div>
+    <%= f.email_field :email, required: true, placeholder: t('users.new.email'),
+                      class:"form-control form-control-lg" %>
+    <div class="form-text"><%= t('users.new.not_share_email') %></div>
   </div>
   <div class="mb-3">
-    <%= f.password_field :password, required: true, placeholder: "Password", class:"form-control form-control-lg" %>
+    <%= f.password_field :password, required: true, placeholder: t('users.new.password'),
+                         class:"form-control form-control-lg" %>
   </div>
   <div class="mb-3">
-    <%= f.password_field :password_confirmation, required: true, placeholder: "Password confirmation", class:"form-control form-control-lg" %>
+    <%= f.password_field :password_confirmation, required: true, placeholder: t('users.new.password_confirmation'),
+                         class:"form-control form-control-lg" %>
   </div>
 
   <%= f.submit @user.new_record? ? "Sign up" : "Update", class:"btn btn-outline-primary btn-lg" %>

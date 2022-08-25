@@ -1,8 +1,8 @@
-<h1>All questions</h1>
+<h1><%= t('.title') %></h1>
 
 <% if logged_in? %>
   <div class="pb-3">
-    <%= link_to 'New question', new_question_path, class:"btn btn-outline-primary" %>
+    <%= link_to t('.new_question'), new_question_path, class:"btn btn-outline-primary" %>
   </div>
 <% end %>
 

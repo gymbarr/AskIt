@@ -1,11 +1,67 @@
 ru:
   en: Английский
   ru: Русский
-  activerecord:
-    attributes:
-      question:
-        title: Заголовок
-        body: Текст
+  users:
+    new:
+      title: Регистрация
+      email: Адрес почты
+      username: Имя
+      password: Пароль
+      password_confirmation: Подтверждение пароля
+      not_share_email: Мы никогда не будем делиться вашей электронной почтой с кем-либо еще.
+    create:
+      success: Вы были успешно зарегистрированы!
+  sessions:
+    new:
+      title: Вход
+      email: Адрес почты
+      password: Пароль
+      submit: Войти
+    create:
+      success: Вы успешно вошли в систему!
+      alert: Неверный адрес почты или пароль
+  categories:
+    index:
+      title: Категории
+      new_category: Новая категория
+      questions_count: вопрос
+      subscribed: Вы подписаны
+    show:
+      title: Категория
+      edit_category: Редактировать категорию
+      subscribe: Подписаться
+      unsubscribe: Отписаться
+    new:
+      title: Новая категория
+      name: Имя категории
+    create:
+      success: Категория успешно создана!
+    edit:
+      title: Редактировать категорию
+      delete: Удалить категорию
+    update:
+      success: Категория успешно отредактирована!
+    destroy:
+      success: Категория успешно удалена!
+  questions:
+    index:
+      title: Все вопросы
+      new_question: Новый вопрос
+    new:
+      title: Новый вопрос
+      question_title: Заголовок
+      question_body: Текст
+      categories_prompt: Выберите категорию из списка ниже
+    create:
+      success: Вопрос успешно создан!
+      alert: Что-то пошло не так
+    edit:
+      title: Редактировать вопрос
+    update:
+      success: Вопрос успешно отредактирован!
+      alert: Что-то пошло не так
+    destroy:
+      success: Вопрос успешно удален!
   navbar:
     home: Главная
     questions: Вопросы
@@ -16,6 +72,3 @@ ru:
   pages:
     index:
       title: Добро пожаловать на AskIt!
-  questions:
-    destroy:
-      success: Вопрос успешно удален!

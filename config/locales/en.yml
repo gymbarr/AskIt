@@ -1,11 +1,67 @@
 en:
   en: English
   ru: Russian
-  activerecord:
-    attributes:
-      question:
-        title: Title
-        body: Body
+  users:
+    new:
+      title: Sign Up
+      email: Email
+      username: Username
+      password: Password
+      password_confirmation: Password confirmation
+      not_share_email: We'll never share your email with anyone else.
+    create:
+      success: You've successfully signed up!
+  sessions:
+    new:
+      title: Sign In
+      email: Email
+      password: Password
+      submit: Sign In
+    create:
+      success: Signed in successfully!
+      alert: Incorrect email or password
+  categories:
+    index:
+      title: Categories
+      new_category: New category
+      questions_count: question
+      subscribed: Subscribed
+    show:
+      title: Category
+      edit_category: Edit category
+      subscribe: Subscribe
+      Unsubscribe: Unsubscribe
+    new:
+      title: New category
+      name: Category name
+    create:
+      success: Category was successfully created!
+    edit:
+      title: Edit category
+      delete: Delete category
+    update:
+      success: Category was updated successfully!
+    destroy:
+      success: The category was successfully deleted!
+  questions:
+    index:
+      title: All questions
+      new_question: New question
+    new:
+      title: New question
+      question_title: Title
+      question_body: Body
+      categories_prompt: Choose category from the listed below
+    create:
+      success: Question was successfully created!
+      alert: Something went wrong
+    edit:
+      title: Edit question
+    update:
+      success: Question was successfully updated!
+      alert: Something went wrong
+    destroy:
+      success: Question was successfully deleted!
   navbar:
     home: Home
     questions: Questions
@@ -16,6 +72,3 @@ en:
   pages:
     index:
       title: Welcome to AskIt!
-  questions:
-    destroy:
-      success: Question was successfully deleted!

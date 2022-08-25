@@ -1,12 +1,12 @@
-<h1 class="pb-3">Sign in</h1>
+<h1 class="pb-3"><%= t('.title') %></h1>
 
 <%= form_with url: session_path do |f| %>
   <div class="mb-3">
-    <%= f.email_field :email, required: true, placeholder: "Email", class:"form-control form-control-lg" %>
+    <%= f.email_field :email, required: true, placeholder: t('.email'), class:"form-control form-control-lg" %>
   </div>
   <div class="mb-3">
-    <%= f.password_field :password, required: true, placeholder: "Password", class:"form-control form-control-lg" %>
+    <%= f.password_field :password, required: true, placeholder: t('.password'), class:"form-control form-control-lg" %>
   </div>
 
-  <%= f.submit "Sign in", class:"btn btn-outline-primary btn-lg" %>
+  <%= f.submit t('.submit'), class:"btn btn-outline-primary btn-lg" %>
 <% end %>
