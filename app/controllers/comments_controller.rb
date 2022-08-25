@@ -3,6 +3,8 @@ class CommentsController < ApplicationController
 
   before_action :question, only: %i[edit]
   before_action :comment, only: %i[edit]
+  before_action :require_user
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def new
     @answers = question.answers
@@ -62,5 +64,9 @@ class CommentsController < ApplicationController
 
   def question
     @question ||= Question.find(params[:question_id])
+  end
+
+  def require_same_user
+    redirect_to question, alert: 'You can only edit or delete your own comments' if current_user != comment.user
   end
 end

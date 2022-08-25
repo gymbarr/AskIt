@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   include ActionView::RecordIdentifier
+
   before_action :answer, only: %i[edit]
   before_action :require_user
   before_action :require_same_user, only: %i[edit update destroy]

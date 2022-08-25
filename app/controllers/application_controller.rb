@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
   end
 
   def already_subscribed?(category)
-    category.subscribers.find_by_id(current_user.id)
+    category.subscribers.find_by_id(current_user&.id)
   end
 end
