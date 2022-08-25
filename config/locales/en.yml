@@ -20,6 +20,10 @@ en:
     create:
       success: Signed in successfully!
       alert: Incorrect email or password
+    already_logged_in:
+      alert: You've already signed in
+    not_signed_in: 
+      alert: You must be signed in to perform that action
   categories:
     index:
       title: Categories

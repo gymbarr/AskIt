@@ -20,6 +20,10 @@ ru:
     create:
       success: Вы успешно вошли в систему!
       alert: Неверный адрес почты или пароль
+    already_logged_in:
+      alert: Вы уже вошли в систему
+    not_signed_in: 
+      alert: Вы должны авторизоваться в системе, чтобы выполнить данное действие
   categories:
     index:
       title: Категории

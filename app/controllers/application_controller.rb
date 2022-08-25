@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    redirect_to new_session_path, alert: 'You must be signed in to perform that action' unless logged_in?
+    redirect_to new_session_path, alert: t('seesions.not_signed_in.alert') unless logged_in?
   end
 
   def already_subscribed?(category)
