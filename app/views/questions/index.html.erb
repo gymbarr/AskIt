@@ -1,8 +1,10 @@
 <h1>All questions</h1>
 
-<div class="pb-3">
-  <%= link_to 'New question', new_question_path, class:"btn btn-outline-primary" %>
-</div>
+<% if logged_in? %>
+  <div class="pb-3">
+    <%= link_to 'New question', new_question_path, class:"btn btn-outline-primary" %>
+  </div>
+<% end %>
 
 <%= render 'question' %>
 

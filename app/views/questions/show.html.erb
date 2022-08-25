@@ -22,7 +22,7 @@
       <%= format_timestamp(@question.created_at) %>
       <div class="py-2"> 
         Rating: <%= @question.weighted_score %>
-        <% if !current_user.voted_for? @question %>
+        <% unless current_user&.voted_for? @question %>
           <span class="ps-3">
             <span class="pe-2"><%= link_to (fa_icon "arrow-up"), question_vote_up_path(@question), class: "btn btn-secondary" %></span>
             <%= link_to (fa_icon "arrow-down"), question_vote_down_path(@question), class: "btn btn-secondary" %>
@@ -36,7 +36,7 @@
 
 <%= render 'reply_form', { reply: @answer, answer: nil } %>
 
-<% if !@answers.empty? %>
+<% unless @answers.empty? %>
   <h2 class="py-3">Answers</h2>
 <% end %>
 
@@ -59,7 +59,7 @@
       
       <div class="py-2"> 
         Rating: <%= answer.weighted_score %>
-        <% if !current_user.voted_for? answer %>
+        <% unless current_user&.voted_for? answer %>
           <span class="ps-3">
             <span class="pe-2"><%= link_to (fa_icon "arrow-up"), 
                                     question_answer_vote_up_path(@question, answer), 

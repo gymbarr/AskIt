@@ -1,5 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :question, only: %i[edit]
+  before_action :require_user, except: %i[index show]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def index
     @pagy, @questions = pagy Question.order(created_at: :desc)
@@ -65,5 +67,9 @@ class QuestionsController < ApplicationController
 
   def question_for_vote
     @question_for_vote ||= Question.find(params[:question_id])
+  end
+
+  def require_same_user
+    redirect_to question, alert: 'You can only edit or delete your own questions' if current_user != question.user
   end
 end

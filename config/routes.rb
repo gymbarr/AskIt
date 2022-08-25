@@ -2,7 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
-  
+
   root 'pages#index'
 
   resources :users, only: %i[new create]
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers, except: %i[new index show]
     resources :comments, except: %i[index show]
-    
+
     get 'vote_up', to: 'questions#vote_up'
     get 'vote_down', to: 'questions#vote_down'
     get 'answers/:id/vote_up', to: 'answers#vote_up', as: 'answer_vote_up'
@@ -21,5 +21,4 @@ Rails.application.routes.draw do
   resources :categories do
     resources :subscriptions, only: %i[create destroy]
   end
-
 end
