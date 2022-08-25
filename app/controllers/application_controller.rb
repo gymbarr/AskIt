@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def require_user
+    redirect_to login_path, alert: 'You must be signed in to perform that action' unless logged_in?
+  end
+
   def already_subscribed?(category)
     category.subscribers.find_by_id(current_user.id)
   end

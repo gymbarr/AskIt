@@ -1,6 +1,8 @@
 class AnswersController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :answer, only: %i[edit]
+  before_action :require_user
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def create
     answer = question.answers.build(answer_params)
@@ -8,7 +10,7 @@ class AnswersController < ApplicationController
 
     if answer.save
       # send notification to the author of question
-      NewReplyMailSender.call(question, answer) unless question.user == answer.user
+      NewReplyMailSender.call(question, answer)
       redirect_to question_path(question, anchor: dom_id(answer)), notice: 'Answer was successfully added to the question!'
     else
       redirect_to question_path(question), alert: 'Something went wrong'
@@ -58,5 +60,9 @@ class AnswersController < ApplicationController
 
   def question
     @question ||= Question.find(params[:question_id])
+  end
+
+  def require_same_user
+    redirect_to question, alert: 'You can only edit or delete your own answers' if current_user != answer.user
   end
 end
