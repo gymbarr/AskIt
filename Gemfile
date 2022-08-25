@@ -26,6 +26,7 @@ gem 'pagy', '~> 5.10'
 gem 'acts_as_votable'
 gem "font-awesome-rails"
 gem 'sidekiq', '~> 6.5.4'
+gem 'rails-i18n', '~> 7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

@@ -1,0 +1,16 @@
+ru:
+  activerecord:
+    attributes:
+      question:
+        title: 'Заголовок'
+        body: 'Текст'
+  navbar:
+    home: 'Главная'
+    questions: 'Вопросы'
+    categories: 'Категории'
+    sign_in: 'Вход'
+    sign_up: 'Регистрация'
+    sign_out: 'Выход'
+  pages:
+    index:
+      title: 'Добро пожаловать на AskIt!'

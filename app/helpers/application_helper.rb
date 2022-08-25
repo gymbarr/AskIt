@@ -1,8 +1,9 @@
 module ApplicationHelper
   include Pagy::Frontend
-  
-  def format_timestamp(timestamp, format = '%d-%m-%Y %H:%M:%S')
-    timestamp.strftime(format)
+
+  def format_timestamp(timestamp)
+    # localise timestamp with the method of rails-i18n gem
+    l timestamp, format: :long
   end
 
   def pagination(obj)
