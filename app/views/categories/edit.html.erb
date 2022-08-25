@@ -3,4 +3,4 @@
 <%= render 'form' %>
 
 <%= link_to t('.delete'), category_path(@category), method: :delete, class: "btn btn-outline-danger",
-data: { confirm: "Are you sure?" } %>
+data: { confirm: t('global.dialog.you_sure') } %>

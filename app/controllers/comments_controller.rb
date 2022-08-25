@@ -20,9 +20,9 @@ class CommentsController < ApplicationController
     comment.user = current_user
 
     if comment.save
-      redirect_to question_path(question, anchor: dom_id(comment)), notice: 'Comment was successfully added to the answer!'
+      redirect_to question_path(question, anchor: dom_id(comment)), notice: t('.success')
     else
-      redirect_to question_path(question), alert: 'Something went wrong'
+      redirect_to question_path(question), alert: t('.alert')
     end
   end
 
@@ -37,15 +37,15 @@ class CommentsController < ApplicationController
 
   def update
     if comment.update(comment_params)
-      redirect_to question_path(question, anchor: dom_id(comment)), notice: 'Comment was successfully updated!'
+      redirect_to question_path(question, anchor: dom_id(comment)), notice: t('.success')
     else
-      redirect_to question_path(question), alert: 'Something went wrong'
+      redirect_to question_path(question), alert: t('.alert')
     end
   end
 
   def destroy
     comment.destroy
-    redirect_to question_path(question), notice: 'Comment was successfully deleted!'
+    redirect_to question_path(question), notice: t('.success')
   end
 
   private
@@ -67,6 +67,6 @@ class CommentsController < ApplicationController
   end
 
   def require_same_user
-    redirect_to question, alert: 'You can only edit or delete your own comments' if current_user != comment.user
+    redirect_to question, alert: t('comments.require_same_user.alert') if current_user != comment.user
   end
 end

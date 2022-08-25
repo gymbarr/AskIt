@@ -47,6 +47,12 @@ ru:
     index:
       title: Все вопросы
       new_question: Новый вопрос
+    show:
+      title: Информация о вопросе
+      leave_answer: Оставьте ответ...
+      leave_comment: Оставьте комментарий...
+      answers: Ответы
+      rating: Рейтинг
     new:
       title: Новый вопрос
       question_title: Заголовок
@@ -62,6 +68,30 @@ ru:
       alert: Что-то пошло не так
     destroy:
       success: Вопрос успешно удален!
+    require_same_user:
+      alert: Вы можете редактировать и удалять только свои вопросы
+  answers:
+    create:
+      success: Ответ на вопрос успешно добавлен!
+      alert: Что-то пошло не так
+    update:
+      success: Ответ успешно отредатикрован!
+      alert: Что-то пошло не так
+    destroy:
+      success: Ответ успешно удален!
+    require_same_user:
+      alert: Вы можете редактировать и удалять только свои ответы
+  comments:
+    create:
+      success: Комментарий успешно добавлен!
+      alert: Что-то пошло не так
+    update:
+      success: Комментарий успешно отредактирован!
+      alert: Что-то пошло не так
+    destroy:
+      success: Комментарий успешно удален!
+    require_same_user:
+      alert: Вы можете редактировать и удалять только свои комментарии
   navbar:
     home: Главная
     questions: Вопросы
@@ -72,3 +102,15 @@ ru:
   pages:
     index:
       title: Добро пожаловать на AskIt!
+  global:
+    button:
+      delete: Удалить
+      edit: Изменить
+      update: Обновить
+      create: Создать
+      cancel: Отмена
+      reply: Ответить
+      enter: Ввод
+      show: Показать
+    dialog:
+      you_sure: Вы уверены?

@@ -1,4 +1,4 @@
-<h1>Question info</h1>
+<h1><%= t('.title') %></h1>
 
 <div class="py-3">
   <div class="card">
@@ -13,15 +13,16 @@
       <h5 class="card-title"><%= @question.title %></h5>
       <p class="card-text"><%= @question.body %></p>
       <% if owner?(@question) %>
-        <%= link_to 'Edit', edit_question_path(@question), class:"btn btn-outline-primary" %>
-        <%= link_to 'Delete', question_path(@question), method: :delete, data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger" %>
+        <%= link_to t('global.button.edit'), edit_question_path(@question), class:"btn btn-outline-primary" %>
+        <%= link_to t('global.button.delete'), question_path(@question), method: :delete,
+                    data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger" %>
       <% end %>
     </div>
 
     <div class="card-footer text-muted">
       <%= format_timestamp(@question.created_at) %>
       <div class="py-2"> 
-        Rating: <%= @question.weighted_score %>
+        <%= t('.rating') %>: <%= @question.weighted_score %>
         <% unless current_user&.voted_for? @question %>
           <span class="ps-3">
             <span class="pe-2"><%= link_to (fa_icon "arrow-up"), question_vote_up_path(@question), class: "btn btn-secondary" %></span>
@@ -37,7 +38,7 @@
 <%= render 'reply_form', { reply: @answer, answer: nil } %>
 
 <% unless @answers.empty? %>
-  <h2 class="py-3">Answers</h2>
+  <h2 class="py-3"><%= t('.answers') %></h2>
 <% end %>
 
 <% @answers.each do |answer| %>
@@ -46,19 +47,19 @@
       <h5 class="card-title"><%= answer.user.username %></h5>
       <p class="card-text"><%= answer.body %></p>
 
-      <%= link_to 'Reply', new_question_comment_path(@question, answer_id: answer),
-                           remote: true, class:"btn btn-outline-primary btn-sm" %>
+      <%= link_to t('global.button.reply'), new_question_comment_path(@question, answer_id: answer),
+                  remote: true, class:"btn btn-outline-primary btn-sm" %>
       <% if owner?(answer) %>
-        <%= link_to 'Edit', edit_question_answer_path(@question, answer, page: @page),
-                            remote: true, class:"btn btn-outline-primary btn-sm" %>
-        <%= link_to 'Delete', question_answer_path(@question, answer), method: :delete, 
-                              data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger btn-sm" %>
+        <%= link_to t('global.button.edit'), edit_question_answer_path(@question, answer, page: @page),
+                    remote: true, class:"btn btn-outline-primary btn-sm" %>
+        <%= link_to t('global.button.delete'), question_answer_path(@question, answer), method: :delete, 
+                    data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
       <% end %>
 
       <p class="card-text mt-3"><small class="text-muted"><%= format_timestamp(answer.created_at) %></small></p>
       
       <div class="py-2"> 
-        Rating: <%= answer.weighted_score %>
+        <%= t('.rating') %>: <%= answer.weighted_score %>
         <% unless current_user&.voted_for? answer %>
           <span class="ps-3">
             <span class="pe-2"><%= link_to (fa_icon "arrow-up"), 
@@ -89,13 +90,13 @@
             <p class="card-text"><%= comment.body %></p>
             <p class="card-text"><small class="text-muted"><%= format_timestamp(comment.created_at) %></small></p>
 
-            <%= link_to 'Reply', new_question_comment_path(@question, answer_id: answer),
-                                 remote: true, class:"btn btn-outline-primary btn-sm" %>
+            <%= link_to t('global.button.reply'), new_question_comment_path(@question, answer_id: answer),
+                        remote: true, class:"btn btn-outline-primary btn-sm" %>
             <% if owner?(comment) %>
-              <%= link_to 'Edit', edit_question_comment_path(@question, comment), 
-                                  remote: true, class:"btn btn-outline-primary btn-sm" %>
-              <%= link_to 'Delete', question_comment_path(@question, comment), method: :delete, 
-                                    data: { confirm: "Are you sure?" }, class:"btn btn-outline-danger btn-sm" %>
+              <%= link_to t('global.button.edit'), edit_question_comment_path(@question, comment), 
+                          remote: true, class:"btn btn-outline-primary btn-sm" %>
+              <%= link_to t('global.button.delete'), question_comment_path(@question, comment), method: :delete, 
+                          data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
             <% end %>
 
             <%# displaying editing or replying form for comment with ajax (see _comment_form.js.erb) %>

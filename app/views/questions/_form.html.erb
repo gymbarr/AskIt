@@ -13,5 +13,6 @@
                           class: "form-select") %>
   </div>
 
-  <%= f.submit @question.new_record? ? "Create" : "Update", class:"btn btn-outline-primary" %>
+  <%= f.submit @question.new_record? ? t('global.button.create') : t('global.button.update'),
+               class:"btn btn-outline-primary" %>
 <% end %>

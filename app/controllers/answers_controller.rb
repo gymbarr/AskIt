@@ -12,9 +12,9 @@ class AnswersController < ApplicationController
     if answer.save
       # send notification to the author of question
       NewReplyMailSender.call(question, answer)
-      redirect_to question_path(question, anchor: dom_id(answer)), notice: 'Answer was successfully added to the question!'
+      redirect_to question_path(question, anchor: dom_id(answer)), notice: t('.success')
     else
-      redirect_to question_path(question), alert: 'Something went wrong'
+      redirect_to question_path(question), alert: t('.alert')
     end
   end
 
@@ -28,15 +28,15 @@ class AnswersController < ApplicationController
 
   def update
     if answer.update(answer_params)
-      redirect_to question_path(question, anchor: dom_id(answer)), notice: 'Answer was successfully updated!'
+      redirect_to question_path(question, anchor: dom_id(answer)), notice: t('.success')
     else
-      redirect_to question_path(question), alert: 'Something went wrong'
+      redirect_to question_path(question), alert: t('.alert')
     end
   end
 
   def destroy
     answer.destroy
-    redirect_to question_path(question), notice: 'Answer was successfully deleted!'
+    redirect_to question_path(question), notice: t('.success')
   end
 
   def vote_up
@@ -64,6 +64,6 @@ class AnswersController < ApplicationController
   end
 
   def require_same_user
-    redirect_to question, alert: 'You can only edit or delete your own answers' if current_user != answer.user
+    redirect_to question, alert: t('answers.require_same_user.alert') if current_user != answer.user
   end
 end

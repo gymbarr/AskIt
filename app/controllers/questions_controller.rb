@@ -70,6 +70,6 @@ class QuestionsController < ApplicationController
   end
 
   def require_same_user
-    redirect_to question, alert: 'You can only edit or delete your own questions' if current_user != question.user
+    redirect_to question, alert: t('questions.require_same_user.alert') if current_user != question.user
   end
 end
