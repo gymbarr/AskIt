@@ -1,16 +1,21 @@
 en:
+  en: English
+  ru: Russian
   activerecord:
     attributes:
       question:
-        title: 'Title'
-        body: 'Body'
+        title: Title
+        body: Body
   navbar:
-    home: 'Home'
-    questions: 'Questions'
-    categories: 'Categories'
-    sign_in: 'Sign In'
-    sign_up: 'Sign Up'
-    sign_out: 'Sign Out'
+    home: Home
+    questions: Questions
+    categories: Categories
+    sign_in: Sign In
+    sign_up: Sign Up
+    sign_out: Sign Out
   pages:
     index:
-      title: 'Welcome to AskIt!'
+      title: Welcome to AskIt!
+  questions:
+    destroy:
+      success: Question was successfully deleted!

@@ -42,7 +42,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     question.destroy
-    redirect_to questions_path, notice: 'Question was successfully deleted!'
+    redirect_to questions_path, notice: t('.success')
   end
 
   def vote_up
