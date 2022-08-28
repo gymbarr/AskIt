@@ -1,9 +1,9 @@
 <% replies.each do |reply| %>
-  <% if obj == reply %>
+  <% if repliable == reply %>
     document.querySelector('#new_reply_form_<%= reply.id %>').innerHTML = 
-      '<%= escape_javascript(render 'questions/reply_form.html', { answer: @answer, reply: @comment }) %>'
+      '<%= escape_javascript(render 'questions/reply_form.html', { reply: reply.comments.build }) %>'
   <% else %>
-    document.querySelector('#new_reply_form_<%= reply.id %>').innerHTML = ''
+
   <% end %>
 <% end %>
 

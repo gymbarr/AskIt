@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
-  before_action :category, only: %i[edit show]
+  # before_action :category, only: %i[edit show]
   before_action :require_user, except: %i[index show]
+
+  helper_method :already_subscribed?, :category
 
   def new
     @category = Category.new
@@ -37,7 +39,7 @@ class CategoriesController < ApplicationController
 
   def show
     @pagy, @questions = pagy category.questions.order(created_at: :desc)
-    @subscription = Subscription.find_by(user_id: current_user, category_id: category)
+    @subscription = Subscription.find_by(user: current_user, category: category)
   end
 
   private
@@ -48,5 +50,11 @@ class CategoriesController < ApplicationController
 
   def category
     @category ||= Category.find(params[:id])
+  end
+
+  def already_subscribed?(category)
+    return unless current_user
+
+    Subscription.find_by(category: category, user: current_user)
   end
 end

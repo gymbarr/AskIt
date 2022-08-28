@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<%= render 'reply_form', { reply: @answer, answer: nil } %>
+<%= render 'reply_form', { reply: @question.answers.build } %>
 
 <% unless @answers.empty? %>
   <h2 class="py-3"><%= t('.answers') %></h2>
@@ -90,7 +90,7 @@
             <p class="card-text"><%= comment.body %></p>
             <p class="card-text"><small class="text-muted"><%= format_timestamp(comment.created_at) %></small></p>
 
-            <%= link_to t('global.button.reply'), new_question_comment_path(@question, answer_id: answer),
+            <%= link_to t('global.button.reply'), reply_path(repliable_id: comment),
                         remote: true, class:"btn btn-outline-primary btn-sm" %>
             <% if owner?(comment) %>
               <%= link_to t('global.button.edit'), edit_question_comment_path(@question, comment), 
@@ -100,7 +100,7 @@
             <% end %>
 
             <%# displaying editing or replying form for comment with ajax (see _comment_form.js.erb) %>
-            <div id="reply_form_<%= comment.id %>">
+            <div id="new_reply_form_<%= comment.id %>">
 
             </div>
           </div>

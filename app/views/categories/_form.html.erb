@@ -1,7 +1,7 @@
-<%= form_with(model: @category, local: true) do |f| %>
+<%= form_with(model: category, local: true) do |f| %>
   <div class="input-group my-3">
     <%= f.text_field :name, class: "form-control", placeholder: t('categories.new.name') %>
-    <%= f.submit(@category.new_record? ? t('global.button.create') : t('global.button.update'),
+    <%= f.submit(category.new_record? ? t('global.button.create') : t('global.button.update'),
                 class: "btn btn-outline-primary mr-2") %>
     <%= link_to t('global.button.cancel'), :back, class: "btn btn-outline-secondary" %>
   </div>

@@ -1,4 +1,4 @@
-<%= form_with model: [@question, reply] do |f| %>
+<%= form_for reply, as: :reply, url: { controller: :replies, action: :reply } do |f| %>
   <div class="input-group my-3">
     <% if reply.class == Answer %>
       <% if reply.new_record? %>
@@ -20,7 +20,9 @@
         <% end %>
       <% end %>       
 
-    <%= hidden_field_tag :answer_id, answer&.id %>
+    <%= f.hidden_field :repliable_type, value: reply.repliable_type %>
+    <%= f.hidden_field :repliable_id, value: reply.repliable_id %>
+    <%= f.hidden_field :type, value: reply.type %>
     <%= f.submit reply.new_record? ? t('global.button.enter') : t('global.button.update'),
                  class:"btn btn-outline-primary" %>
   </div>
