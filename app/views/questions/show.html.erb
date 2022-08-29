@@ -37,81 +37,17 @@
 
 <%= render 'reply_form', { reply: @question.answers.build } %>
 
-<% unless @answers.empty? %>
+<% unless @replies.empty? %>
   <h2 class="py-3"><%= t('.answers') %></h2>
 <% end %>
 
-<% @answers.each do |answer| %>
-  <div class="card mt-3" id="<%= dom_id(answer) %>">
-    <div class="card-body">
-      <h5 class="card-title"><%= answer.user.username %></h5>
-      <p class="card-text"><%= answer.body %></p>
+<% @replies.each do |reply| %>
+  <% if reply.is_a?(Answer) %>
+    <%= render 'answer', { answer: reply } %>
+  <% else %>
+    <%= render 'comment', { comment: reply } %>
+  <% end %>
 
-      <%= link_to t('global.button.reply'), new_question_comment_path(@question, answer_id: answer),
-                  remote: true, class:"btn btn-outline-primary btn-sm" %>
-      <% if owner?(answer) %>
-        <%= link_to t('global.button.edit'), edit_question_answer_path(@question, answer, page: @page),
-                    remote: true, class:"btn btn-outline-primary btn-sm" %>
-        <%= link_to t('global.button.delete'), question_answer_path(@question, answer), method: :delete, 
-                    data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
-      <% end %>
-
-      <p class="card-text mt-3"><small class="text-muted"><%= format_timestamp(answer.created_at) %></small></p>
-      
-      <div class="py-2"> 
-        <%= t('.rating') %>: <%= answer.weighted_score %>
-        <% unless current_user&.voted_for? answer %>
-          <span class="ps-3">
-            <span class="pe-2"><%= link_to (fa_icon "arrow-up"), 
-                                    question_answer_vote_up_path(@question, answer), 
-                                    class: "btn btn-secondary" %></span>
-            <%= link_to (fa_icon "arrow-down"), question_answer_vote_down_path(@question, answer), 
-                                                class: "btn btn-secondary" %>
-          </span>
-        <% end %>
-      </div>
-
-      <%# displaying editing form for answer with ajax (see _answer_form.js.erb) %>
-      <div id="reply_form_<%= answer.id %>">
-
-      </div>
-    </div>
-  </div>
-
-  <%# displaying comment for answers %>
-  <div class="row">
-    <div class="col-1">
-    </div>
-    <div class="col-11">
-      <% answer.comments.each do |comment| %>
-        <div class="card mt-2" id="<%= dom_id(comment) %>">
-          <div class="card-body">
-            <h6 class="card-title"><%= comment.user.username %></h6>
-            <p class="card-text"><%= comment.body %></p>
-            <p class="card-text"><small class="text-muted"><%= format_timestamp(comment.created_at) %></small></p>
-
-            <%= link_to t('global.button.reply'), reply_path(repliable_id: comment),
-                        remote: true, class:"btn btn-outline-primary btn-sm" %>
-            <% if owner?(comment) %>
-              <%= link_to t('global.button.edit'), edit_question_comment_path(@question, comment), 
-                          remote: true, class:"btn btn-outline-primary btn-sm" %>
-              <%= link_to t('global.button.delete'), question_comment_path(@question, comment), method: :delete, 
-                          data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
-            <% end %>
-
-            <%# displaying editing or replying form for comment with ajax (see _comment_form.js.erb) %>
-            <div id="new_reply_form_<%= comment.id %>">
-
-            </div>
-          </div>
-        </div>
-      <% end %> 
-
-      <div id="new_reply_form_<%= answer.id %>">
-
-      </div>
-    </div>
-  </div>
 <% end %>
 
 <%== pagination @pagy %>

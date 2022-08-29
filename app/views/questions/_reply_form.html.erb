@@ -1,4 +1,5 @@
-<%= form_for reply, as: :reply, url: { controller: :replies, action: :reply } do |f| %>
+<%= form_for reply.becomes(Reply) do |f| %>
+  <% f.object = reply.becomes reply.class %>
   <div class="input-group my-3">
     <% if reply.class == Answer %>
       <% if reply.new_record? %>
@@ -6,17 +7,17 @@
                         placeholder: t('questions.show.leave_answer'), class:"form-control" %>
       <% else %>
         <%= f.text_area :body, required: true, 
-                      placeholder: t('questions.show.leave_answer'), class:"form-control", id: "edit_answer_area" %>
+                      placeholder: t('questions.show.leave_answer'), class:"form-control", id: "reply_area" %>
       <% end %>
     <% end %>
 
       <% if reply.class == Comment %>
         <% if reply.new_record? %>
           <%= f.text_area :body, required: true, 
-                          placeholder: t('questions.show.leave_comment'), class:"form-control", id: "new_comment_area" %> 
+                          placeholder: t('questions.show.leave_comment'), class:"form-control", id: "reply_area_#{reply.repliable_id}" %> 
         <% else %>
           <%= f.text_area :body, required: true, 
-                          placeholder: t('questions.show.leave_comment'), class:"form-control", id: "edit_comment_area" %> 
+                          placeholder: t('questions.show.leave_comment'), class:"form-control", id: "edit_area_#{reply.id}" %> 
         <% end %>
       <% end %>       
 

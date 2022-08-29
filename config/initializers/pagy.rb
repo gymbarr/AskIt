@@ -237,6 +237,7 @@ Pagy::DEFAULT[:page_param] = :page                           # default
 # than the default pagy internal i18n (see above)
 # See https://ddnexus.github.io/pagy/extras/i18n
 require 'pagy/extras/i18n'
+require 'pagy/extras/array'
 
 # Default i18n key
 # Pagy::DEFAULT[:i18n_key] = 'pagy.item_name'   # default

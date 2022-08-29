@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_24_104819) do
+ActiveRecord::Schema.define(version: 2022_08_29_104648) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2022_08_24_104819) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_questions_on_ancestry"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
@@ -41,6 +43,8 @@ ActiveRecord::Schema.define(version: 2022_08_24_104819) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_replies_on_ancestry"
     t.index ["repliable_type", "repliable_id"], name: "index_replies_on_repliable_type_and_repliable_id"
     t.index ["user_id"], name: "index_replies_on_user_id"
   end

@@ -8,11 +8,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @pagy, @answers = pagy question.answers.order(created_at: :desc)
+    @pagy, @replies = pagy_array question.answers.order(created_at: :desc).flat_map(&:subtree)
     @page = params[:page]
-
-    @answer = Answer.new
-    @comment = Comment.new
   end
 
   def new
