@@ -1,25 +1,25 @@
 <%= form_for reply.becomes(Reply) do |f| %>
   <% f.object = reply.becomes reply.class %>
   <div class="input-group my-3">
-    <% if reply.class == Answer %>
+    <% if reply.is_a?(Answer) %>
       <% if reply.new_record? %>
         <%= f.text_area :body, required: true, 
                         placeholder: t('questions.show.leave_answer'), class:"form-control" %>
       <% else %>
-        <%= f.text_area :body, required: true, 
-                      placeholder: t('questions.show.leave_answer'), class:"form-control", id: "reply_area" %>
+        <%= f.text_area :body, required: true, placeholder: t('questions.show.leave_answer'),
+                        class:"form-control", id: "edit_area_#{reply.id}" %>
       <% end %>
     <% end %>
 
-      <% if reply.class == Comment %>
-        <% if reply.new_record? %>
-          <%= f.text_area :body, required: true, 
-                          placeholder: t('questions.show.leave_comment'), class:"form-control", id: "reply_area_#{reply.repliable_id}" %> 
-        <% else %>
-          <%= f.text_area :body, required: true, 
-                          placeholder: t('questions.show.leave_comment'), class:"form-control", id: "edit_area_#{reply.id}" %> 
-        <% end %>
-      <% end %>       
+    <% if reply.is_a?(Comment) %>
+      <% if reply.new_record? %>
+        <%= f.text_area :body, required: true, placeholder: t('questions.show.leave_comment'),
+                        class:"form-control", id: "reply_area_#{reply.repliable_id}" %> 
+      <% else %>
+        <%= f.text_area :body, required: true, placeholder: t('questions.show.leave_comment'),
+                        class:"form-control", id: "edit_area_#{reply.id}" %> 
+      <% end %>
+    <% end %>       
 
     <%= f.hidden_field :repliable_type, value: reply.repliable_type %>
     <%= f.hidden_field :repliable_id, value: reply.repliable_id %>

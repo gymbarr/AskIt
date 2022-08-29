@@ -3,7 +3,7 @@
   <div class="col-1">
   </div>
   <div class="col-11">
-    <div class="card mt-2" id="<%= dom_id(comment) %>">
+    <div class="card mt-2" id="reply-<%= comment.id %>">
       <div class="card-body">
         <h6 class="card-title"><%= comment.user.username %></h6>
         <p class="card-text"><%= comment.body %></p>
@@ -16,7 +16,7 @@
           <%= link_to t('global.button.edit'), 
                       edit_reply_path(comment, repliable_id: comment), 
                       remote: true, class:"btn btn-outline-primary btn-sm" %>
-          <%= link_to t('global.button.delete'), question_comment_path(@question, comment), method: :delete, 
+          <%= link_to t('global.button.delete'), reply_path(comment), method: :delete, 
                       data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
         <% end %>
 

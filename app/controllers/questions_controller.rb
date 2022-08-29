@@ -4,12 +4,11 @@ class QuestionsController < ApplicationController
   before_action :require_same_user, only: %i[edit update destroy]
 
   def index
-    @pagy, @questions = pagy Question.order(created_at: :desc)
+    @questions = Question.order(created_at: :desc)
   end
 
   def show
-    @pagy, @replies = pagy_array question.answers.order(created_at: :desc).flat_map(&:subtree)
-    @page = params[:page]
+    @replies = question.answers.order(created_at: :desc).flat_map(&:subtree)
   end
 
   def new

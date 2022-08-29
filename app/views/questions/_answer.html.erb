@@ -1,16 +1,16 @@
-<div class="card mt-3" id="<%= dom_id(answer) %>">
+<div class="card mt-3" id="reply-<%= answer.id %>">
   <div class="card-body">
     <h5 class="card-title"><%= answer.user.username %></h5>
     <p class="card-text"><%= answer.body %></p>
 
     <%= link_to t('global.button.reply'),
-                new_reply_path(repliable_id: answer, question_id: @question.id, page: @page),
+                new_reply_path(repliable_id: answer),
                 remote: true, class:"btn btn-outline-primary btn-sm" %>
     <% if owner?(answer) %>
       <%= link_to t('global.button.edit'),
-                  edit_reply_path(answer, repliable_id: answer, question_id: @question.id, page: @page),
+                  edit_reply_path(answer, repliable_id: answer),
                   remote: true, class:"btn btn-outline-primary btn-sm" %>
-      <%= link_to t('global.button.delete'), question_answer_path(@question, answer), method: :delete,
+      <%= link_to t('global.button.delete'), reply_path(answer), method: :delete,
                   data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
     <% end %>
 
@@ -20,17 +20,20 @@
       <%= t('.rating') %>: <%= answer.weighted_score %>
       <% unless current_user&.voted_for? answer %>
         <span class="ps-3">
-          <span class="pe-2"><%= link_to (fa_icon "arrow-up"), 
-                                  question_answer_vote_up_path(@question, answer), 
-                                  class: "btn btn-secondary" %></span>
-          <%= link_to (fa_icon "arrow-down"), question_answer_vote_down_path(@question, answer), 
-                                              class: "btn btn-secondary" %>
+          <span class="pe-2"><%= link_to (fa_icon "arrow-up"), reply_vote_up_path(answer), 
+                                         class: "btn btn-secondary" %></span>
+          <%= link_to (fa_icon "arrow-down"), reply_vote_down_path(answer), 
+                      class: "btn btn-secondary" %>
         </span>
       <% end %>
     </div>
 
-    <div id="reply_form_<%= answer.id %>">
+    <div class="answer-form" id="reply_form_<%= answer.id %>">
+      <%= render 'questions/reply_form.html', { reply: answer.comments.build } %>
+    </div>
 
+    <div class="answer-form" id="edit_form_<%= answer.id %>">
+      <%= render 'questions/reply_form.html', { reply: answer } %>
     </div>
   </div>
 </div>

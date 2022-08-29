@@ -2,7 +2,7 @@ class RepliesController < ApplicationController
   def new
     respond_to do |format|
       format.js do
-        render partial: 'questions/new_reply_form', locals: { repliable: repliable, new_reply: true }
+        render partial: 'questions/reply_form', locals: { repliable: repliable, new_reply: true }
       end
     end
   end
@@ -10,26 +10,50 @@ class RepliesController < ApplicationController
   def create
     reply = Reply.new(user: current_user, **reply_params)
     reply.parent = reply.repliable if reply.is_a?(Comment)
-    reply.save
-    redirect_back fallback_location: root_path
+
+    if reply.save
+      flash[:notice] = t('.success')
+      redirect_to back_with_anchor anchor: "reply-#{reply.id}"
+    else
+      flash[:alert] = t('.alert')
+      redirect_back fallback_location: root_path
+    end
   end
 
   def edit
     respond_to do |format|
       format.js do
-        render partial: 'questions/new_reply_form', locals: { repliable: repliable, new_reply: false }
+        render partial: 'questions/reply_form', locals: { repliable: repliable, new_reply: false }
       end
     end
   end
 
   def update
-    reply = Reply.find(params[:id])
-
     if reply.update(reply_params)
-      redirect_back fallback_location: root_path
+      flash[:notice] = t('.success')
     else
-      redirect_back fallback_location: root_path, alert: 'Something went wrong'
+      flash[:alert] = t('.alert')
     end
+    redirect_back fallback_location: root_path
+  end
+
+  def destroy
+    if reply.destroy
+      flash[:notice] = t('.success')
+    else
+      flash[:alert] = t('.alert')
+    end
+    redirect_back fallback_location: root_path
+  end
+
+  def vote_up
+    reply_for_vote.vote_by voter: current_user, vote: 'like'
+    redirect_to back_with_anchor anchor: "reply-#{reply_for_vote.id}"
+  end
+
+  def vote_down
+    reply_for_vote.vote_by voter: current_user, vote: 'bad'
+    redirect_to back_with_anchor anchor: "reply-#{reply_for_vote.id}"
   end
 
   private
@@ -42,12 +66,24 @@ class RepliesController < ApplicationController
     @question ||= Question.find(params[:question_id])
   end
 
+  def reply
+    @reply ||= Reply.find(params[:id])
+  end
+
+  def reply_for_vote
+    @reply_for_vote ||= Reply.find(params[:reply_id])
+  end
+
   def replies
-    @pagy, answers = pagy question.answers.order(created_at: :desc), page: params[:page]
+    answers = question.answers.order(created_at: :desc)
     answers.flat_map(&:subtree)
   end
 
   def repliable
-    Reply.find(params[:repliable_id])
+    @repliable ||= Reply.find(params[:repliable_id])
+  end
+
+  def back_with_anchor(anchor: '')
+    "#{request.referrer}##{anchor}"
   end
 end
