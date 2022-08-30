@@ -12,6 +12,8 @@ class RepliesController < ApplicationController
     reply.parent = reply.repliable if reply.is_a?(Comment)
 
     if reply.save
+      # send notification to the author of question
+      NewReplyMailSender.call(question, reply)
       flash[:notice] = t('.success')
       redirect_to back_with_anchor anchor: "reply-#{reply.id}"
     else
@@ -47,13 +49,13 @@ class RepliesController < ApplicationController
   end
 
   def vote_up
-    reply_for_vote.vote_by voter: current_user, vote: 'like'
-    redirect_to back_with_anchor anchor: "reply-#{reply_for_vote.id}"
+    reply.vote_by voter: current_user, vote: 'like'
+    redirect_to back_with_anchor anchor: "reply-#{reply.id}"
   end
 
   def vote_down
-    reply_for_vote.vote_by voter: current_user, vote: 'bad'
-    redirect_to back_with_anchor anchor: "reply-#{reply_for_vote.id}"
+    reply.vote_by voter: current_user, vote: 'bad'
+    redirect_to back_with_anchor anchor: "reply-#{reply.id}"
   end
 
   private
@@ -67,11 +69,7 @@ class RepliesController < ApplicationController
   end
 
   def reply
-    @reply ||= Reply.find(params[:id])
-  end
-
-  def reply_for_vote
-    @reply_for_vote ||= Reply.find(params[:reply_id])
+    @reply ||= Reply.find_by_id(params[:id]) || Reply.find_by_id(params[:reply_id])
   end
 
   def replies

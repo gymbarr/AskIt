@@ -21,6 +21,7 @@
       <% end %>
     <% end %>       
 
+    <%= hidden_field_tag :question_id, @question.id %>
     <%= f.hidden_field :repliable_type, value: reply.repliable_type %>
     <%= f.hidden_field :repliable_id, value: reply.repliable_id %>
     <%= f.hidden_field :type, value: reply.type %>
