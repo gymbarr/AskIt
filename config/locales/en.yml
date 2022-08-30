@@ -91,9 +91,15 @@ en:
       success: Unsubscribed!
       alert: Something went wrong
   user_mailer:
+    notify_subscriber:
+      subject: New question in the %{name} category!
+      greeting: Hi %{name}!
+      content_1: 'There is a new questions in the %{name} category! Check it out:'
+      content_2: 'See all questions in the category %{name}:'
+      farewell: Thanks for staying with us and have a great day!
     notify_new_reply:
       subject: You've got a new reply!
-      greeting: Hi %{name}
+      greeting: Hi %{name}!
       content: 'User %{name} replied to you in the discussion of the question:'
       farewell: Thanks for staying with us and have a great day!
   navbar:

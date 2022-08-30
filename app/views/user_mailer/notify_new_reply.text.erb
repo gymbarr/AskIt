@@ -2,6 +2,6 @@
 ===============================================
  
 <%= t('.content', name: @replier.username) %>
-<%= link_to nil, question_url(@question, locale: I18n.locale) %>
+<%= question_url(@question, locale: I18n.locale) %>
 
 <%= t('.farewell') %>

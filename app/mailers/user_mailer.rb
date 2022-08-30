@@ -4,7 +4,9 @@ class UserMailer < ApplicationMailer
     @category = params[:category]
     @question = params[:question]
 
-    mail to: @user.email, subject: "New question in the #{@category.name} category! | AskIt"
+    I18n.with_locale(I18n.locale) do
+      mail to: @user.email, subject: "#{t('.subject', name: @category.name)} | AskIt"
+    end
   end
 
   def notify_new_reply

@@ -1,10 +1,9 @@
-<h4>Hi, <%= @user.username %>, it's the admin of AskIt and we have something interesting for you!<h4>
+<h4><%= t('.greeting', name: @user.username) %><h4>
  
-<p>There is a new questions in the <%= @category.name %> category!</p>
-<p>Check it out:</p>
-<p><%= link_to nil, question_url(@question) %></p>
+<p><%= t('.content_1', name: @category.name) %></p>
+<p><%= link_to nil, question_url(@question, locale: I18n.locale) %></p>
 
-<p>Check new questions in the category <%= @category.name %>:</p>
-<p><%= link_to nil, category_url(@category) %></p>
+<p><%= t('.content_2', name: @category.name) %></p>
+<p><%= link_to nil, category_url(@category, locale: I18n.locale) %></p>
 
-<p>Thanks for staying with us and have a great day!</p>
+<p><%= t('.farewell') %></p>
