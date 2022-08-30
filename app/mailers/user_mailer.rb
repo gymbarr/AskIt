@@ -9,9 +9,9 @@ class UserMailer < ApplicationMailer
 
   def notify_new_reply
     @question = params[:question]
-    answer = params[:answer]
-    @user = @question.user
-    @replier = answer.user
+    reply = params[:reply]
+    @user = reply.repliable.user
+    @replier = reply.user
 
     mail to: @user.email, subject: "You've got a new answer on your question! | AskIt"
   end

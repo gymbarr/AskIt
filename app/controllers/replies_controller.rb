@@ -12,7 +12,7 @@ class RepliesController < ApplicationController
     reply.parent = reply.repliable if reply.is_a?(Comment)
 
     if reply.save
-      # send notification to the author of question
+      # send notification to the repliable user
       NewReplyMailSender.call(question, reply)
       flash[:notice] = t('.success')
       redirect_to back_with_anchor anchor: "reply-#{reply.id}"

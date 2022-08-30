@@ -1,6 +1,6 @@
 <h4>Hi, <%= @user.username %>, it's the admin of AskIt<h4>
  
-<p>User <%= @replier.username %> answered to your question:</p>
-<p><%= link_to nil, question_url(@question) %></p>
+<p>User <%= @replier.username %> replied to you in the discussion of the question:</p>
+<p><%= link_to nil, question_url(@question, locale: I18n.default_locale) %></p>
 
 <p>Thanks for staying with us and have a great day!</p>

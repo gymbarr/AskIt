@@ -74,28 +74,22 @@ en:
       success: Question was successfully deleted!
     require_same_user:
       alert: You can only edit or delete your own questions
-  answers:
+  replies:
     create:
-      success: Answer was successfully added to the question!
+      success: Reply was successfully added!
       alert: Something went wrong
     update:
-      success: Answer was successfully updated!
+      success: Reply was successfully updated!
       alert: Something went wrong
     destroy:
-      success: Answer was successfully deleted!
-    require_same_user:
-      alert: You can only edit or delete your own answers
-  comments:
+      success: Reply was successfully deleted!
+  subscriptions:
     create:
-      success: Comment was successfully added
-      alert: Something went wrong
-    update:
-      success: Comment was successfully updated!
+      success: Subscribed successfully!
       alert: Something went wrong
     destroy:
-      success: Comment was successfully deleted!
-    require_same_user:
-      alert: You can only edit or delete your own comments
+      success: Unsubscribed!
+      alert: Something went wrong
   navbar:
     home: Home
     questions: Questions

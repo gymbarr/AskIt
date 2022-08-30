@@ -1,7 +1,7 @@
 class NotifyNewReplyJob < ApplicationJob
   queue_as :default
 
-  def perform(question, answer)
-    UserMailer.with(question: question, answer: answer).notify_new_reply.deliver_later
+  def perform(question, reply)
+    UserMailer.with(question: question, reply: reply).notify_new_reply.deliver_now
   end
 end

@@ -1,15 +1,15 @@
 class NewReplyMailSender < ApplicationService
-  attr_reader :question, :answer
+  attr_reader :question, :reply
 
-  def initialize(question, answer)
+  def initialize(question, reply)
     @question = question
-    @answer = answer
+    @reply = reply
   end
 
   def call
-    # don't notify if the replier is the author of the question
-    return if @question.user == @answer.user
+    # don't notify if the replier is the author of the repliable
+    return if @reply.repliable.user == @reply.user
 
-    NotifyNewReplyJob.perform_later(@question, @answer)
+    NotifyNewReplyJob.perform_now(@question, @reply)
   end
 end

@@ -5,17 +5,17 @@ class SubscriptionsController < ApplicationController
     subscription = category.subscriptions.build(user_id: current_user.id)
 
     if subscription.save
-      redirect_to category_path(category), notice: 'Subscribed successfully!'
+      redirect_to category_path(category), notice: t('.success')
     else
-      redirect_to category_path(category), alert: 'Something went wrong'
+      redirect_to category_path(category), alert: t('.alert')
     end
   end
 
   def destroy
     if subscription.destroy
-      redirect_to category_path(category), notice: 'Unsubscribed!'
+      redirect_to category_path(category), notice: t('.success')
     else
-      redirect_to category_path(category), alert: 'Something went wrong'
+      redirect_to category_path(category), alert: t('.alert')
     end
   end
 

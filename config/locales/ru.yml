@@ -74,28 +74,22 @@ ru:
       success: Вопрос успешно удален!
     require_same_user:
       alert: Вы можете редактировать и удалять только свои вопросы
-  answers:
+  replies:
     create:
-      success: Ответ на вопрос успешно добавлен!
+      success: Ответ успешно добавлен!
       alert: Что-то пошло не так
     update:
       success: Ответ успешно отредатикрован!
       alert: Что-то пошло не так
     destroy:
       success: Ответ успешно удален!
-    require_same_user:
-      alert: Вы можете редактировать и удалять только свои ответы
-  comments:
+  subscriptions:
     create:
-      success: Комментарий успешно добавлен!
-      alert: Что-то пошло не так
-    update:
-      success: Комментарий успешно отредактирован!
+      success: Подписка на категорию оформлена!
       alert: Что-то пошло не так
     destroy:
-      success: Комментарий успешно удален!
-    require_same_user:
-      alert: Вы можете редактировать и удалять только свои комментарии
+      success: Подписка на категорию отменена!
+      alert: Что-то пошло не так
   navbar:
     home: Главная
     questions: Вопросы
