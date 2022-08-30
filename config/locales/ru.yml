@@ -90,6 +90,12 @@ ru:
     destroy:
       success: Подписка на категорию отменена!
       alert: Что-то пошло не так
+  user_mailer:
+    notify_new_reply:
+      subject: Вам ответили!
+      greeting: Приветствую, %{name}
+      content: 'Пользователь %{name} ответил Вам в обсуждении вопроса:'
+      farewell: Спасибо, что остаетесь с нами, хорошего дня!
   navbar:
     home: Главная
     questions: Вопросы

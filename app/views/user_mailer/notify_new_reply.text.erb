@@ -1,7 +1,7 @@
-Hi, <%= @user.username %>, it's the admin of AskIt
+<%= t('.greeting', name: @user.username) %>
 ===============================================
  
-User <%= @replier.username %> replied to you in the discussion of the question::
-<%= link_to nil, question_url(@question, locale: I18n.default_locale) %>
+<%= t('.content', name: @replier.username) %>
+<%= link_to nil, question_url(@question, locale: I18n.locale) %>
 
-Thanks for staying with us and have a great day!
+<%= t('.farewell') %>

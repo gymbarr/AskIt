@@ -13,6 +13,8 @@ class UserMailer < ApplicationMailer
     @user = reply.repliable.user
     @replier = reply.user
 
-    mail to: @user.email, subject: "You've got a new answer on your question! | AskIt"
+    I18n.with_locale(I18n.locale) do
+      mail to: @user.email, subject: "#{t('.subject')} | AskIt"
+    end
   end
 end

@@ -90,6 +90,12 @@ en:
     destroy:
       success: Unsubscribed!
       alert: Something went wrong
+  user_mailer:
+    notify_new_reply:
+      subject: You've got a new reply!
+      greeting: Hi %{name}
+      content: 'User %{name} replied to you in the discussion of the question:'
+      farewell: Thanks for staying with us and have a great day!
   navbar:
     home: Home
     questions: Questions
