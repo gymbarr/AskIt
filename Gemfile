@@ -28,7 +28,7 @@ gem "font-awesome-rails"
 gem 'sidekiq', '~> 6.5.4'
 gem 'rails-i18n', '~> 7'
 gem 'ancestry'
-
+gem 'devise'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
