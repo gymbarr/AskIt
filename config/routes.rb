@@ -7,9 +7,6 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     root 'pages#index'
 
-    resources :users, only: %i[new create]
-    resource :session, only: %i[new create destroy]
-
     resources :questions do
       get 'vote_up', to: 'questions#vote_up'
       get 'vote_down', to: 'questions#vote_down'
