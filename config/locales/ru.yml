@@ -1,29 +1,11 @@
 ru:
   en: Английский
   ru: Русский
-  users:
-    new:
-      title: Регистрация
-      email: Адрес почты
-      username: Имя
-      password: Пароль
-      password_confirmation: Подтверждение пароля
-      not_share_email: Мы никогда не будем делиться вашей электронной почтой с кем-либо еще.
-    create:
-      success: Вы были успешно зарегистрированы!
-  sessions:
-    new:
-      title: Вход
-      email: Адрес почты
-      password: Пароль
-      submit: Войти
-    create:
-      success: Вы успешно вошли в систему!
-      alert: Неверный адрес почты или пароль
-    already_logged_in:
-      alert: Вы уже вошли в систему
-    not_signed_in: 
-      alert: Вы должны авторизоваться в системе, чтобы выполнить данное действие
+  activerecord:
+    attributes:
+      user:
+        email: Адрес почты
+        username: Имя пользователя
   categories:
     index:
       title: Категории

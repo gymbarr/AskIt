@@ -1,29 +1,11 @@
 en:
   en: English
   ru: Russian
-  users:
-    new:
-      title: Sign Up
-      email: Email
-      username: Username
-      password: Password
-      password_confirmation: Password confirmation
-      not_share_email: We'll never share your email with anyone else.
-    create:
-      success: You've successfully signed up!
-  sessions:
-    new:
-      title: Sign In
-      email: Email
-      password: Password
-      submit: Sign In
-    create:
-      success: Signed in successfully!
-      alert: Incorrect email or password
-    already_logged_in:
-      alert: You've already signed in
-    not_signed_in: 
-      alert: You must be signed in to perform that action
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        username: Username   
   categories:
     index:
       title: Categories
