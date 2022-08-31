@@ -91,6 +91,7 @@ en:
     sign_in: Sign In
     sign_up: Sign Up
     sign_out: Sign Out
+    edit_profile: Edit profile
   pages:
     index:
       title: Welcome to AskIt!

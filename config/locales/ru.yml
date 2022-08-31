@@ -91,6 +91,7 @@ ru:
     sign_in: Вход
     sign_up: Регистрация
     sign_out: Выход
+    edit_profile: Редактировать профиль
   pages:
     index:
       title: Добро пожаловать на AskIt!

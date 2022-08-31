@@ -1,11 +1,12 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  devise_for :users
   mount Sidekiq::Web => '/sidekiq'
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     root 'pages#index'
+
+    devise_for :users
 
     resources :questions do
       get 'vote_up', to: 'questions#vote_up'
