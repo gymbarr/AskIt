@@ -7,7 +7,13 @@
       <div class="card-body">
         <h6 class="card-title"><%= comment.user.username %></h6>
         <p class="card-text"><%= comment.body %></p>
-        <p class="card-text"><small class="text-muted"><%= format_timestamp(comment.created_at) %></small></p>
+        <p class="card-text"><small class="text-muted">
+          <%= format_timestamp(comment.created_at) %>
+          <% if comment.parent.is_a?(Comment) %>
+            <%= link_to "Replied to #{comment.parent.user.username}",
+                        question_path(@question, anchor: "reply-#{comment.parent.id}") %>
+          <% end %>
+        </small></p>
 
         <%= link_to t('global.button.reply'),
                     new_reply_path(repliable_id: comment),
