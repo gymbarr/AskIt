@@ -1,6 +1,4 @@
 class SubscriptionsController < ApplicationController
-  before_action :require_user
-
   def create
     subscription = category.subscriptions.build(user_id: current_user.id)
 

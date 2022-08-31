@@ -1,7 +1,4 @@
 class CategoriesController < ApplicationController
-  # before_action :category, only: %i[edit show]
-  before_action :require_user, except: %i[index show]
-
   helper_method :already_subscribed?, :category
 
   def new

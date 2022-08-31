@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_30_202825) do
+ActiveRecord::Schema.define(version: 2022_08_31_105515) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -30,7 +30,9 @@ ActiveRecord::Schema.define(version: 2022_08_30_202825) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "ancestry"
+    t.integer "user_id"
     t.index ["ancestry"], name: "index_questions_on_ancestry"
+    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "replies", force: :cascade do |t|
@@ -41,15 +43,19 @@ ActiveRecord::Schema.define(version: 2022_08_30_202825) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "ancestry"
+    t.integer "user_id"
     t.index ["ancestry"], name: "index_replies_on_ancestry"
     t.index ["repliable_type", "repliable_id"], name: "index_replies_on_repliable_type_and_repliable_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["category_id"], name: "index_subscriptions_on_category_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -81,4 +87,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_202825) do
     t.index ["voter_type", "voter_id"], name: "index_votes_on_voter_type_and_voter_id"
   end
 
+  add_foreign_key "questions", "users", on_delete: :cascade
+  add_foreign_key "replies", "users", on_delete: :cascade
+  add_foreign_key "subscriptions", "users", on_delete: :cascade
 end

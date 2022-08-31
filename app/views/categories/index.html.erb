@@ -1,8 +1,6 @@
 <h1><%= t('.title') %></h1>
 
-<% if logged_in? %>
-  <%= link_to t('.new_category'), new_category_path, class:"btn btn-outline-primary" %>
-<% end %>
+<%= link_to t('.new_category'), new_category_path, class:"btn btn-outline-primary" %>
 
 <% @categories.each do |category| %>
   <div class="pt-3">
