@@ -1,20 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe UserMailer, type: :mailer do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
-require 'rails_helper'
+  describe '#notify_subscriber' do
+    subject(:user) { create :user }
+    subject(:category) { create :category }
+    subject(:question) { create :question }
+    subject(:mail) do
+      described_class.with(user: user, category: category, question: question).notify_subscriber.deliver_now
+    end
 
-RSpec.describe UserMailer, type: :mailer do
-  subject(:category) { create :category }
-  subject(:question) { create :question }
-  subject(:user) { question.user }
-  subject(:mail) do
-    described_class.with(user: user, category: category, question: question).notify_subscriber.deliver_now
-  end
-
-  describe '#notify_subscriber', :fast do
-    context 'when instant mail sending' do
+    describe '#deliever_now' do
       it 'renders the receiver emailname' do
         expect(mail.to[0]).to eq(user.email)
       end
@@ -39,10 +34,12 @@ RSpec.describe UserMailer, type: :mailer do
       end
     end
 
-    it 'enqueues email sending to a background job' do
-      expect do
-        described_class.notify_subscriber.deliver_later
-      end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+    describe '#deliever_later' do
+      it 'enqueues email sending to a background job' do
+        expect do
+          described_class.notify_subscriber.deliver_later
+        end.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+      end
     end
   end
 end
