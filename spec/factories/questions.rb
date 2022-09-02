@@ -3,6 +3,6 @@ FactoryBot.define do
     title { generate(:string) }
     body { generate(:string) }
 
-    association :user, factory: :user
+    association :user
   end
 end
