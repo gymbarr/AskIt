@@ -80,6 +80,10 @@ GEM
     devise-i18n (1.10.2)
       devise (>= 4.8.0)
     diff-lcs (1.5.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.11.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -244,7 +248,11 @@ DEPENDENCIES
   devise
   devise-bootstrap5
   devise-i18n
+<<<<<<< HEAD
   factory_bot_rails
+=======
+  dotenv-rails
+>>>>>>> 693c6dd (add dot env gem for gmail creds, smtp settings for gmail)
   font-awesome-rails
   jbuilder (~> 2.7)
   letter_opener
