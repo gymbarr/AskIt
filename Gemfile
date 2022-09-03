@@ -31,6 +31,7 @@ gem 'ancestry'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-bootstrap5'
+gem 'dotenv-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
