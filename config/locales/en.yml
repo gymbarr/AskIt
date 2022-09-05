@@ -72,18 +72,25 @@ en:
     destroy:
       success: Unsubscribed!
       alert: Something went wrong
-  user_mailer:
-    notify_subscriber:
+  mailer_common:
+    greeting: Hi %{name}!
+    farewell: Thanks for staying with us and have a great day!
+  answer_mailer:
+    new_answer_to_question:
+      subject: You've got a new reply to your question!
+      content: 'User %{name} left an answer to your question:'
+  comment_mailer:
+    new_comment_to_answer:
+      subject: You've got a new reply to your answer!
+      content: 'User %{name} left a comment to your answer:'
+    new_comment_to_comment:
+      subject: You've got a new reply to your comment!
+      content: 'User %{name} left a comment to your comment:'
+  subscription_mailer:
+    new_question_in_category:
       subject: New question in the %{name} category!
-      greeting: Hi %{name}!
       content_1: 'There is a new questions in the %{name} category! Check it out:'
       content_2: 'See all questions in the category %{name}:'
-      farewell: Thanks for staying with us and have a great day!
-    notify_new_reply:
-      subject: You've got a new reply!
-      greeting: Hi %{name}!
-      content: 'User %{name} replied to you in the discussion of the question:'
-      farewell: Thanks for staying with us and have a great day!
   navbar:
     home: Home
     questions: Questions
