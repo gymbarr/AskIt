@@ -1,6 +1,6 @@
 module Runners
   class MailCommentToAnswerJob < ApplicationJob
-    queue_as :default
+    queue_as :mailers
 
     def perform(question_id, comment_id)
       CommentMailer.with(question_id: question_id, comment_id: comment_id)
