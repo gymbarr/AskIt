@@ -3,6 +3,6 @@ class NotifySubscriberJob < ApplicationJob
 
   def perform(params)
     SubscriptionMailer.with(user: params[:subscriber], category: params[:category], question: params[:question])
-                      .notify_subscriber.deliver_later
+                      .new_question_in_category.deliver_later
   end
 end
