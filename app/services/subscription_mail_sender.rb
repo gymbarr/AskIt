@@ -6,6 +6,6 @@ class SubscriptionMailSender < ApplicationService
   end
 
   def call
-    NotifySubscribersJob.perform_later(@question)
+    Kickers::NotifySubscribersJob.perform_later(@question)
   end
 end
