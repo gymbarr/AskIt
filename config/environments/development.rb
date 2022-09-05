@@ -35,17 +35,17 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
-  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.delivery_method = ENV.fetch('ACTION_MAILER_DELIVERY_METHOD').to_sym
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: ENV.fetch('HOST') }
 
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    user_name: ENV.fetch('GMAIL_USERNAME', 'username'),
-    password: ENV.fetch('GMAIL_SECURED_PASSWORD', 'password'),
-    authentication: 'plain',
+    address: ENV.fetch('SMTP_ADDRESS'),
+    port: ENV.fetch('SMTP_PORT'),
+    user_name: ENV.fetch('SMTP_USERNAME'),
+    password: ENV.fetch('SMTP_SECURED_PASSWORD'),
+    authentication: ENV.fetch('SMTP_AUTHENTICATION'),
     enable_starttls_auto: true
   }
 
