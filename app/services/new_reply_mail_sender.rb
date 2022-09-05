@@ -12,11 +12,11 @@ class NewReplyMailSender < ApplicationService
 
     case reply.repliable
     when Question
-      MailAnswerToQuestionJob.perform_later(@question, @reply)
+      Runners::MailAnswerToQuestionJob.perform_later(@question, @reply)
     when Answer
-      MailCommentToAnswerJob.perform_later(@question, @reply)
+      Runners::MailCommentToAnswerJob.perform_later(@question, @reply)
     when Comment
-      MailCommentToCommentJob.perform_later(@question, @reply)
+      Runners::MailCommentToCommentJob.perform_later(@question, @reply)
     end
   end
 end
