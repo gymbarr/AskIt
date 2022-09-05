@@ -2,18 +2,18 @@ module Kickers
   class NotifySubscribersJob < ApplicationJob
     queue_as :default
 
-    def perform(question)
+    def perform(question_id)
+      question = Question.find(question_id)
       subscribers = question.subscribers
-      category = question.categories.first
-      return if subscribers.blank? || category.blank?
+      return if subscribers.blank?
 
-      params = { category: category, question: question }
+      params = { question_id: question_id }
 
       subscribers.each do |subscriber|
         # skip the author of the question if he is a subscriber
         next if question.user == subscriber
 
-        params[:subscriber] = subscriber
+        params[:subscriber_id] = subscriber.id
         Runners::NotifySubscriberJob.perform_later(params)
       end
     end

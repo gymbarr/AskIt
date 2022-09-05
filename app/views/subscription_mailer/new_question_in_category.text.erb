@@ -1,10 +1,12 @@
 <%= t('.greeting', name: @user.username) %>
 ===============================================
  
-<%= t('.content_1', name: @category.name) %>
+<%= t('.content_1', name: @categories_name) %>
 <%= question_url(@question, locale: I18n.locale) %>
  
-<%= t('.content_2', name: @category.name) %>
-<%= category_url(@category, locale: I18n.locale) %>
+<% @categories.each do |category| %>
+  <%= t('.content_2', name: category.name) %>
+  <%= category_url(category, locale: I18n.locale) %>
+<% end %>
 
 <%= t('.farewell') %>

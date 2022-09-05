@@ -2,8 +2,10 @@ module Runners
   class MailCommentToCommentJob < ApplicationJob
     queue_as :default
 
-    def perform(question, comment)
-      CommentMailer.with(question: question, comment: comment).new_comment_to_comment.deliver_now
+    def perform(question_id, comment_id)
+      CommentMailer.with(question_id: question_id, comment_id: comment_id)
+                   .new_comment_to_comment
+                   .deliver_now
     end
   end
 end
