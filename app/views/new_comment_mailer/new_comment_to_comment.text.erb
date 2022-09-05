@@ -1,0 +1,7 @@
+<%= t('.greeting', name: @user.username) %>
+===============================================
+ 
+<%= t('.content', name: @replier.username) %>
+<%= question_url(@question, locale: I18n.locale) %>
+
+<%= t('.farewell') %>
