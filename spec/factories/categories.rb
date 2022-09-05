@@ -8,7 +8,7 @@ FactoryBot.define do
       count { 5 }
     end
     after(:create) do |category, evaluator|
-      create_list(:subscription, evaluator.count, category_id: category.id)
+      create_list(:subscription, evaluator.count, category: category)
     end
   end
 end

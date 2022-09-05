@@ -4,9 +4,9 @@ FactoryBot.define do
 
     association :user
 
-    trait :for_question do
-      association :repliable, factory: :question
-    end
+    # trait :for_question do
+    #   association :repliable, factory: :question
+    # end
 
   #   transient do
   #     repliable { nil }
