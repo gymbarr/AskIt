@@ -1,4 +1,4 @@
-class NewCommentMailer < ApplicationMailer
+class CommentMailer < ApplicationMailer
   before_action do
     @question = params[:question]
     @user = params[:comment].repliable.user

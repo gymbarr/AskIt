@@ -10,6 +10,13 @@ class NewReplyMailSender < ApplicationService
     # don't notify if the replier is the author of the repliable
     return if @reply.repliable.user == @reply.user
 
-    NotifyNewReplyJob.perform_later(@question, @reply)
+    case reply.repliable
+    when Question
+      MailAnswerToQuestionJob.perform_later(@question, @reply)
+    when Answer
+      MailCommentToAnswerJob.perform_later(@question, @reply)
+    when Comment
+      MailCommentToCommentJob.perform_later(@question, @reply)
+    end
   end
 end
