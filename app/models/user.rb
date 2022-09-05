@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
+  has_many :subscription_categories, through: :subscriptions, source: :category
   acts_as_voter
 
   # Include default devise modules. Others available are:

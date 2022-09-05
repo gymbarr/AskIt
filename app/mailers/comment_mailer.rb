@@ -1,8 +1,9 @@
 class CommentMailer < ApplicationMailer
   before_action do
-    @question = params[:question]
-    @user = params[:comment].repliable.user
-    @replier = params[:comment].user
+    @question = Question.find(params[:question_id])
+    comment = Comment.find(params[:comment_id])
+    @user = comment.repliable.user
+    @replier = comment.user
   end
 
   def new_comment_to_answer
