@@ -72,18 +72,25 @@ ru:
     destroy:
       success: Подписка на категорию отменена!
       alert: Что-то пошло не так
-  user_mailer:
-    notify_subscriber:
+  mailer_common:
+    greeting: Приветствую, %{name}!
+    farewell: Спасибо, что остаетесь с нами, хорошего дня!
+  answer_mailer:
+    new_answer_to_question:
+      subject: 'Вам оставили ответ на Ваш вопрос!'
+      content: 'Пользователь %{name} оставил ответ на Ваш вопрос:'
+  comment_mailer:
+    new_comment_to_answer:
+      subject: 'Вам оставили комментарий на Ваш ответ!'
+      content: 'Пользователь %{name} оставил комментарий на Ваш ответ:'
+    new_comment_to_comment:
+      subject: 'Вам оставили комментарий на Ваш комментарий!'
+      content: 'Пользователь %{name} оставил комментарий на Ваш комментарий:'
+  subscription_mailer:
+    new_question_in_category:
       subject: Новый вопрос в категории %{name}!
-      greeting: Приветствую, %{name}!
       content_1: 'Появился новый вопрос в категории %{name}! Заходи и смотри:'
       content_2: 'Посмортеть все вопросы в категории %{name}:'
-      farewell: Спасибо, что остаетесь с нами, хорошего дня!
-    notify_new_reply:
-      subject: Вам ответили!
-      greeting: Приветствую, %{name}!
-      content: 'Пользователь %{name} ответил Вам в обсуждении вопроса:'
-      farewell: Спасибо, что остаетесь с нами, хорошего дня!
   navbar:
     home: Главная
     questions: Вопросы
