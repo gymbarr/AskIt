@@ -50,7 +50,7 @@ RSpec.describe UserMailer, type: :mailer do
     #   described_class.with(question: question, reply: reply).notify_new_reply.deliver_now
     # end
 
-    describe '#deliever_now' do
+    describe '#deliever_now', :slow do
       it 'renders the receiver emailname' do
        debugger
       end
