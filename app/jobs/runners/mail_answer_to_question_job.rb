@@ -1,6 +1,6 @@
 module Runners
   class MailAnswerToQuestionJob < ApplicationJob
-    queue_as :default
+    queue_as :mailers
 
     def perform(question_id, answer_id)
       AnswerMailer.with(question_id: question_id, answer_id: answer_id)
