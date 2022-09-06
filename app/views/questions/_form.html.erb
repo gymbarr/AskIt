@@ -9,8 +9,8 @@
   </div>
   <div class="mb-3">
     <%= f.collection_select(:category_ids, Category.all, :id, :name, 
-                          options = { :prompt => t('questions.new.categories_prompt') },
-                          class: "form-select") %>
+                            options = { :prompt => t('questions.new.categories_prompt') },
+                            html_options = { :multiple => true, class: "form-select" }) %>
   </div>
 
   <%= f.submit @question.new_record? ? t('global.button.create') : t('global.button.update'),

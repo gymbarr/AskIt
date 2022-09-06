@@ -43,7 +43,7 @@ ru:
       title: Новый вопрос
       question_title: Заголовок
       question_body: Текст
-      categories_prompt: Выберите категорию из списка ниже
+      categories_prompt: Выберите категории из списка ниже
     create:
       success: Вопрос успешно создан!
       alert: Что-то пошло не так
