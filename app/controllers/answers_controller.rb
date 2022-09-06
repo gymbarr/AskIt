@@ -1,10 +1,11 @@
 class AnswersController < ApplicationController
+  include Answers
   def create
     answer = Answer.new(user: current_user, **answer_params)
 
     if answer.save
       # send notification to the repliable user
-      # NewReplyMailSender.call(question, answer)
+      Answers::NewAnswerNotifier.call(question, answer)
       flash[:notice] = t('.success')
       redirect_to back_with_anchor anchor: "reply-#{answer.id}"
     else
@@ -49,6 +50,10 @@ class AnswersController < ApplicationController
 
   def answer
     @answer ||= Answer.find_by_id(params[:id]) || Answer.find_by_id(params[:answer_id])
+  end
+
+  def question
+    @question ||= Question.find(params[:question_id])
   end
 
   def back_with_anchor(anchor: '')
