@@ -18,6 +18,13 @@ Rails.application.routes.draw do
       get 'vote_down', to: 'replies#vote_down'
     end
 
+    resources :answers, except: %i[index show] do
+      get 'vote_up', to: 'replies#vote_up'
+      get 'vote_down', to: 'replies#vote_down'
+    end
+
+    resources :comments, except: %i[index show]
+
     resources :categories do
       resources :subscriptions, only: %i[create destroy]
     end
