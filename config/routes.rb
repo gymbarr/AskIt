@@ -13,14 +13,14 @@ Rails.application.routes.draw do
       get 'vote_down', to: 'questions#vote_down'
     end
 
-    resources :replies, except: %i[index show] do
-      get 'vote_up', to: 'replies#vote_up'
-      get 'vote_down', to: 'replies#vote_down'
-    end
+    # resources :replies, except: %i[index show] do
+    #   get 'vote_up', to: 'replies#vote_up'
+    #   get 'vote_down', to: 'replies#vote_down'
+    # end
 
     resources :answers, except: %i[index show] do
-      get 'vote_up', to: 'replies#vote_up'
-      get 'vote_down', to: 'replies#vote_down'
+      get 'vote_up', to: 'answers#vote_up'
+      get 'vote_down', to: 'answers#vote_down'
     end
 
     resources :comments, except: %i[index show]

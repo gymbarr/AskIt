@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<%= render 'reply_form', { reply: @question.answers.build } %>
+<%= render 'shared/reply_form', { reply: @question.answers.build } %>
 
 <% unless @replies.empty? %>
   <h2 class="py-3"><%= t('.answers') %></h2>
@@ -42,8 +42,8 @@
 
 <% @replies.each do |reply| %>
   <% if reply.is_a?(Answer) %>
-    <%= render 'answer', { answer: reply } %>
+    <%= render 'answers/answer', { answer: reply } %>
   <% else %>
-    <%= render 'comment', { comment: reply } %>
+    <%= render 'comments/comment', { comment: reply } %>
   <% end %>
 <% end %>

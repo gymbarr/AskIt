@@ -56,15 +56,24 @@ en:
       success: Question was successfully deleted!
     require_same_user:
       alert: You can only edit or delete your own questions
-  replies:
+  answers:
     create:
-      success: Reply was successfully added!
+      success: Answer was successfully added!
       alert: Something went wrong
     update:
-      success: Reply was successfully updated!
+      success: Answer was successfully updated!
       alert: Something went wrong
     destroy:
-      success: Reply was successfully deleted!
+      success: Answer was successfully deleted!
+  comments:
+    create:
+      success: Comment was successfully added!
+      alert: Something went wrong
+    update:
+      success: Comment was successfully updated!
+      alert: Something went wrong
+    destroy:
+      success: Comment was successfully deleted!
   subscriptions:
     create:
       success: Subscribed successfully!

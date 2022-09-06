@@ -22,16 +22,16 @@
           <%= button_tag t('global.button.edit'),
                   class:"btn btn-outline-primary btn-sm",
                   onclick: "showForm(#{comment.id}, 'edit')" %>
-          <%= link_to t('global.button.delete'), reply_path(comment), method: :delete, 
+          <%= link_to t('global.button.delete'), comment_path(comment), method: :delete, 
                       data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
         <% end %>
 
         <div class="comment-form hidden" id="reply_form_<%= comment.id %>">
-          <%= render 'questions/reply_form.html', { reply: comment.comments.build } %>
+          <%= render 'shared/reply_form.html', { reply: comment.comments.build } %>
         </div>
 
         <div class="comment-form hidden" id="edit_form_<%= comment.id %>">
-          <%= render 'questions/reply_form.html', { reply: comment } %>
+          <%= render 'shared/reply_form.html', { reply: comment } %>
         </div>
       </div>
     </div>

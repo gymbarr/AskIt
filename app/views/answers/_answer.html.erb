@@ -10,7 +10,7 @@
       <%= button_tag t('global.button.edit'),
                   class:"btn btn-outline-primary btn-sm",
                   onclick: "showForm(#{answer.id}, 'edit')" %>
-      <%= link_to t('global.button.delete'), reply_path(answer), method: :delete,
+      <%= link_to t('global.button.delete'), answer_path(answer), method: :delete,
                   data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
     <% end %>
 
@@ -20,20 +20,20 @@
       <%= t('.rating') %>: <%= answer.weighted_score %>
       <% unless current_user&.voted_for? answer %>
         <span class="ps-3">
-          <span class="pe-2"><%= link_to (fa_icon "arrow-up"), reply_vote_up_path(answer), 
+          <span class="pe-2"><%= link_to (fa_icon "arrow-up"), answer_vote_up_path(answer), 
                                          class: "btn btn-secondary" %></span>
-          <%= link_to (fa_icon "arrow-down"), reply_vote_down_path(answer), 
+          <%= link_to (fa_icon "arrow-down"), answer_vote_down_path(answer), 
                       class: "btn btn-secondary" %>
         </span>
       <% end %>
     </div>
 
     <div class="answer-form hidden" id="reply_form_<%= answer.id %>">
-      <%= render 'questions/reply_form.html', { reply: answer.comments.build } %>
+      <%= render 'shared/reply_form.html', { reply: answer.comments.build } %>
     </div>
 
     <div class="answer-form hidden" id="edit_form_<%= answer.id %>">
-      <%= render 'questions/reply_form.html', { reply: answer } %>
+      <%= render 'shared/reply_form.html', { reply: answer } %>
     </div>
   </div>
 </div>
