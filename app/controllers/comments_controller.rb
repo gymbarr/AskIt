@@ -1,11 +1,12 @@
 class CommentsController < ApplicationController
+  include Comments
   def create
     comment = Comment.new(user: current_user, **comment_params)
     comment.parent = comment.repliable
 
     if comment.save
       # send notification to the repliable user
-      # NewReplyMailSender.call(question, answer)
+      Comments::NewCommentNotifier.call(question, comment)
       flash[:notice] = t('.success')
       redirect_to back_with_anchor anchor: "reply-#{comment.id}"
     else
@@ -40,6 +41,10 @@ class CommentsController < ApplicationController
 
   def comment
     @comment ||= Comment.find_by_id(params[:id]) || Comment.find_by_id(params[:comment_id])
+  end
+
+  def question
+    @question ||= Question.find(params[:question_id])
   end
 
   def back_with_anchor(anchor: '')

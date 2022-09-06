@@ -1,5 +1,5 @@
 class AnswerMailer < ApplicationMailer
-  def new_answer_to_question
+  def new_answer_notify
     @question = Question.find(params[:question_id])
     answer = Answer.find(params[:answer_id])
     @user = answer.repliable.user

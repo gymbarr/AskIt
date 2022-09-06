@@ -85,18 +85,15 @@ ru:
     greeting: Приветствую, %{name}!
     farewell: Спасибо, что остаетесь с нами, хорошего дня!
   answer_mailer:
-    new_answer_to_question:
+    new_answer_notify:
       subject: 'Вам оставили ответ на Ваш вопрос!'
       content: 'Пользователь %{name} оставил ответ на Ваш вопрос:'
   comment_mailer:
-    new_comment_to_answer:
-      subject: 'Вам оставили комментарий на Ваш ответ!'
-      content: 'Пользователь %{name} оставил комментарий на Ваш ответ:'
-    new_comment_to_comment:
-      subject: 'Вам оставили комментарий на Ваш комментарий!'
-      content: 'Пользователь %{name} оставил комментарий на Ваш комментарий:'
-  subscription_mailer:
-    new_question_in_category:
+    new_comment_notify:
+      subject: 'Вам оставили комментарий!'
+      content: 'Пользователь %{name} оставил Вам комментарий:'
+  question_mailer:
+    new_question_notify:
       subject: Новый вопрос в категории %{name}!
       content_1: 'Появился новый вопрос в категории %{name}! Заходи и смотри:'
       content_2: 'Посмортеть все вопросы в категории %{name}:'

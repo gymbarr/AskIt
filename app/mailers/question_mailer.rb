@@ -1,5 +1,5 @@
-class SubscriptionMailer < ApplicationMailer
-  def new_question_in_category
+class QuestionMailer < ApplicationMailer
+  def new_question_notify
     @question = Question.find(params[:question_id])
     @user = User.find(params[:user_id])
 
