@@ -14,26 +14,46 @@
                         question_path(@question, anchor: "reply-#{comment.parent.id}") %>
           <% end %>
         </small></p>
-
-        <%= link_to t('global.button.reply'),
-                    new_reply_path(repliable_id: comment),
-                    remote: true, class:"btn btn-outline-primary btn-sm" %>
+        
+        <%= button_tag t('global.button.reply'),
+                class:"btn btn-outline-primary btn-sm",
+                onclick: "showForm(#{comment.id}, 'reply')" %>
         <% if owner?(comment) %>
-          <%= link_to t('global.button.edit'), 
-                      edit_reply_path(comment, repliable_id: comment), 
-                      remote: true, class:"btn btn-outline-primary btn-sm" %>
+          <%= button_tag t('global.button.edit'),
+                  class:"btn btn-outline-primary btn-sm",
+                  onclick: "showForm(#{comment.id}, 'edit')" %>
           <%= link_to t('global.button.delete'), reply_path(comment), method: :delete, 
                       data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
         <% end %>
 
-        <div class="comment-form" id="reply_form_<%= comment.id %>">
+        <div class="comment-form hidden" id="reply_form_<%= comment.id %>">
           <%= render 'questions/reply_form.html', { reply: comment.comments.build } %>
         </div>
 
-        <div class="comment-form" id="edit_form_<%= comment.id %>">
+        <div class="comment-form hidden" id="edit_form_<%= comment.id %>">
           <%= render 'questions/reply_form.html', { reply: comment } %>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  function showForm(id, action) {
+    let answer_boxes = $('div.answer-form');
+    let comment_boxes = $('div.comment-form');
+    answer_boxes.addClass( 'hidden' );
+    answer_boxes.removeClass( 'displayed' );
+    comment_boxes.addClass( 'hidden' );
+    comment_boxes.removeClass( 'displayed' );
+
+    $(`div#${action}_form_${id}`).addClass('displayed');
+
+    let reply_area = $(`#${action}_area_${id}`);
+    let area_length = reply_area.val().length;
+
+    // set cursor to the end of input of the element
+    reply_area.focus();
+    reply_area[0].setSelectionRange(area_length, area_length);
+  }
+</script>

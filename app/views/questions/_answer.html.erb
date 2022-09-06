@@ -9,7 +9,7 @@
     <% if owner?(answer) %>
       <%= button_tag t('global.button.edit'),
                   class:"btn btn-outline-primary btn-sm",
-                  onclick: "showForm(#{answer.id}, 'edit')"  %>
+                  onclick: "showForm(#{answer.id}, 'edit')" %>
       <%= link_to t('global.button.delete'), reply_path(answer), method: :delete,
                   data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
     <% end %>
@@ -47,6 +47,13 @@
     comment_boxes.addClass( 'hidden' );
     comment_boxes.removeClass( 'displayed' );
 
-    $(`div#${action}_form_${id}`).addClass('displayed')
+    $(`div#${action}_form_${id}`).addClass('displayed');
+
+    let reply_area = $(`#${action}_area_${id}`);
+    let area_length = reply_area.val().length;
+
+    // set cursor to the end of input of the element
+    reply_area.focus();
+    reply_area[0].setSelectionRange(area_length, area_length);
   }
 </script>
