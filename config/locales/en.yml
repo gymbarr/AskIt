@@ -43,7 +43,7 @@ en:
       title: New question
       question_title: Title
       question_body: Body
-      categories_prompt: Choose category from the listed below
+      categories_prompt: Choose categories from the listed below
     create:
       success: Question was successfully created!
       alert: Something went wrong
