@@ -39,6 +39,7 @@ gem 'dotenv-rails'
 gem "rolify"
 gem "pundit", "~> 2.2"
 gem 'activeadmin'
+gem 'http_accept_language'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
