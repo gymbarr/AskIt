@@ -1,12 +1,4 @@
 class RepliesController < ApplicationController
-  def new
-    respond_to do |format|
-      format.js do
-        render partial: 'questions/reply_form', locals: { repliable: repliable, new_reply: true }
-      end
-    end
-  end
-
   def create
     reply = Reply.new(user: current_user, **reply_params)
     reply.parent = reply.repliable if reply.is_a?(Comment)
@@ -19,14 +11,6 @@ class RepliesController < ApplicationController
     else
       flash[:alert] = t('.alert')
       redirect_back fallback_location: root_path
-    end
-  end
-
-  def edit
-    respond_to do |format|
-      format.js do
-        render partial: 'questions/reply_form', locals: { repliable: repliable, new_reply: false }
-      end
     end
   end
 
