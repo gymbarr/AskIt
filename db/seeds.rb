@@ -52,18 +52,3 @@ end
 
   FactoryBot.create(:comment, comment_type, user: user, repliable: repliable)
 end
-
-Question.all.each do |question|
-  5.times do
-    user = User.all.sample
-    FactoryBot.create(:answer, user: user, repliable: question)
-  end
-end
-
-100.times do
-  repliable = Reply.all.sample
-  comment_type = repliable.type == 'Answer' ? :for_answer : :for_comment
-  user = User.all.sample
-
-  FactoryBot.create(:comment, comment_type, user: user, repliable: repliable)
-end
