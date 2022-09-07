@@ -1,18 +1,7 @@
 FactoryBot.define do
   factory :reply do
-    body { generate(:string) }
+    body { Faker::Hipster.sentence(word_count: 3) }
 
     association :user
-
-    # trait :for_question do
-    #   association :repliable, factory: :question
-    # end
-
-  #   transient do
-  #     repliable { nil }
-  #   end
-
-  #   repliable_id { repliable.id }
-  #   repliable_type { repliable.class.name }
   end
 end

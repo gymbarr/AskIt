@@ -34,7 +34,15 @@
 
 # 20.times do
 #   reply = Reply.all.sample
+<<<<<<< Updated upstream
 #   comment = reply.comments.build
+=======
+#   comment = Comment.new
+#   comment.repliable_id = reply.id
+#   comment.repliable_type = reply.type
+#   comment.type = 'Comment'
+#   comment.parent = comment.repliable
+>>>>>>> Stashed changes
 #   comment.body = Faker::Hipster.sentence(word_count: 3)
 #   comment.user = User.all.sample
 
