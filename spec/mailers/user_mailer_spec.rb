@@ -43,14 +43,14 @@ RSpec.describe UserMailer, type: :mailer do
     end
   end
 
-  describe '#notify_new_reply', :fast do
+  describe '#notify_new_reply' do
     let!(:question) { create :question }
     let!(:reply) { create :answer }
     # let!(:mail) do
     #   described_class.with(question: question, reply: reply).notify_new_reply.deliver_now
     # end
 
-    describe '#deliever_now', :slow do
+    describe '#deliever_now' do
       it 'renders the receiver emailname' do
        debugger
       end
