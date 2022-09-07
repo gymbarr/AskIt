@@ -98,6 +98,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (2.23.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
@@ -258,7 +260,12 @@ DEPENDENCIES
   devise-i18n
   factory_bot_rails
   dotenv-rails
+<<<<<<< HEAD
   faker!
+=======
+  factory_bot_rails
+  faker (~> 2)
+>>>>>>> 6fdc859 (add tests for models answer, category, comment, question, user)
   font-awesome-rails
   jbuilder (~> 2.7)
   letter_opener
