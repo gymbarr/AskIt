@@ -54,28 +54,4 @@ RSpec.describe Category, type: :model do
       expect(subject.subscribers).to contain_exactly(subscriber)
     end
   end
-
-  describe 'associations' do
-    let(:category) { create :category }
-    let(:subscription) { create :subscription, category: category }
-    let(:question) { create :question, categories: [category] }
-    let(:question_category) { QuestionCategory.find_by(question: question, category: category) }
-    let(:subscriber) { subscription.user }
-
-    it 'has question_categories' do
-      expect(category.question_categories).to contain_exactly(question_category)
-    end
-
-    it 'has questions' do
-      expect(category.questions).to contain_exactly(question)
-    end
-
-    it 'has subscriptions' do
-      expect(category.subscriptions).to contain_exactly(subscription)
-    end
-
-    it 'has subscribers' do
-      expect(category.subscribers).to contain_exactly(subscriber)
-    end
-  end
 end

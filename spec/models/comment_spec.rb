@@ -74,42 +74,4 @@ RSpec.describe Comment, type: :model do
       end
     end
   end
-
-  describe 'associations' do
-    let(:user) { create :user }
-    let(:comment_for_answer) { create :comment, user: user, repliable: answer }
-    let(:comment_for_comment) do
-      create :comment,
-             :for_comment,
-             repliable: comment_for_answer
-    end
-
-    it 'has a user' do
-      expect(comment_for_answer.user).to eq(user)
-    end
-
-    it 'has a comment' do
-      expect(comment_for_answer.comments).to contain_exactly(comment_for_comment)
-    end
-
-    context 'when comment for answer' do
-      it 'has an answer as a repliable' do
-        expect(comment_for_answer.repliable).to eq(answer)
-      end
-
-      it 'has an answer as a parent' do
-        expect(comment_for_answer.parent).to eq(answer)
-      end
-    end
-
-    context 'when comment for comment' do
-      it 'has a comment as a repliable' do
-        expect(comment_for_comment.repliable).to eq(comment_for_answer)
-      end
-
-      it 'has a comment as a parent' do
-        expect(comment_for_comment.parent).to eq(comment_for_answer)
-      end
-    end
-  end
 end
