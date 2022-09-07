@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :category do
-    name { generate(:string) }
+    name { Faker::Hobby.unique.activity }
   end
 
   trait :with_subscribers do
