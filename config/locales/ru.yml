@@ -95,8 +95,8 @@ ru:
   question_mailer:
     notify_subscriber_about_new_question_in_category:
       subject: Новый вопрос в категории %{name}!
-      content_1: 'Появился новый вопрос в категории %{name}! Заходи и смотри:'
-      content_2: 'Посмортеть все вопросы в категории %{name}:'
+      content_new_question_in_category: 'Появился новый вопрос в категории %{name}! Заходи и смотри:'
+      content_all_questions_in_category: 'Посмортеть все вопросы в категории:'
   navbar:
     home: Главная
     questions: Вопросы
