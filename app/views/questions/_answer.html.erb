@@ -28,11 +28,11 @@
       <% end %>
     </div>
 
-    <div class="answer-form hidden" id="reply_form_<%= answer.id %>">
+    <div class="reply-form hidden" id="reply_form_<%= answer.id %>">
       <%= render 'questions/reply_form.html', { reply: answer.comments.build } %>
     </div>
 
-    <div class="answer-form hidden" id="edit_form_<%= answer.id %>">
+    <div class="reply-form hidden" id="edit_form_<%= answer.id %>">
       <%= render 'questions/reply_form.html', { reply: answer } %>
     </div>
   </div>
@@ -40,12 +40,9 @@
 
 <script>
   function showForm(id, action) {
-    let answer_boxes = $('div.answer-form');
-    let comment_boxes = $('div.comment-form');
-    answer_boxes.addClass( 'hidden' );
-    answer_boxes.removeClass( 'displayed' );
-    comment_boxes.addClass( 'hidden' );
-    comment_boxes.removeClass( 'displayed' );
+    let reply_boxes = $('div.reply-form');
+    reply_boxes.addClass( 'hidden' );
+    reply_boxes.removeClass( 'displayed' );
 
     $(`div#${action}_form_${id}`).addClass('displayed');
 
