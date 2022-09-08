@@ -15,39 +15,35 @@
     <% end %>
 
     <p class="card-text mt-3"><small class="text-muted"><%= format_timestamp(answer.created_at) %></small></p>
-    
-    <div class="py-2"> 
+
+    <div class="py-2">
       <%= t('.rating') %>: <%= answer.weighted_score %>
       <% unless current_user&.voted_for? answer %>
         <span class="ps-3">
           <span class="pe-2"><%= link_to (fa_icon "arrow-up"), answer_vote_up_path(answer),
-                                         method: :post, 
+                                         method: :post,
                                          class: "btn btn-secondary" %></span>
           <%= link_to (fa_icon "arrow-down"), answer_vote_down_path(answer),
-                      method: :post, 
+                      method: :post,
                       class: "btn btn-secondary" %>
         </span>
       <% end %>
     </div>
-
-    <div class="answer-form hidden" id="reply_form_<%= answer.id %>">
-      <%= render 'shared/reply_form.html', { reply: answer.comments.build } %>
+    <div class="reply-form hidden" id="reply_form_<%= answer.id %>">
+      <%= render 'questions/reply_form.html', { reply: answer.comments.build } %>
     </div>
 
-    <div class="answer-form hidden" id="edit_form_<%= answer.id %>">
-      <%= render 'shared/reply_form.html', { reply: answer } %>
+    <div class="reply-form hidden" id="edit_form_<%= answer.id %>">
+      <%= render 'questions/reply_form.html', { reply: answer } %>
     </div>
   </div>
 </div>
 
 <script>
   function showForm(id, action) {
-    let answer_boxes = $('div.answer-form');
-    let comment_boxes = $('div.comment-form');
-    answer_boxes.addClass( 'hidden' );
-    answer_boxes.removeClass( 'displayed' );
-    comment_boxes.addClass( 'hidden' );
-    comment_boxes.removeClass( 'displayed' );
+    let reply_boxes = $('div.reply-form');
+    reply_boxes.addClass( 'hidden' );
+    reply_boxes.removeClass( 'displayed' );
 
     $(`div#${action}_form_${id}`).addClass('displayed');
 

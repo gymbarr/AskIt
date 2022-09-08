@@ -14,7 +14,7 @@
                         question_path(@question, anchor: "reply-#{comment.parent.id}") %>
           <% end %>
         </small></p>
-        
+
         <%= button_tag t('global.button.reply'),
                 class:"btn btn-outline-primary btn-sm",
                 onclick: "showForm(#{comment.id}, 'reply')" %>
@@ -22,16 +22,16 @@
           <%= button_tag t('global.button.edit'),
                   class:"btn btn-outline-primary btn-sm",
                   onclick: "showForm(#{comment.id}, 'edit')" %>
-          <%= link_to t('global.button.delete'), comment_path(comment), method: :delete, 
+          <%= link_to t('global.button.delete'), comment_path(comment), method: :delete,
                       data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
         <% end %>
 
-        <div class="comment-form hidden" id="reply_form_<%= comment.id %>">
-          <%= render 'shared/reply_form.html', { reply: comment.comments.build } %>
+        <div class="reply-form hidden" id="reply_form_<%= comment.id %>">
+          <%= render 'questions/reply_form.html', { reply: comment.comments.build } %>
         </div>
 
-        <div class="comment-form hidden" id="edit_form_<%= comment.id %>">
-          <%= render 'shared/reply_form.html', { reply: comment } %>
+        <div class="reply-form hidden" id="edit_form_<%= comment.id %>">
+          <%= render 'questions/reply_form.html', { reply: comment } %>
         </div>
       </div>
     </div>
@@ -40,12 +40,9 @@
 
 <script>
   function showForm(id, action) {
-    let answer_boxes = $('div.answer-form');
-    let comment_boxes = $('div.comment-form');
-    answer_boxes.addClass( 'hidden' );
-    answer_boxes.removeClass( 'displayed' );
-    comment_boxes.addClass( 'hidden' );
-    comment_boxes.removeClass( 'displayed' );
+    let reply_boxes = $('div.reply-form');
+    reply_boxes.addClass( 'hidden' );
+    reply_boxes.removeClass( 'displayed' );
 
     $(`div#${action}_form_${id}`).addClass('displayed');
 
