@@ -1,5 +1,5 @@
 module Runners
-  class NotifySubscriberJob < ApplicationJob
+  class NotifyCategorySubscriberJob < ApplicationJob
     queue_as :notifiers
 
     def perform(question_id, subscriber_id)
@@ -14,7 +14,7 @@ module Runners
                           question: question,
                           categories: categories,
                           categories_name: categories_name)
-                    .new_question_notify
+                    .notify_subscriber_about_new_question_in_category
                     .deliver_now
     end
   end

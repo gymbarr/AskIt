@@ -1,5 +1,5 @@
 module Runners
-  class NewAnswerNotifyJob < ApplicationJob
+  class NotifyUserAboutNewAnswerJob < ApplicationJob
     queue_as :notifiers
 
     def perform(answer_id)
@@ -13,7 +13,7 @@ module Runners
       AnswerMailer.with(question: question,
                         user: user,
                         replier: replier)
-                  .new_answer_notify
+                  .notify_user_about_new_answer
                   .deliver_now
     end
   end

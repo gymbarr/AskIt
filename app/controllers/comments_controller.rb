@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
     if comment.save
       # send notification to the repliable user
-      Comments::NewCommentNotifier.call(comment)
+      Comments::Notifier::NewCommentNotifier.call(comment)
       flash[:notice] = t('.success')
       redirect_to back_with_anchor anchor: "reply-#{comment.id}"
     else

@@ -1,5 +1,5 @@
 class QuestionMailer < ApplicationMailer
-  def new_question_notify
+  def notify_subscriber_about_new_question_in_category
     @question = params[:question]
     @user = params[:user]
     @categories = params[:categories]

@@ -1,5 +1,5 @@
 class AnswerMailer < ApplicationMailer
-  def new_answer_notify
+  def notify_user_about_new_answer
     @question = params[:question]
     @user = params[:user]
     @replier = params[:replier]

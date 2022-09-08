@@ -1,5 +1,5 @@
 class CommentMailer < ApplicationMailer
-  def new_comment_notify
+  def notify_user_about_new_comment
     @question = params[:question]
     @user = params[:user]
     @replier = params[:replier]
