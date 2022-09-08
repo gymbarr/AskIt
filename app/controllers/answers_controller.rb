@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
 
     if answer.save
       # send notification to the repliable user
-      Answers::NewAnswerNotifier.call(question, answer)
+      Answers::NewAnswerNotifier.call(answer)
       flash[:notice] = t('.success')
       redirect_to back_with_anchor anchor: "reply-#{answer.id}"
     else

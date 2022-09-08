@@ -9,14 +9,11 @@ module Kickers
       subscribers = question.subscribers
       return if subscribers.blank?
 
-      params = { question_id: question_id }
-
       subscribers.each do |subscriber|
         # skip the author of the question if he is a subscriber
         next if question.user == subscriber
 
-        params[:subscriber_id] = subscriber.id
-        Runners::NotifySubscriberJob.perform_later(params)
+        Runners::NotifySubscriberJob.perform_later(question_id, subscriber.id)
       end
     end
   end
