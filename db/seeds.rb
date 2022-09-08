@@ -6,45 +6,41 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# 10.times do
-#   name = Faker::Hobby.activity
-#   Category.create(name: name)
-# end
+10.times do
+  name = Faker::Hobby.activity
+  Category.create(name: name)
+end
 
-# all_category_ids = Category.all.ids
+all_category_ids = Category.all.ids
 
-# 10.times do
-#   title = Faker::Hipster.sentence(word_count: 3)
-#   body = Faker::Hipster.paragraph(sentence_count: 2)
-#   user = User.all.sample
+10.times do
+  title = Faker::Hipster.sentence(word_count: 3)
+  body = Faker::Hipster.paragraph(sentence_count: 2)
+  user = User.all.sample
 
-#   category_ids = all_category_ids.sample(1 + rand(all_category_ids.count))
-#   Question.create(title: title, body: body, user: user, category_ids: category_ids)
-# end
+  category_ids = all_category_ids.sample(1 + rand(all_category_ids.count))
+  Question.create(title: title, body: body, user: user, category_ids: category_ids)
+end
 
-# Question.all.each do |question|
-#   5.times do
-#     answer = question.answers.build
-#     answer.body = Faker::Hipster.sentence(word_count: 3)
-#     answer.user = User.all.sample
+Question.all.each do |question|
+  5.times do
+    answer = question.answers.build
+    answer.body = Faker::Hipster.sentence(word_count: 3)
+    answer.user = User.all.sample
 
-#     answer.save
-#   end
-# end
+    answer.save
+  end
+end
 
-# 20.times do
-#   reply = Reply.all.sample
-<<<<<<< Updated upstream
-#   comment = reply.comments.build
-=======
-#   comment = Comment.new
-#   comment.repliable_id = reply.id
-#   comment.repliable_type = reply.type
-#   comment.type = 'Comment'
-#   comment.parent = comment.repliable
->>>>>>> Stashed changes
-#   comment.body = Faker::Hipster.sentence(word_count: 3)
-#   comment.user = User.all.sample
+20.times do
+  reply = Reply.all.sample
+  comment = Comment.new
+  comment.repliable_id = reply.id
+  comment.repliable_type = reply.type
+  comment.type = 'Comment'
+  comment.parent = comment.repliable
+  comment.body = Faker::Hipster.sentence(word_count: 3)
+  comment.user = User.all.sample
 
-#   comment.save
-# end
+  comment.save
+end

@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     else
       flash[:alert] = t('.alert')
     end
-    redirect_back fallback_location: root_path
+    redirect_to back_with_anchor anchor: "reply-#{comment.id}"
   end
 
   def destroy

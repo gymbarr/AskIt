@@ -20,9 +20,11 @@
       <%= t('.rating') %>: <%= answer.weighted_score %>
       <% unless current_user&.voted_for? answer %>
         <span class="ps-3">
-          <span class="pe-2"><%= link_to (fa_icon "arrow-up"), answer_vote_up_path(answer), 
+          <span class="pe-2"><%= link_to (fa_icon "arrow-up"), answer_vote_up_path(answer),
+                                         method: :post, 
                                          class: "btn btn-secondary" %></span>
-          <%= link_to (fa_icon "arrow-down"), answer_vote_down_path(answer), 
+          <%= link_to (fa_icon "arrow-down"), answer_vote_down_path(answer),
+                      method: :post, 
                       class: "btn btn-secondary" %>
         </span>
       <% end %>

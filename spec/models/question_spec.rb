@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Question, type: :model do
   let(:category) { create :category }
-  let(:question) { build :question, category_ids: [category.id] }
+  let(:question) { build :question, categories: [category] }
 
   it 'is valid with valid attributes' do
     expect(question).to be_valid

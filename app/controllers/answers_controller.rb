@@ -20,7 +20,7 @@ class AnswersController < ApplicationController
     else
       flash[:alert] = t('.alert')
     end
-    redirect_back fallback_location: root_path
+    redirect_to back_with_anchor anchor: "reply-#{answer.id}"
   end
 
   def destroy
@@ -49,7 +49,7 @@ class AnswersController < ApplicationController
   end
 
   def answer
-    @answer ||= Answer.find_by_id(params[:id]) || Answer.find_by_id(params[:answer_id])
+    @answer ||= Answer.find_by_id(params[:id])
   end
 
   def question

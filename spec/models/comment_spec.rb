@@ -11,13 +11,18 @@ RSpec.describe Comment, type: :model do
     expect(comment).to be_valid
   end
 
-  # it 'is not valid without a body' do
-  #   answer.body = nil
-  #   expect(answer).to_not be_valid
-  # end
+  it 'is not valid without a body' do
+    comment.body = nil
+    expect(comment).to_not be_valid
+  end
 
-  # it 'is not valid without a repliable' do
-  #   answer.repliable = nil
-  #   expect(answer).to_not be_valid
+  it 'is not valid without a repliable' do
+    comment.repliable = nil
+    expect(comment).to_not be_valid
+  end
+
+  # it 'is not valid without an ancestry' do
+  #   comment.repliable = nil
+  #   expect(comment).to_not be_valid
   # end
 end
