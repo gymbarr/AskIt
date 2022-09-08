@@ -95,8 +95,8 @@ en:
   question_mailer:
     notify_subscriber_about_new_question_in_category:
       subject: New question in the %{name} category!
-      content_1: 'There is a new questions in the %{name} category! Check it out:'
-      content_2: 'See all questions in the category %{name}:'
+      content_new_question_in_category: 'There is a new questions in the %{name} category! Check it out:'
+      content_all_questions_in_category: 'See all questions in the category:'
   navbar:
     home: Home
     questions: Questions

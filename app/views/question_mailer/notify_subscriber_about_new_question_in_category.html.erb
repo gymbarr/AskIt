@@ -1,11 +1,11 @@
 <h4><%= t('mailer_common.greeting', name: @user.username) %><h4>
  
-<p><%= t('.content_1', name: @categories_name) %></p>
-<p><%= link_to nil, question_url(@question, locale: I18n.locale) %></p>
+<p><%= t('.content_new_question_in_category', name: @categories_name) %></p>
+<p><%= link_to 'Check it', question_url(@question, locale: I18n.locale) %></p>
 
+<p><%= t('.content_all_questions_in_category') %></p>
 <% @categories.each do |category| %>
-  <p><%= t('.content_2', name: category.name) %></p>
-  <p><%= link_to nil, category_url(category, locale: I18n.locale) %></p>
+  <p><%= link_to category.name, category_url(category, locale: I18n.locale) %></p>
 <% end %>
 
 <p><%= t('mailer_common.farewell') %></p>
