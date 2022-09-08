@@ -1,5 +1,5 @@
 module Kickers
-  class NotifySubscribersJob < ApplicationJob
+  class NotifyCategorySubscribersJob < ApplicationJob
     queue_as :default
 
     def perform(question_id)
@@ -13,7 +13,7 @@ module Kickers
         # skip the author of the question if he is a subscriber
         next if question.user == subscriber
 
-        Runners::NotifySubscriberJob.perform_later(question_id, subscriber.id)
+        Runners::NotifyCategorySubscriberJob.perform_later(question_id, subscriber.id)
       end
     end
   end

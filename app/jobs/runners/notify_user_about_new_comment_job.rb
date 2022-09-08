@@ -1,5 +1,5 @@
 module Runners
-  class NewCommentNotifyJob < ApplicationJob
+  class NotifyUserAboutNewCommentJob < ApplicationJob
     queue_as :notifiers
 
     def perform(comment_id)
@@ -13,7 +13,7 @@ module Runners
       CommentMailer.with(question: question,
                          user: user,
                          replier: replier)
-                   .new_comment_notify
+                   .notify_user_about_new_comment
                    .deliver_now
     end
   end

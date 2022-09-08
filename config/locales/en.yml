@@ -85,15 +85,15 @@ en:
     greeting: Hi %{name}!
     farewell: Thanks for staying with us and have a great day!
   answer_mailer:
-    new_answer_notify:
+    notify_user_about_new_answer:
       subject: You've got a new reply to your question!
       content: 'User %{name} left an answer to your question:'
   comment_mailer:
-    new_comment_notify:
+    notify_user_about_new_comment:
       subject: You've got a new comment!
       content: 'User %{name} left a comment to you:'
   question_mailer:
-    new_question_notify:
+    notify_subscriber_about_new_question_in_category:
       subject: New question in the %{name} category!
       content_1: 'There is a new questions in the %{name} category! Check it out:'
       content_2: 'See all questions in the category %{name}:'
