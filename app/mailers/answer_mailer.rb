@@ -1,9 +1,8 @@
 class AnswerMailer < ApplicationMailer
   def new_answer_notify
-    @question = Question.find(params[:question_id])
-    answer = Answer.find(params[:answer_id])
-    @user = answer.repliable.user
-    @replier = answer.user
+    @question = params[:question]
+    @user = params[:user]
+    @replier = params[:replier]
 
     I18n.with_locale(I18n.locale) do
       mail to: @user.email, subject: "#{t('.subject')} | AskIt"

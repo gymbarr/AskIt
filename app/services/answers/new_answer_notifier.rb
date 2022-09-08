@@ -2,8 +2,7 @@ module Answers
   class NewAnswerNotifier < ApplicationService
     attr_reader :question, :answer
 
-    def initialize(question, answer)
-      @question = question
+    def initialize(answer)
       @answer = answer
     end
 
@@ -11,7 +10,7 @@ module Answers
       # don't notify if the replier is the author of the repliable
       return if @answer.repliable.user == @answer.user
 
-      Runners::NewAnswerNotifyJob.perform_later(@question.id, @answer.id)
+      Runners::NewAnswerNotifyJob.perform_later(@answer.id)
     end
   end
 end

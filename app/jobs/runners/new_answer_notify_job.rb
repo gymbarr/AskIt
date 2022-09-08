@@ -1,9 +1,18 @@
 module Runners
   class NewAnswerNotifyJob < ApplicationJob
-    queue_as :mailers
+    queue_as :notifiers
 
-    def perform(question_id, answer_id)
-      AnswerMailer.with(question_id: question_id, answer_id: answer_id)
+    def perform(answer_id)
+      answer = Answer.find_by_id(answer_id)
+      return unless answer
+
+      question = answer.repliable
+      user = question.user
+      replier = answer.user
+
+      AnswerMailer.with(question: question,
+                        user: user,
+                        replier: replier)
                   .new_answer_notify
                   .deliver_now
     end
