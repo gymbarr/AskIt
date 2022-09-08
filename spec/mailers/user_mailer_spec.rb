@@ -9,7 +9,8 @@ RSpec.describe UserMailer, type: :mailer do
       described_class.with(user: user, category: category, question: question).notify_subscriber.deliver_now
     end
 
-    describe '#deliever_now' do
+    describe '#deliver_now' do
+      # join with test on 32 line
       it 'renders the receiver emailname' do
         expect(mail.to[0]).to eq(user.email)
       end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
   let(:category) { create :category }
-  let(:question) { create :question, category_ids: [category.id] }
+  let(:question) { create :question, categories: [category] }
   let(:answer) { build :answer, repliable: question }
 
   it 'is valid with valid attributes' do

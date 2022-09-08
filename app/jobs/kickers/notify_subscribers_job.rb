@@ -3,7 +3,9 @@ module Kickers
     queue_as :default
 
     def perform(question_id)
-      question = Question.find(question_id)
+      question = Question.find_by_id(question_id)
+      return unless question
+
       subscribers = question.subscribers
       return if subscribers.blank?
 

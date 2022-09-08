@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :question_category do
-    association :question, factory: :question_with_categories
+    association :question
     association :category
   end
 end

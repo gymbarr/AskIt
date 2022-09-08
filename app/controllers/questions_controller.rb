@@ -41,13 +41,13 @@ class QuestionsController < ApplicationController
   end
 
   def vote_up
-    question_for_vote.vote_by voter: current_user, vote: 'like'
-    redirect_to question_path(question_for_vote)
+    question.vote_by voter: current_user, vote: 'like'
+    redirect_to question_path(question)
   end
 
   def vote_down
-    question_for_vote.vote_by voter: current_user, vote: 'bad'
-    redirect_to question_path(question_for_vote)
+    question.vote_by voter: current_user, vote: 'bad'
+    redirect_to question_path(question)
   end
 
   private
@@ -58,9 +58,5 @@ class QuestionsController < ApplicationController
 
   def question
     @question ||= Question.find(params[:id])
-  end
-
-  def question_for_vote
-    @question_for_vote ||= Question.find(params[:question_id])
   end
 end
