@@ -55,8 +55,4 @@ class AnswersController < ApplicationController
   def question
     @question ||= Question.find(params[:question_id])
   end
-
-  def back_with_anchor(anchor: '')
-    "#{request.referrer}##{anchor}"
-  end
 end
