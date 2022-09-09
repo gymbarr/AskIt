@@ -2,6 +2,14 @@ FactoryBot.define do
   factory :comment, class: 'Comment', parent: :reply do
     association :repliable, factory: :answer
 
-    # todo traits (for_answer and for_comment)
+    for_answer
+
+    trait :for_comment do
+      association :repliable, factory: :comment
+    end
+
+    trait :for_answer do
+      association :repliable, factory: :answer
+    end
   end
 end
