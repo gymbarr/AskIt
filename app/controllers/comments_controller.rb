@@ -40,14 +40,10 @@ class CommentsController < ApplicationController
   end
 
   def comment
-    @comment ||= Comment.find_by_id(params[:id]) || Comment.find_by_id(params[:comment_id])
+    @comment ||= Comment.find_by_id(params[:id])
   end
 
   def question
     @question ||= Question.find(params[:question_id])
-  end
-
-  def back_with_anchor(anchor: '')
-    "#{request.referrer}##{anchor}"
   end
 end
