@@ -49,7 +49,7 @@ class AnswersController < ApplicationController
   end
 
   def answer
-    @answer ||= Answer.find_by_id(params[:id])
+    @answer ||= Answer.find(params[:id])
   end
 
   def question
