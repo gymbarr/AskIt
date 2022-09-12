@@ -6,13 +6,10 @@ module Kickers
       question = Question.find_by_id(question_id)
       return unless question
 
-      subscribers = question.subscribers
+      subscribers = question.subscribers_without_author
       return if subscribers.blank?
 
       subscribers.each do |subscriber|
-        # skip the author of the question if he is a subscriber
-        next if question.user == subscriber
-
         Runners::NotifyCategorySubscriberJob.perform_later(question_id, subscriber.id)
       end
     end

@@ -9,4 +9,8 @@ class Question < ApplicationRecord
   validates :title, presence: true, length: { minimum: 2 }
   validates :body, presence: true, length: { minimum: 2 }
   validates :categories, presence: true
+
+  def subscribers_without_author
+    subscribers.where.not(id: user_id)
+  end
 end

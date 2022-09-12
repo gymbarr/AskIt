@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
   end
 
   def comment
-    @comment ||= Comment.find_by_id(params[:id])
+    @comment ||= Comment.find(params[:id])
   end
 
   def question
