@@ -74,4 +74,38 @@ RSpec.describe Comment, type: :model do
       end
     end
   end
+
+  context 'associations' do
+    let(:comment_for_answer) { create :comment, repliable: answer, parent: answer }
+    let(:comment_for_comment) do
+      create :comment,
+             :for_comment,
+             repliable: comment_for_answer,
+             parent: comment_for_answer
+    end
+
+    it 'has a user' do
+      expect(comment_for_answer.user).to be_instance_of(User)
+    end
+
+    it 'has a comment' do
+      expect(comment_for_answer.comments).to all(be_an(Comment))
+    end
+
+    it 'has an answer as a repliable' do
+      expect(comment_for_answer.repliable).to be_an_instance_of(Answer)
+    end
+
+    it 'has an answer as a parent' do
+      expect(comment_for_answer.parent).to be_an_instance_of(Answer)
+    end
+
+    it 'has a comment as a repliable' do
+      expect(comment_for_comment.repliable).to be_an_instance_of(Comment)
+    end
+
+    it 'has a comment as a parent' do
+      expect(comment_for_comment.parent).to be_an_instance_of(Comment)
+    end
+  end
 end

@@ -88,4 +88,24 @@ RSpec.describe User, type: :model do
       expect(subject.roles).to contain_exactly(role)
     end
   end
+
+  context 'associations' do
+    let!(:user) { create :user }
+
+    it 'has questions' do
+      expect(user.questions).to all(be_an(Question))
+    end
+
+    it 'has answers' do
+      expect(user.replies).to all(be_an(Reply))
+    end
+
+    it 'has subscriptions' do
+      expect(user.subscriptions).to all(be_an(Subscription))
+    end
+
+    it 'has subscription_categories' do
+      expect(user.subscription_categories).to all(be_an(Category))
+    end
+  end
 end
