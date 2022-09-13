@@ -33,7 +33,10 @@ RSpec.describe Question, type: :model do
       let(:attr) { :categories }
       let(:errors) { ['can\'t be blank'] }
     end
-  end
+
+    it 'has categories' do
+      expect(subject.categories).to contain_exactly(category)
+    end
 
   describe 'associations' do
     let(:category) { create :category }
