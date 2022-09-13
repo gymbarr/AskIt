@@ -5,16 +5,12 @@ RSpec.describe Subscription, type: :model do
   context 'when valid attributes' do
     subject(:subscription) { build :subscription }
 
-    it 'has a user' do
-      expect(subject.user).to eq(user)
-    end
+    include_examples 'valid object'
+  end
 
   context 'when invalid attributes' do
     let(:attrs) { { user: nil, category: nil } }
     subject(:subscription) { build :subscription, **attrs }
-
-  context 'associations' do
-    let(:subscription) { create :subscription }
 
     it_behaves_like 'with errors' do
       let(:attr) { :user }
@@ -38,6 +34,18 @@ RSpec.describe Subscription, type: :model do
 
     it 'has a category' do
       expect(subject.category).to eq(category)
+    end
+  end
+
+  context 'associations' do
+    let(:subscription) { create :subscription }
+
+    it 'has a user' do
+      expect(subscription.user).to be_instance_of(User)
+    end
+
+    it 'has a category' do
+      expect(subscription.category).to be_instance_of(Category)
     end
   end
 end

@@ -48,4 +48,21 @@ RSpec.describe Answer, type: :model do
       expect(subject.comments).to contain_exactly(comment)
     end
   end
+
+  context 'associations' do
+    let(:answer) { create :answer_with_comments, comments_count: 10 }
+
+    it 'has a user' do
+      expect(answer.user).to be_instance_of(User)
+    end
+
+    it 'has a repliable' do
+      expect(answer.repliable).to be_instance_of(Question)
+    end
+
+    it 'has comments' do
+      expect(answer.comments.size).to eq(10)
+      expect(answer.comments).to all(be_an(Comment))
+    end
+  end
 end
