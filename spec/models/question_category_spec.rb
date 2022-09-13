@@ -5,14 +5,16 @@ RSpec.describe QuestionCategory, type: :model do
   context 'when valid attributes' do
     subject(:question_category) { build :question_category }
 
-    include_examples 'valid object'
-  end
+    it 'has a question' do
+      expect(subject.question).to eq(question)
+    end
 
   context 'when invalid attributes' do
     let(:attrs) { { question: nil, category: nil } }
     subject(:question_category) { build :question_category, **attrs }
 
-    include_examples 'invalid object'
+  context 'associations' do
+    let(:question_category) { create :question_category }
 
     it_behaves_like 'with errors' do
       let(:attr) { :question }

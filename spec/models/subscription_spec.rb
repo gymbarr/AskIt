@@ -5,14 +5,16 @@ RSpec.describe Subscription, type: :model do
   context 'when valid attributes' do
     subject(:subscription) { build :subscription }
 
-    include_examples 'valid object'
-  end
+    it 'has a user' do
+      expect(subject.user).to eq(user)
+    end
 
   context 'when invalid attributes' do
     let(:attrs) { { user: nil, category: nil } }
     subject(:subscription) { build :subscription, **attrs }
 
-    include_examples 'invalid object'
+  context 'associations' do
+    let(:subscription) { create :subscription }
 
     it_behaves_like 'with errors' do
       let(:attr) { :user }
