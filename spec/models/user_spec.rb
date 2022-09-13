@@ -32,12 +32,12 @@ RSpec.describe User, type: :model do
 
     include_examples 'invalid object'
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :username }
       let(:error) { ['can\'t be blank', 'is too short (minimum is 3 characters)'] }
     end
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :email }
       let(:error) { ['can\'t be blank'] }
     end
@@ -48,14 +48,34 @@ RSpec.describe User, type: :model do
     let(:attrs) { { username: user2.username, email: user2.email } }
     let(:user) { build :user, **attrs }
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :username }
       let(:error) { ['has already been taken'] }
     end
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :email }
       let(:error) { ['has already been taken'] }
+    end
+  end
+
+  context 'associations' do
+    let!(:user) { create :user }
+
+    it 'has questions' do
+      expect(user.questions).to all(be_an(Question))
+    end
+
+    it 'has answers' do
+      expect(user.replies).to all(be_an(Reply))
+    end
+
+    it 'has subscriptions' do
+      expect(user.subscriptions).to all(be_an(Subscription))
+    end
+
+    it 'has subscription_categories' do
+      expect(user.subscription_categories).to all(be_an(Category))
     end
   end
 end

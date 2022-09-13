@@ -21,9 +21,7 @@ RSpec.describe Subscription, type: :model do
   end
 
   context 'when valid attributes' do
-    let(:user) { create :user }
-    let(:category) { create :category }
-    let(:subscription) { build :subscription, user: user, category: category }
+    let(:subscription) { build :subscription }
 
     include_examples 'valid object'
   end
@@ -34,14 +32,26 @@ RSpec.describe Subscription, type: :model do
 
     include_examples 'invalid object'
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :user }
       let(:error) { ['must exist'] }
     end
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :category }
       let(:error) { ['must exist'] }
+    end
+  end
+
+  context 'associations' do
+    let(:subscription) { create :subscription }
+
+    it 'has a user' do
+      expect(subscription.user).to be_instance_of(User)
+    end
+
+    it 'has a category' do
+      expect(subscription.category).to be_instance_of(Category)
     end
   end
 end

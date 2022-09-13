@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
-  let(:category) { create :category }
-  let(:question) { create :question, categories: [category] }
-
   shared_examples 'valid object' do
     it 'is valid' do
       expect(answer).to be_valid
@@ -24,18 +21,9 @@ RSpec.describe Answer, type: :model do
   end
 
   context 'when valid attributes' do
-    let(:attrs) { { repliable: question } }
-    let(:answer) { build :answer, **attrs }
+    let(:answer) { build :answer }
 
     include_examples 'valid object'
-
-    it 'has user' do
-      expect(answer.user).to be_instance_of(User)
-    end
-
-    it 'has repliable' do
-      expect(answer.repliable).to eq(question)
-    end
   end
 
   context 'when invalid attributes' do
@@ -44,19 +32,36 @@ RSpec.describe Answer, type: :model do
 
     include_examples 'invalid object'
 
-    include_examples 'with error' do
-      let(:attr) { :body }
+    it_behaves_like 'with error' do
+      let!(:attr) { :body }
       let(:error) { ['can\'t be blank'] }
     end
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :user }
       let(:error) { ['must exist'] }
     end
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :repliable }
       let(:error) { ['must exist'] }
+    end
+  end
+
+  context 'associations' do
+    let(:answer) { create :answer_with_comments, comments_count: 10 }
+
+    it 'has a user' do
+      expect(answer.user).to be_instance_of(User)
+    end
+
+    it 'has a repliable' do
+      expect(answer.repliable).to be_instance_of(Question)
+    end
+
+    it 'has comments' do
+      expect(answer.comments.size).to eq(10)
+      expect(answer.comments).to all(be_an(Comment))
     end
   end
 end
