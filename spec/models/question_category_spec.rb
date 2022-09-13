@@ -21,9 +21,7 @@ RSpec.describe QuestionCategory, type: :model do
   end
 
   context 'when valid attributes' do
-    let(:category) { create :category }
-    let(:question) { create :question, categories: [category] }
-    let(:question_category) { build :question_category, question: question, category: category }
+    let(:question_category) { build :question_category }
 
     include_examples 'valid object'
   end
@@ -34,14 +32,26 @@ RSpec.describe QuestionCategory, type: :model do
 
     include_examples 'invalid object'
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :question }
       let(:error) { ['must exist'] }
     end
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :category }
       let(:error) { ['must exist'] }
+    end
+  end
+
+  context 'associations' do
+    let(:question_category) { create :question_category }
+
+    it 'has a question' do
+      expect(question_category.question).to be_instance_of(Question)
+    end
+
+    it 'has a category' do
+      expect(question_category.category).to be_instance_of(Category)
     end
   end
 end

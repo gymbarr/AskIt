@@ -32,7 +32,7 @@ RSpec.describe Category, type: :model do
 
     include_examples 'invalid object'
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :name }
       let(:error) { ['can\'t be blank', 'is too short (minimum is 3 characters)'] }
     end
@@ -43,9 +43,33 @@ RSpec.describe Category, type: :model do
     let(:attrs) { { name: category2.name } }
     let(:category) { build :category, **attrs }
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :name }
       let(:error) { ['has already been taken'] }
+    end
+  end
+
+  context 'associations' do
+    let(:category) { create :category_with_questions, questions_count: 10, subscribers_count: 10 }
+
+    it 'has question_categories' do
+      expect(category.question_categories.size).to eq(10)
+      expect(category.question_categories).to all(be_an(QuestionCategory))
+    end
+
+    it 'has questions' do
+      expect(category.questions.size).to eq(10)
+      expect(category.questions).to all(be_an(Question))
+    end
+
+    it 'has subscriptions' do
+      expect(category.subscriptions.size).to eq(10)
+      expect(category.subscriptions).to all(be_an(Subscription))
+    end
+
+    it 'has subscribers' do
+      expect(category.subscribers.size).to eq(10)
+      expect(category.subscribers).to all(be_an(User))
     end
   end
 end

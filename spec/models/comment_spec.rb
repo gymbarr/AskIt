@@ -1,10 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  let(:category) { create :category }
-  let(:question) { create :question, categories: [category] }
-  let(:answer) { create :answer, repliable: question }
-  let(:comment_for_answer) { create :comment, repliable: answer, parent: answer }
+  let(:answer) { create :answer }
 
   shared_examples 'valid object' do
     it 'is valid' do
@@ -21,48 +18,15 @@ RSpec.describe Comment, type: :model do
   shared_examples 'with error' do
     it 'has error' do
       comment.valid?
+      debugger
       expect(comment.errors[attr]).to eq(error)
     end
   end
 
   context 'when valid attributes' do
-    describe 'for answer' do
-      let(:attrs) { { repliable: answer, parent: answer } }
-      let(:comment) { build :comment, **attrs }
+    let(:comment) { build :comment, repliable: answer, parent: answer }
 
-      include_examples 'valid object'
-
-      it 'has user' do
-        expect(comment.user).to be_instance_of(User)
-      end
-
-      it 'has repliable' do
-        expect(comment.repliable).to eq(answer)
-      end
-
-      it 'has parent' do
-        expect(comment.parent).to eq(answer)
-      end
-    end
-
-    describe 'for comment' do
-      let(:attrs) { { repliable: comment_for_answer, parent: comment_for_answer } }
-      let(:comment) { build :comment, **attrs }
-
-      include_examples 'valid object'
-
-      it 'has user' do
-        expect(comment.user).to be_instance_of(User)
-      end
-
-      it 'has repliable' do
-        expect(comment.repliable).to eq(comment_for_answer)
-      end
-
-      it 'has parent' do
-        expect(comment.parent).to eq(comment_for_answer)
-      end
-    end
+    include_examples 'valid object'
   end
 
   context 'when invalid attributes' do
@@ -71,24 +35,58 @@ RSpec.describe Comment, type: :model do
 
     include_examples 'invalid object'
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :body }
       let(:error) { ['can\'t be blank'] }
     end
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :user }
       let(:error) { ['must exist'] }
     end
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :repliable }
       let(:error) { ['must exist'] }
     end
 
-    include_examples 'with error' do
+    it_behaves_like 'with error' do
       let(:attr) { :ancestry }
       let(:error) { ['can\'t be blank'] }
+    end
+  end
+
+  context 'associations' do
+    let(:comment_for_answer) { create :comment, repliable: answer, parent: answer }
+    let(:comment_for_comment) do
+      create :comment,
+             :for_comment,
+             repliable: comment_for_answer,
+             parent: comment_for_answer
+    end
+
+    it 'has a user' do
+      expect(comment_for_answer.user).to be_instance_of(User)
+    end
+
+    it 'has a comment' do
+      expect(comment_for_answer.comments).to all(be_an(Comment))
+    end
+
+    it 'has an answer as a repliable' do
+      expect(comment_for_answer.repliable).to be_an_instance_of(Answer)
+    end
+
+    it 'has an answer as a parent' do
+      expect(comment_for_answer.parent).to be_an_instance_of(Answer)
+    end
+
+    it 'has a comment as a repliable' do
+      expect(comment_for_comment.repliable).to be_an_instance_of(Comment)
+    end
+
+    it 'has a comment as a parent' do
+      expect(comment_for_comment.parent).to be_an_instance_of(Comment)
     end
   end
 end
