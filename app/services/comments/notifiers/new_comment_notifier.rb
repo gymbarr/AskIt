@@ -1,5 +1,5 @@
 module Comments
-  module Notifier
+  module Notifiers
     class NewCommentNotifier < ApplicationService
       attr_reader :question, :comment
 
