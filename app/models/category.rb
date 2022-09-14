@@ -4,6 +4,6 @@ class Category < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :subscribers, through: :subscriptions, source: :user
 
-  validates :name, presence: true, length: { minimum: 3, maximum: 25 }
+  validates :name, presence: true, length: { minimum: 3, maximum: 40 }
   validates_uniqueness_of :name
 end
