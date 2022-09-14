@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
     question = current_user.questions.build(question_params)
 
     if question.save
-      Questions::Notifier::CategorySubscribersNotifier.call(question)
+      Questions::Notifiers::CategorySubscribersNotifier.call(question)
       redirect_to question_path(question), notice: t('.success')
     else
       redirect_to new_question_path, alert: t('.alert')

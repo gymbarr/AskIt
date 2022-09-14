@@ -1,5 +1,5 @@
 module Questions
-  module Notifier
+  module Notifiers
     class CategorySubscribersNotifier < ApplicationService
       attr_reader :question
 

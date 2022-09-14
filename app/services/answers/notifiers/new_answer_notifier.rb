@@ -1,5 +1,5 @@
 module Answers
-  module Notifier
+  module Notifiers
     class NewAnswerNotifier < ApplicationService
       attr_reader :question, :answer
 
