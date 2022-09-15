@@ -9,7 +9,12 @@ Rails.application.routes.draw do
     devise_for :users
     resources :users
 
-    resources :questions
+    resources :questions do
+      collection do
+        post :index
+        post ':id', to: 'questions#show'
+      end
+    end
 
     post 'questions/:id/vote_up', to: 'questions#vote_up', as: :question_vote_up
     post 'questions/:id/vote_down', to: 'questions#vote_down', as: :question_vote_down

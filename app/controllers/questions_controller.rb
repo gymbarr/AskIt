@@ -4,11 +4,24 @@ class QuestionsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @questions = Question.order(created_at: :desc)
+    @pagy, @questions = pagy_countless(Question.order(created_at: :desc), items: 5)
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
   end
 
   def show
-    @replies = question.answers.order(created_at: :desc).flat_map(&:subtree)
+    @pagy, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 5)
+    @replies = @answers.flat_map(&:subtree)
+    debugger
+    # @pagy, @replies = pagy_array(question.answers.order(created_at: :desc).flat_map(&:subtree), items: 5)
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
   end
 
   def new
