@@ -4,4 +4,10 @@
   <%= link_to t('.new_question'), new_question_path, class:"btn btn-outline-primary" %>
 </div>
 
-<%= render 'question' %>
+<div id="questions">
+  <%= render 'question' %>
+</div>
+
+<div class="py-3" id="load_more_questions_button">
+  <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class:"btn btn-outline-primary" %>
+</div>

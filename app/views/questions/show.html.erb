@@ -48,10 +48,16 @@
   <h2 class="py-3"><%= t('.answers') %></h2>
 <% end %>
 
-<% @replies.each do |reply| %>
-  <% if reply.is_a?(Answer) %>
-    <%= render 'answers/answer', { answer: reply } %>
-  <% else %>
-    <%= render 'comments/comment', { comment: reply } %>
+<div id="replies">
+  <% @replies.each do |reply| %>
+    <% if reply.is_a?(Answer) %>
+      <%= render 'answers/answer', { answer: reply } %>
+    <% else %>
+      <%= render 'comments/comment', { comment: reply } %>
+    <% end %>
   <% end %>
+</div>
+
+<% if @pagy.next.present? %>
+  <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class:"btn btn-outline-primary" %>
 <% end %>
