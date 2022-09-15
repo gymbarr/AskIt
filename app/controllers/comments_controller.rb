@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
   include Comments
+  before_action :require_same_user, except: %i[create]
+
   def create
     comment = Comment.new(user: current_user, **comment_params)
     comment.parent = comment.repliable
@@ -45,5 +47,10 @@ class CommentsController < ApplicationController
 
   def question
     @question ||= Question.find(params[:question_id])
+  end
+
+  def require_same_user
+    flash[:alert] = t('.require_same_user.alert')
+    redirect_back fallback_location: root_path if current_user != comment.user
   end
 end

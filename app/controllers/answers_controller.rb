@@ -1,5 +1,7 @@
 class AnswersController < ApplicationController
   include Answers
+  before_action :require_same_user, except: %i[create vote_up vote_down]
+
   def create
     answer = Answer.new(user: current_user, **answer_params)
 
@@ -54,5 +56,10 @@ class AnswersController < ApplicationController
 
   def question
     @question ||= Question.find(params[:question_id])
+  end
+
+  def require_same_user
+    flash[:alert] = t('.require_same_user.alert')
+    redirect_back fallback_location: root_path if current_user != answer.user
   end
 end

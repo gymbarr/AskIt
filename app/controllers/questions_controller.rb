@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   include Questions
   before_action :question, only: %i[edit]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def index
     @questions = Question.order(created_at: :desc)
@@ -58,5 +59,10 @@ class QuestionsController < ApplicationController
 
   def question
     @question ||= Question.find(params[:id])
+  end
+
+  def require_same_user
+    flash[:alert] = t('.require_same_user.alert')
+    redirect_back fallback_location: root_path if current_user != question.user
   end
 end

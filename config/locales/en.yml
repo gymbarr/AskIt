@@ -55,7 +55,7 @@ en:
     destroy:
       success: Question was successfully deleted!
     require_same_user:
-      alert: You can only edit or delete your own questions
+      alert: You can edit and delete only your own questions!
   answers:
     create:
       success: Answer was successfully added!
@@ -65,6 +65,8 @@ en:
       alert: Something went wrong
     destroy:
       success: Answer was successfully deleted!
+    require_same_user:
+      alert: You can edit and delete only your own answers!
   comments:
     create:
       success: Comment was successfully added!
@@ -74,6 +76,8 @@ en:
       alert: Something went wrong
     destroy:
       success: Comment was successfully deleted!
+    require_same_user:
+      alert: You can edit and delete only your own comments!
   subscriptions:
     create:
       success: Subscribed successfully!
