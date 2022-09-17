@@ -1,5 +1,4 @@
 class AnswersController < ApplicationController
-  include Answers
   before_action :authorize_answer!
   after_action :verify_authorized
 
