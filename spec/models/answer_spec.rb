@@ -40,6 +40,7 @@ RSpec.describe Answer, type: :model do
       expect(subject.user).to eq(user)
     end
 
+    # TODO: do like for 'has a user'
     it 'has a repliable' do
       expect(subject.repliable).to eq(question)
     end
