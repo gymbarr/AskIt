@@ -5,20 +5,16 @@ FactoryBot.define do
 
     association :user
 
-    transient do
-      categories_count { 1 }
+    trait :with_categories do
+      transient do
+        categories_count { 1 }
+        subscribers_per_category { 0 }
+      end
+
+      categories { create_list(:category, categories_count, :with_subscribers, subscribers_count: subscribers_per_category) }
     end
 
-    transient do
-      subscribers_per_category { 0 }
-    end
-
-    after(:build) do |question, evaluator|
-      question.categories << create_list(:category,
-                                         evaluator.categories_count,
-                                         subscribers_count: evaluator.subscribers_per_category)
-    end
-
+    # TODO: modify like with_subscribers
     factory :question_with_answers do
       transient do
         answers_count { 1 }
