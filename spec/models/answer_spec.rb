@@ -49,13 +49,15 @@ RSpec.describe Answer, type: :model do
     end
   end
 
-  context 'associations' do
-    let(:answer) { create :answer_with_comments, comments_count: 10 }
+  describe 'associations' do
+    let(:user) { create :user }
+    subject(:answer) { create :answer_with_comments, comments_count: 10, user: user }
 
     it 'has a user' do
-      expect(answer.user).to be_instance_of(User)
+      expect(answer.user).to eq(user)
     end
 
+    # TODO: do like for 'has a user'
     it 'has a repliable' do
       expect(answer.repliable).to be_instance_of(Question)
     end
