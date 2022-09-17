@@ -3,32 +3,32 @@ require 'rails_helper'
 RSpec.describe Answer, type: :model do
   shared_examples 'valid object' do
     it 'is valid' do
-      expect(answer).to be_valid
+      expect(subject).to be_valid
     end
   end
 
   shared_examples 'invalid object' do
     it 'is invalid' do
-      expect(answer).to_not be_valid
+      expect(subject).to_not be_valid
     end
   end
 
   shared_examples 'with error' do
     it 'has error' do
-      answer.valid?
-      expect(answer.errors[attr]).to eq(error)
+      subject.valid?
+      expect(subject.errors[attr]).to eq(error)
     end
   end
 
   context 'when valid attributes' do
-    let(:answer) { build :answer }
+    subject(:answer) { build :answer }
 
     include_examples 'valid object'
   end
 
   context 'when invalid attributes' do
     let(:attrs) { { body: nil, user: nil, repliable: nil } }
-    let(:answer) { build :answer, **attrs }
+    subject(:answer) { build :answer, **attrs }
 
     include_examples 'invalid object'
 
@@ -48,13 +48,15 @@ RSpec.describe Answer, type: :model do
     end
   end
 
-  context 'associations' do
-    let(:answer) { create :answer_with_comments, comments_count: 10 }
+  describe 'associations' do
+    let(:user) { create :user }
+    subject(:answer) { create :answer_with_comments, comments_count: 10, user: user }
 
     it 'has a user' do
-      expect(answer.user).to be_instance_of(User)
+      expect(answer.user).to eq(user)
     end
 
+    # TODO: do like for 'has a user'
     it 'has a repliable' do
       expect(answer.repliable).to be_instance_of(Question)
     end

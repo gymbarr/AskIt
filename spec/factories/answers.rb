@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :answer, class: 'Answer', parent: :reply do
-    association :repliable, factory: :question
+
+    repliable { create :question, :with_categories }
 
     factory :answer_with_comments do
       transient do

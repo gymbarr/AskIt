@@ -2,12 +2,12 @@ FactoryBot.define do
   factory :category do
     name { Faker::Hobby.unique.activity }
 
-    transient do
-      subscribers_count { 0 }
-    end
+    trait :with_subscribers do
+      transient do
+        subscribers_count { 1 }
+      end
 
-    after(:create) do |category, evaluator|
-      create_list(:subscription, evaluator.subscribers_count, category: category)
+      subscriptions { create_list(:subscription, subscribers_count) }
     end
 
     factory :category_with_questions do
