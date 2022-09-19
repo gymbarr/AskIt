@@ -43,15 +43,17 @@ RSpec.describe Subscription, type: :model do
     end
   end
 
-  context 'associations' do
-    let(:subscription) { create :subscription }
+  describe 'associations' do
+    let(:user) { create :user }
+    let(:category) { create :category }
+    let(:subscription) { create :subscription, user: user, category: category }
 
     it 'has a user' do
-      expect(subscription.user).to be_instance_of(User)
+      expect(subscription.user).to eq(user)
     end
 
     it 'has a category' do
-      expect(subscription.category).to be_instance_of(Category)
+      expect(subscription.category).to eq(category)
     end
   end
 end
