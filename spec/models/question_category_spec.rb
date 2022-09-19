@@ -37,15 +37,17 @@ RSpec.describe QuestionCategory, type: :model do
     end
   end
 
-  context 'associations' do
-    let(:question_category) { create :question_category }
+  describe 'associations' do
+    let(:category) { create :category }
+    let(:question) { create :question, categories: [category] }
+    let(:question_category) { QuestionCategory.find_by(question: question, category: category) }
 
     it 'has a question' do
-      expect(question_category.question).to be_instance_of(Question)
+      expect(question_category.question).to eq(question)
     end
 
     it 'has a category' do
-      expect(question_category.category).to be_instance_of(Category)
+      expect(question_category.category).to eq(category)
     end
   end
 end
