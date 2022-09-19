@@ -1,4 +1,7 @@
 class Question < ApplicationRecord
+  TITLE_MIN_LENGTH = 2
+  BODY_MIN_LENGTH = 2
+
   include Authorship
   belongs_to :user
   has_many :answers, as: :repliable, dependent: :destroy
@@ -7,8 +10,8 @@ class Question < ApplicationRecord
   has_many :subscribers, -> { distinct }, through: :categories
   acts_as_votable
 
-  validates :title, presence: true, length: { minimum: 2 }
-  validates :body, presence: true, length: { minimum: 2 }
+  validates :title, presence: true, length: { minimum: TITLE_MIN_LENGTH }
+  validates :body, presence: true, length: { minimum: BODY_MIN_LENGTH }
   validates :categories, presence: true
 
   def subscribers_without_author

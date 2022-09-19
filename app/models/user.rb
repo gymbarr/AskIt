@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  USERNAME_MIN_LENGTH = 3
+  USERNAME_MAX_LENGTH = 40
+
   rolify
 
   has_many :questions, dependent: :destroy
@@ -14,7 +17,7 @@ class User < ApplicationRecord
 
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
-                       length: { minimum: 3, maximum: 40 }
+                       length: { minimum: USERNAME_MIN_LENGTH, maximum: USERNAME_MAX_LENGTH }
 
   after_create :assign_default_role
 

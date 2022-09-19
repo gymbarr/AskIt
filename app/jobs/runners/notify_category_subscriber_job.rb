@@ -4,8 +4,10 @@ module Runners
 
     def perform(question_id, subscriber_id)
       question = Question.find_by_id(question_id)
+      return unless question
+
       user = User.find_by_id(subscriber_id)
-      return unless question && user
+      return unless user
 
       categories = question.categories.where(id: user.subscription_categories)
       categories_name = categories.map(&:name).join(', ')
