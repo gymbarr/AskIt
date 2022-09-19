@@ -1,8 +1,6 @@
 class Question < ApplicationRecord
-  TITLE_MIN_LENGTH = 2
-  BODY_MIN_LENGTH = 2
-
   include Authorship
+
   TITLE_MIN_LENGTH = 2
   BODY_MIN_LENGTH = 2
 
