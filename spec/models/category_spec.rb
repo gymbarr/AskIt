@@ -49,27 +49,27 @@ RSpec.describe Category, type: :model do
     end
   end
 
-  context 'associations' do
-    let(:category) { create :category_with_questions, questions_count: 10, subscribers_count: 10 }
+  describe 'associations' do
+    let(:category) { create :category }
+    let(:subscription) { create :subscription, category: category }
+    let(:question) { create :question, categories: [category] }
+    let(:question_category) { QuestionCategory.find_by(question: question, category: category) }
+    let(:subscriber) { subscription.user }
 
     it 'has question_categories' do
-      expect(category.question_categories.size).to eq(10)
-      expect(category.question_categories).to all(be_an(QuestionCategory))
+      expect(category.question_categories).to contain_exactly(question_category)
     end
 
     it 'has questions' do
-      expect(category.questions.size).to eq(10)
-      expect(category.questions).to all(be_an(Question))
+      expect(category.questions).to contain_exactly(question)
     end
 
     it 'has subscriptions' do
-      expect(category.subscriptions.size).to eq(10)
-      expect(category.subscriptions).to all(be_an(Subscription))
+      expect(category.subscriptions).to contain_exactly(subscription)
     end
 
     it 'has subscribers' do
-      expect(category.subscribers.size).to eq(10)
-      expect(category.subscribers).to all(be_an(User))
+      expect(category.subscribers).to contain_exactly(subscriber)
     end
   end
 end

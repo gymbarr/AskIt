@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :comment, class: 'Comment', parent: :reply do
-
     for_answer
 
     parent { repliable }

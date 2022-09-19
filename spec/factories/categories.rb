@@ -9,15 +9,5 @@ FactoryBot.define do
 
       subscriptions { create_list(:subscription, subscribers_count) }
     end
-
-    factory :category_with_questions do
-      transient do
-        questions_count { 1 }
-      end
-
-      after(:create) do |category, evaluator|
-        create_list(:question, evaluator.questions_count, categories: [category])
-      end
-    end
   end
 end
