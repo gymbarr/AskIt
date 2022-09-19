@@ -1,36 +1,18 @@
 require 'rails_helper'
+require 'models/shared_examples/validation_spec'
 
 RSpec.describe Comment, type: :model do
   let(:answer) { create :answer }
 
-  shared_examples 'valid object' do
-    it 'is valid' do
-      expect(comment).to be_valid
-    end
-  end
-
-  shared_examples 'invalid object' do
-    it 'is invalid' do
-      expect(comment).to_not be_valid
-    end
-  end
-
-  shared_examples 'with error' do
-    it 'has error' do
-      comment.valid?
-      expect(comment.errors[attr]).to eq(error)
-    end
-  end
-
   context 'when valid attributes' do
-    let(:comment) { build :comment, repliable: answer }
+    subject(:comment) { build :comment, repliable: answer }
 
     include_examples 'valid object'
   end
 
   context 'when invalid attributes' do
     let(:attrs) { { body: nil, user: nil, repliable: nil, parent: nil } }
-    let(:comment) { build :comment, **attrs }
+    subject(:comment) { build :comment, **attrs }
 
     include_examples 'invalid object'
 
