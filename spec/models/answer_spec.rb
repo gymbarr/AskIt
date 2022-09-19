@@ -1,25 +1,7 @@
 require 'rails_helper'
+require 'models/shared_examples/validation_spec'
 
 RSpec.describe Answer, type: :model do
-  shared_examples 'valid object' do
-    it 'is valid' do
-      expect(subject).to be_valid
-    end
-  end
-
-  shared_examples 'invalid object' do
-    it 'is invalid' do
-      expect(subject).to_not be_valid
-    end
-  end
-
-  shared_examples 'with error' do
-    it 'has error' do
-      subject.valid?
-      expect(subject.errors[attr]).to eq(error)
-    end
-  end
-
   context 'when valid attributes' do
     subject(:answer) { build :answer }
 

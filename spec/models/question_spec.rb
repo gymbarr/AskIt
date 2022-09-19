@@ -1,34 +1,16 @@
 require 'rails_helper'
+require 'models/shared_examples/validation_spec'
 
 RSpec.describe Question, type: :model do
-  shared_examples 'valid object' do
-    it 'is valid' do
-      expect(question).to be_valid
-    end
-  end
-
-  shared_examples 'invalid object' do
-    it 'is invalid' do
-      expect(question).to_not be_valid
-    end
-  end
-
-  shared_examples 'with error' do
-    it 'has error' do
-      question.valid?
-      expect(question.errors[attr]).to eq(error)
-    end
-  end
-
   context 'when valid attributes' do
-    let(:question) { build :question, :with_categories }
+    subject(:question) { build :question, :with_categories }
 
     include_examples 'valid object'
   end
 
   context 'when invalid attributes' do
     let(:attrs) { { title: nil, body: nil, user: nil, categories_count: 0 } }
-    let(:question) { build :question, :with_categories, **attrs }
+    subject(:question) { build :question, :with_categories, **attrs }
 
     include_examples 'invalid object'
 
@@ -54,11 +36,12 @@ RSpec.describe Question, type: :model do
   end
 
   describe 'associations' do
-    let(:category) { create :category, :with_subscribers }
+    let(:category) { create :category }
     let(:user) { create :user }
     let(:question) { create :question, user: user, categories: [category] }
     let(:answer) { create :answer, repliable: question }
     let(:question_category) { QuestionCategory.find_by(question: question, category: category) }
+    let!(:subscription) { create :subscription, user: user, category: category }
 
     it 'has a user' do
       expect(question.user).to eq(user)
@@ -77,7 +60,7 @@ RSpec.describe Question, type: :model do
     end
 
     it 'has subscribers' do
-      expect(question.subscribers).to contain_exactly(category.subscribers)
+      expect(question.subscribers).to contain_exactly(user)
     end
   end
 end
