@@ -4,6 +4,9 @@ class User < ApplicationRecord
 
   rolify
 
+  USERNAME_MIN_LENGTH = 3
+  USERNAME_MAX_LENGTH = 40
+
   has_many :questions, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
