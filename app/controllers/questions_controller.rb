@@ -13,10 +13,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @pagy, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 5)
+    @pagy, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
     @replies = @answers.flat_map(&:subtree)
-    debugger
-    # @pagy, @replies = pagy_array(question.answers.order(created_at: :desc).flat_map(&:subtree), items: 5)
 
     respond_to do |format|
       format.html # GET
@@ -43,7 +41,7 @@ class QuestionsController < ApplicationController
 
   def update
     if question.update(question_params)
-      redirect_to question_path(question), notice: t('.success')
+      redirect_to question_path(question, format: :html), notice: t('.success')
     else
       redirect_to edit_question_path(question), alert: t('.alert')
     end
@@ -51,7 +49,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     question.destroy
-    redirect_to questions_path, notice: t('.success')
+    redirect_to questions_path(format: :html), notice: t('.success')
   end
 
   def vote_up
