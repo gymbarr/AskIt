@@ -11,10 +11,11 @@ Rails.application.routes.draw do
 
     resources :questions do
       collection do
-        post :index
-        post ':id', to: 'questions#show'
+        post 'load_more', to: 'questions#index'
       end
     end
+
+    post 'questions/:id/load_more_answers', to: 'questions#show', as: :load_more_answers
 
     post 'questions/:id/vote_up', to: 'questions#vote_up', as: :question_vote_up
     post 'questions/:id/vote_down', to: 'questions#vote_down', as: :question_vote_down
