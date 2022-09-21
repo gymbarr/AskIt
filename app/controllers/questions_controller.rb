@@ -15,11 +15,6 @@ class QuestionsController < ApplicationController
   def show
     @pagy, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
     @replies = @answers.flat_map(&:subtree)
-
-    respond_to do |format|
-      format.html # GET
-      format.turbo_stream # POST
-    end
   end
 
   def new
