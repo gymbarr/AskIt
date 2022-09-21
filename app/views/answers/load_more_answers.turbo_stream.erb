@@ -10,6 +10,6 @@
 
 <%= turbo_stream.update "load_more_answers_button" do %>
   <% if @pagy.next.present? %>
-    <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class:"btn btn-outline-primary" %>
+    <%= button_to "Load more", load_more_answers_path(question_id: @question.id, page: @pagy.next), class:"btn btn-outline-primary" %>
   <% end %>
 <% end %>

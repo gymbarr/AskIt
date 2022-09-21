@@ -45,6 +45,16 @@ class AnswersController < ApplicationController
     redirect_to back_with_anchor anchor: "answer-#{answer.id}"
   end
 
+  def load_more_answers
+    @pagy, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
+    @replies = @answers.flat_map(&:subtree)
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
+  end
+
   private
 
   def answer_params
