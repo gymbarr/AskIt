@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
       # send notification to the repliable user
       Answers::Notifiers::NewAnswerNotifier.call(answer)
       flash[:notice] = t('.success')
-      redirect_to back_with_anchor anchor: "reply-#{answer.id}"
+      redirect_to back_with_anchor anchor: "answer-#{answer.id}"
     else
       flash[:alert] = t('.alert')
       redirect_back fallback_location: root_path
@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
     else
       flash[:alert] = t('.alert')
     end
-    redirect_to back_with_anchor anchor: "reply-#{answer.id}"
+    redirect_to back_with_anchor anchor: "answer-#{answer.id}"
   end
 
   def destroy
@@ -36,17 +36,17 @@ class AnswersController < ApplicationController
 
   def vote_up
     answer.vote_by voter: current_user, vote: 'like'
-    redirect_to back_with_anchor anchor: "reply-#{answer.id}"
+    redirect_to back_with_anchor anchor: "answer-#{answer.id}"
   end
 
   def vote_down
     answer.vote_by voter: current_user, vote: 'bad'
-    redirect_to back_with_anchor anchor: "reply-#{answer.id}"
+    redirect_to back_with_anchor anchor: "answer-#{answer.id}"
   end
 
   def load_more_answers
-    @pagy, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
-    @replies = @answers.flat_map(&:subtree)
+    @pagy_answers, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
+    @comments_per_page = 1
 
     respond_to do |format|
       format.html # GET

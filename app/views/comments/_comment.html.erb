@@ -3,7 +3,7 @@
   <div class="col-1">
   </div>
   <div class="col-11">
-    <div class="card mt-2" id="reply-<%= comment.id %>">
+    <div class="card mt-2" id="comment-<%= comment.id %>">
       <div class="card-body">
         <h6 class="card-title"><%= comment.user.username %></h6>
         <p class="card-text"><%= comment.body %></p>
@@ -11,7 +11,7 @@
           <%= format_timestamp(comment.created_at) %>
           <% if comment.parent.is_a?(Comment) %>
             <%= link_to "Replied to #{comment.parent.user.username}",
-                        question_path(@question, anchor: "reply-#{comment.parent.id}") %>
+                        question_path(@question, anchor: "comment-#{comment.parent.id}") %>
           <% end %>
         </small></p>
 

@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       # send notification to the repliable user
       Comments::Notifiers::NewCommentNotifier.call(comment)
       flash[:notice] = t('.success')
-      redirect_to back_with_anchor anchor: "reply-#{comment.id}"
+      redirect_to back_with_anchor anchor: "comment-#{comment.id}"
     else
       flash[:alert] = t('.alert')
       redirect_back fallback_location: root_path
@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
     else
       flash[:alert] = t('.alert')
     end
-    redirect_to back_with_anchor anchor: "reply-#{comment.id}"
+    redirect_to back_with_anchor anchor: "comment-#{comment.id}"
   end
 
   def destroy
@@ -33,6 +33,16 @@ class CommentsController < ApplicationController
       flash[:alert] = t('.alert')
     end
     redirect_back fallback_location: root_path
+  end
+
+  def load_more_comments
+    @question = answer.repliable
+    @pagy_comments, @comments = pagy_countless(answer.descendants.order(created_at: :asc), items: 1)
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
   end
 
   private
@@ -47,6 +57,10 @@ class CommentsController < ApplicationController
 
   def question
     @question ||= Question.find(params[:question_id])
+  end
+
+  def answer
+    @answer ||= Answer.find(params[:answer_id])
   end
 
   def authorize_comment!

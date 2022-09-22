@@ -1,6 +1,6 @@
 <h1><%= t('.title') %></h1>
 
-<div class="py-3">
+<div class="pt-3">
   <div class="card">
     <div class="card-header">
       <%= @question.user.username %>
@@ -44,25 +44,21 @@
 
 <%= render 'shared/reply_form', { reply: @question.answers.build } %>
 
-<% unless @replies.empty? %>
-  <h2 class="py-3"><%= t('.answers') %></h2>
+<% unless @answers.empty? %>
+  <h2 class="pb-3"><%= t('.answers') %></h2>
 <% end %>
 
-<div id="replies">
-  <% @replies.each do |reply| %>
-    <% if reply.is_a?(Answer) %>
-      <%= render 'answers/answer', { answer: reply } %>
-    <% else %>
-      <%= render 'comments/comment', { comment: reply } %>
-    <% end %>
-  <% end %>
-</div>
+<% @answers.each do |answer| %>
+  <%= render 'answers/answer', { answer: answer } %>
 
-<div class="py-3" id="load_more_answers_button">
-  <% if @pagy.next.present? %>
-    <%= button_to "Load more", load_more_answers_path(question_id: @question.id, page: @pagy.next), class:"btn btn-outline-primary" %>
+  <% answer.descendants.first(@comments_per_page).each do |comment| %>
+    <%= render 'comments/comment', { comment: comment } %>
   <% end %>
-</div>
+
+  <%= render 'comments/loaded_comments', { answer: answer } %>
+<% end %>
+
+<%= render 'answers/loaded_answers' %>
 
 <script>
   function showForm(id, action) {
