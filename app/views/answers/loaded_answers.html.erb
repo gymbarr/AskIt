@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "answers-page-#{@pagy.page}" do %>
+  <% @answers.each do |answer| %>
+    <%= render 'answers/answer', { answer: answer } %>
+
+    <% answer.descendants.first(@comments_per_page).each do |comment| %>
+      <%= render 'comments/comment', { comment: comment } %>
+    <% end %>
+
+    <%= render 'comments/loaded_comments', { answer: answer } %>
+  <% end %>
+  
+  <%= render 'answers/next_page' %>
+<% end %>

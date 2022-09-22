@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     post 'questions/:id/vote_down', to: 'questions#vote_down', as: :question_vote_down
 
     resources :answers, except: %i[index show]
-    post 'questions/:id/load_more_answers', to: 'answers#load_more_answers', as: :load_more_answers
 
     post 'answers/:id/vote_up', to: 'answers#vote_up', as: :answer_vote_up
     post 'answers/:id/vote_down', to: 'answers#vote_down', as: :answer_vote_down

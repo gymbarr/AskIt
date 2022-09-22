@@ -10,8 +10,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @pagy_answers, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
+    @pagy, @answers = pagy(question.answers.order(created_at: :desc), items: 2)
     @comments_per_page = 1
+
+    render 'answers/loaded_answers' if params[:page]
   end
 
   def new
