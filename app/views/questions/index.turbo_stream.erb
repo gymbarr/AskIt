@@ -1,9 +1,0 @@
-<%= turbo_stream.append "questions" do %>
-  <%= render 'question' %>
-<% end %>
-
-<%= turbo_stream.update "load_more_questions_button" do %>
-  <% if @pagy.next.present? %>
-    <%= button_to "Load more", pagy_url_for(@pagy, @pagy.next), class:"btn btn-outline-primary" %>
-  <% end %>
-<% end %>
