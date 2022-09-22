@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Answers::Notifiers::NewAnswerNotifier, type: :model do
-  describe '#call' do
+  describe '.call' do
     context 'when replier and the user of the repliable are different users' do
       let(:answer) { create :answer }
+      subject(:service) { described_class.call(answer) }
 
       it 'enqueues job NotifyUserAboutNewAnswerJob' do
-        expect do
-          described_class.call(answer)
-        end.to have_enqueued_job(Runners::NotifyUserAboutNewAnswerJob).with(answer.id).on_queue('notifiers')
+        expect { subject }
+          .to have_enqueued_job(Runners::NotifyUserAboutNewAnswerJob).with(answer.id).on_queue('notifiers')
       end
     end
 
