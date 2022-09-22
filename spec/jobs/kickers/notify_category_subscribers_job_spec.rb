@@ -4,8 +4,8 @@ RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
   include ActiveJob::TestHelper
 
   describe '#perform_later' do
-    subject(:job) { described_class.perform_later(question.id) }
     let(:question) { create :question, :with_categories, subscribers_per_category: 5 }
+    subject(:job) { described_class.perform_later(question.id) }
 
     it 'matches with enqueued job' do
       expect { subject }

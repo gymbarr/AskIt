@@ -20,14 +20,13 @@ RSpec.describe Runners::NotifyUserAboutNewCommentJob, type: :job do
       subject(:job) { described_class.perform_now(comment.id) }
 
       it 'calls on CommentMailer' do
-        mailer = double('ActionMailer::Parameterized::Mailer')
-        allow(CommentMailer).to receive(:with).with(question: question,
-                                                    user: answer.user,
-                                                    replier: comment.user)
-                                              .and_return(mailer)
-
-        expect(mailer).to receive_message_chain(:notify_user_about_new_comment, :deliver_now)
+        allow(CommentMailer).to receive_message_chain(:with,
+                                                      :notify_user_about_new_comment,
+                                                      :deliver_now)
         subject
+        expect(CommentMailer).to have_received(:with).with(question: question,
+                                                           user: answer.user,
+                                                           replier: comment.user)
       end
     end
 
@@ -36,11 +35,8 @@ RSpec.describe Runners::NotifyUserAboutNewCommentJob, type: :job do
         allow(CommentMailer).to receive_message_chain(:with,
                                                       :notify_user_about_new_comment,
                                                       :deliver_now)
-        expect(CommentMailer.with(any_args)
-                           .notify_user_about_new_comment)
-          .not_to receive(:deliver_now)
-
         described_class.perform_now(999)
+        expect(CommentMailer).not_to have_received(:with)
       end
     end
   end

@@ -19,12 +19,12 @@ RSpec.describe Runners::NotifyCategorySubscriberJob, type: :job do
       subject(:job) { described_class.perform_now(question.id, subscriber.id) }
 
       it 'calls on QuestionMailer' do
-        mailer = double('ActionMailer::Parameterized::Mailer')
-        allow(QuestionMailer).to receive(:with).with(hash_including(question: question, user: subscriber))
-                                               .and_return(mailer)
-
-        expect(mailer).to receive_message_chain(:notify_subscriber_about_new_question_in_category, :deliver_now)
+        allow(QuestionMailer).to receive_message_chain(:with,
+                                                       :notify_subscriber_about_new_question_in_category,
+                                                       :deliver_now)
         subject
+        expect(QuestionMailer).to have_received(:with).with(hash_including(question: question,
+                                                                           user: subscriber))
       end
     end
 
@@ -33,22 +33,16 @@ RSpec.describe Runners::NotifyCategorySubscriberJob, type: :job do
         allow(QuestionMailer).to receive_message_chain(:with,
                                                        :notify_subscriber_about_new_question_in_category,
                                                        :deliver_now)
-        expect(QuestionMailer.with(any_args)
-                             .notify_subscriber_about_new_question_in_category)
-          .not_to receive(:deliver_now)
-
         described_class.perform_now(question.id, 999)
+        expect(QuestionMailer).not_to have_received(:with)
       end
 
       it 'does not call on QuestionMailer with non existing question' do
         allow(QuestionMailer).to receive_message_chain(:with,
                                                        :notify_subscriber_about_new_question_in_category,
                                                        :deliver_now)
-        expect(QuestionMailer.with(any_args)
-                             .notify_subscriber_about_new_question_in_category)
-          .not_to receive(:deliver_now)
-
         described_class.perform_now(999, subscriber.id)
+        expect(QuestionMailer).not_to have_received(:with)
       end
     end
   end
