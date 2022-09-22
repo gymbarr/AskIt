@@ -1,4 +1,4 @@
-<div class="card mt-3" id="reply-<%= answer.id %>">
+<div class="card mt-2" id="answer-<%= answer.id %>">
   <div class="card-body">
     <h5 class="card-title"><%= answer.user.username %></h5>
     <p class="card-text"><%= answer.body %></p>
@@ -16,21 +16,19 @@
                   data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
     <% end %>
 
-    <p class="card-text mt-3"><small class="text-muted"><%= format_timestamp(answer.created_at) %></small></p>
+    <p class="card-text"><small class="text-muted"><%= format_timestamp(answer.created_at) %></small></p>
     
-    <div class="py-2"> 
-      <%= t('.rating') %>: <%= answer.weighted_score %>
-      <% unless current_user&.voted_for? answer %>
-        <span class="ps-3">
-          <span class="pe-2"><%= link_to (fa_icon "arrow-up"), answer_vote_up_path(answer),
-                                         method: :post, 
-                                         class: "btn btn-secondary" %></span>
-          <%= link_to (fa_icon "arrow-down"), answer_vote_down_path(answer),
-                      method: :post, 
-                      class: "btn btn-secondary" %>
-        </span>
-      <% end %>
-    </div>
+    <%= t('.rating') %>: <%= answer.weighted_score %>
+    <% unless current_user&.voted_for? answer %>
+      <span class="ps-3">
+        <span class="pe-2"><%= link_to (fa_icon "arrow-up"), answer_vote_up_path(answer),
+                                        method: :post, 
+                                        class: "btn btn-secondary" %></span>
+        <%= link_to (fa_icon "arrow-down"), answer_vote_down_path(answer),
+                    method: :post, 
+                    class: "btn btn-secondary" %>
+      </span>
+    <% end %>
 
     <div class="reply-form hidden" id="reply_form_<%= answer.id %>">
       <%= render 'shared/reply_form.html', { reply: answer.comments.build } %>

@@ -13,8 +13,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @pagy, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
-    @replies = @answers.flat_map(&:subtree)
+    @pagy_answers, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
+    @comments_per_page = 1
   end
 
   def new

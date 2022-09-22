@@ -1,0 +1,9 @@
+<div id="loaded-answers">
+</div>
+
+<div class="my-2" id="load-more-answers-button">
+  <% if @pagy_answers.next.present? %>
+    <%= button_to "Load more", load_more_answers_path(question_id: @question.id, page: @pagy_answers.next),
+                  class:"btn btn-outline-primary" %>
+  <% end %>
+</div>

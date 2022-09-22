@@ -1,0 +1,14 @@
+<%= turbo_stream.append "loaded-comments-for-answer-#{@answer.id}" do %>
+  <% @comments.each do |comment| %>
+    <%= render 'comments/comment', { comment: comment } %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update "load-more-comments-button-#{@answer.id}" do %>
+  <% if @pagy_comments.next.present? %>
+    <div class="mt-2">
+      <%= button_to "Show more", load_more_comments_path(answer_id: @answer.id, page: @pagy_comments.next),
+                    class:"btn btn-outline-primary" %>
+    </div>
+  <% end %>
+<% end %>

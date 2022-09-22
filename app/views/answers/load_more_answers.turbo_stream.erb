@@ -1,15 +1,18 @@
-<%= turbo_stream.append "replies" do %>
-  <% @replies.each do |reply| %>
-    <% if reply.is_a?(Answer) %>
-      <%= render 'answers/answer', { answer: reply } %>
-    <% else %>
-      <%= render 'comments/comment', { comment: reply } %>
+<%= turbo_stream.append "loaded-answers" do %>
+  <% @answers.each do |answer| %>
+    <%= render 'answers/answer', { answer: answer } %>
+
+    <% answer.descendants.first(@comments_per_page).each do |comment| %>
+      <%= render 'comments/comment', { comment: comment } %>
     <% end %>
+
+    <%= render 'comments/loaded_comments', { answer: answer } %>
   <% end %>
 <% end %>
 
-<%= turbo_stream.update "load_more_answers_button" do %>
-  <% if @pagy.next.present? %>
-    <%= button_to "Load more", load_more_answers_path(question_id: @question.id, page: @pagy.next), class:"btn btn-outline-primary" %>
+<%= turbo_stream.update "load-more-answers-button" do %>
+  <% if @pagy_answers.next.present? %>
+    <%= button_to "Load more", load_more_answers_path(question_id: @question.id, page: @pagy_answers.next),
+                  class:"btn btn-outline-primary" %>
   <% end %>
 <% end %>
