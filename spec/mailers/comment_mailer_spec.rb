@@ -18,28 +18,14 @@ RSpec.describe CommentMailer, type: :mailer do
       expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
-    context 'when locale set to en' do
-      it 'renders the subject for en locale' do
-        I18n.locale = :en
-        expect(subject.subject).to eq("You've got a new comment! | AskIt")
-      end
-
-      it 'renders the body for en locale' do
-        I18n.locale = :en
-        expect(subject.body.encoded).to match('left a comment to you:')
-      end
+    it 'renders the subject' do
+      expect(subject.subject)
+        .to eq("#{I18n.t('comment_mailer.notify_user_about_new_comment.subject')} | AskIt")
     end
 
-    context 'when locale set to ru' do
-      it 'renders the subject for ru locale' do
-        I18n.locale = :ru
-        expect(subject.subject).to eq('Вам оставили комментарий! | AskIt')
-      end
-
-      # it 'renders the body for ru locale' do
-      #   I18n.locale = :ru
-      #   expect(mail.body.encoded).to match('оставил Вам комментарий:')
-      # end
+    it 'renders the body' do
+      expect(subject.body.encoded)
+        .to match("#{I18n.t('comment_mailer.notify_user_about_new_comment.content', name: replier.username)}")
     end
   end
 end
