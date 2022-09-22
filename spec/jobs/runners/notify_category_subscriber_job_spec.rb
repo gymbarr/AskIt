@@ -15,13 +15,41 @@ RSpec.describe Runners::NotifyCategorySubscriberJob, type: :job do
   end
 
   describe '#perform_now' do
-    subject(:job) { described_class.perform_later(question.id, subscriber.id) }
+    context 'when valid parameters were passed' do
+      subject(:job) { described_class.perform_now(question.id, subscriber.id) }
 
-    it 'calls on QuestionMailer' do
-      expect(QuestionMailer).to receive_message_chain(:with,
-                                                      :notify_subscriber_about_new_question_in_category,
-                                                      :deliver_now)
-      perform_enqueued_jobs { job }
+      it 'calls on QuestionMailer' do
+        mailer = double('ActionMailer::Parameterized::Mailer')
+        allow(QuestionMailer).to receive(:with).with(hash_including(question: question, user: subscriber))
+                                               .and_return(mailer)
+
+        expect(mailer).to receive_message_chain(:notify_subscriber_about_new_question_in_category, :deliver_now)
+        subject
+      end
+    end
+
+    context 'when invalid parameters were passed' do
+      it 'does not call on QuestionMailer with non existing subscriber' do
+        allow(QuestionMailer).to receive_message_chain(:with,
+                                                       :notify_subscriber_about_new_question_in_category,
+                                                       :deliver_now)
+        expect(QuestionMailer.with(any_args)
+                             .notify_subscriber_about_new_question_in_category)
+          .not_to receive(:deliver_now)
+
+        described_class.perform_now(question.id, 999)
+      end
+
+      it 'does not call on QuestionMailer with non existing question' do
+        allow(QuestionMailer).to receive_message_chain(:with,
+                                                       :notify_subscriber_about_new_question_in_category,
+                                                       :deliver_now)
+        expect(QuestionMailer.with(any_args)
+                             .notify_subscriber_about_new_question_in_category)
+          .not_to receive(:deliver_now)
+
+        described_class.perform_now(999, subscriber.id)
+      end
     end
   end
 end
