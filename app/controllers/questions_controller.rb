@@ -4,12 +4,9 @@ class QuestionsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @pagy, @questions = pagy_countless(Question.order(created_at: :desc), items: 5)
+    @pagy, @questions = pagy(Question.order(created_at: :desc), items: 5)
 
-    respond_to do |format|
-      format.html # GET
-      format.turbo_stream # POST
-    end
+    render 'loaded_questions' if params[:page]
   end
 
   def show
