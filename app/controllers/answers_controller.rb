@@ -56,8 +56,8 @@ class AnswersController < ApplicationController
   end
 
   def load_more_answers
-    @pagy, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
-    @replies = @answers.flat_map(&:subtree)
+    @pagy_answers, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
+    @comments_per_page = 1
 
     respond_to do |format|
       format.html # GET
