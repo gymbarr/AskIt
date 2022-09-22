@@ -20,28 +20,14 @@ RSpec.describe QuestionMailer, type: :mailer do
       expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
-    context 'when locale set to en' do
-      it 'renders the subject for en locale' do
-        I18n.locale = :en
-        expect(subject.subject).to match('New question')
-      end
-
-      it 'renders the body for en locale' do
-        I18n.locale = :en
-        expect(subject.body.encoded).to match('See all questions in the category:')
-      end
+    it 'renders the subject' do
+      expect(subject.subject)
+        .to eq("#{I18n.t('question_mailer.notify_subscriber_about_new_question_in_category.subject', name: categories_name)} | AskIt")
     end
 
-    context 'when locale set to ru' do
-      it 'renders the subject for ru locale' do
-        I18n.locale = :ru
-        expect(subject.subject).to match('Новый вопрос')
-      end
-
-      # it 'renders the body for ru locale' do
-      #   I18n.locale = :ru
-      #   expect(mail.body.encoded).to match('Посмортеть все вопросы в категории:')
-      # end
+    it 'renders the body' do
+      expect(subject.body.encoded)
+        .to match("#{I18n.t('question_mailer.notify_subscriber_about_new_question_in_category.content_all_questions_in_category')}")
     end
   end
 end
