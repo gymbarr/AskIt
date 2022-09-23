@@ -8,6 +8,8 @@ require 'rspec/rails'
 require_relative 'support/factory_bot'
 require 'pundit/rspec'
 require 'pundit/matchers'
+require_relative 'support/action_mailer'
+require_relative 'support/active_job'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
