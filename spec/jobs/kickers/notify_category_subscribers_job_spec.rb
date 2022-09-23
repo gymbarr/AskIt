@@ -29,12 +29,12 @@ RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
     context 'when invalid parameters were passed' do
       let(:question) { create :question, :with_categories, subscribers_per_category: 0 }
 
-      it 'does not call on NotifyCategorySubscriberJob with non existing question' do
+      it 'does not enqueue NotifyCategorySubscriberJob with non existing question' do
         described_class.perform_now(999)
         expect(Runners::NotifyCategorySubscriberJob).not_to have_been_enqueued
       end
 
-      it 'does not call on NotifyCategorySubscriberJob with non existing subscribers' do
+      it 'does not enqueue NotifyCategorySubscriberJob with non existing subscribers' do
         described_class.perform_now(question.id)
         expect(Runners::NotifyCategorySubscriberJob).not_to have_been_enqueued
       end
