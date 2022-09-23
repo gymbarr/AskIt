@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-  include Questions
   before_action :question, only: %i[edit]
   before_action :authorize_question!
   after_action :verify_authorized

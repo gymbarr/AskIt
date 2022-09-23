@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-  include Comments
   before_action :authorize_comment!
   after_action :verify_authorized
 
