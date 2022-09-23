@@ -1,6 +1,6 @@
 module Kickers
   class NotifyCategorySubscribersJob < ApplicationJob
-    queue_as :default
+    queue_as :low
 
     def perform(question_id)
       question = Question.find_by_id(question_id)

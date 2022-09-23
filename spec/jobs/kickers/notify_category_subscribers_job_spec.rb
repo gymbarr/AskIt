@@ -9,7 +9,7 @@ RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
 
     it 'matches with enqueued job' do
       expect { subject }
-        .to have_enqueued_job(described_class).with(question.id).on_queue('default')
+        .to have_enqueued_job(described_class).with(question.id).on_queue('low')
     end
   end
 
