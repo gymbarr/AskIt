@@ -1,7 +1,7 @@
 <h4><%= t('mailer_common.greeting', name: @user.username) %><h4>
  
 <p><%= t('.content_new_question_in_category', name: @categories_name) %></p>
-<p><%= link_to 'Check it', question_url(@question, locale: I18n.locale) %></p>
+<p><%= link_to t('.link'), question_url(@question, locale: I18n.locale) %></p>
 
 <p><%= t('.content_all_questions_in_category') %></p>
 <% @categories.each do |category| %>
