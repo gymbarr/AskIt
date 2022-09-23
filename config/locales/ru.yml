@@ -110,15 +110,18 @@ ru:
     notify_user_about_new_answer:
       subject: 'Вам оставили ответ на Ваш вопрос!'
       content: 'Пользователь %{name} оставил ответ на Ваш вопрос:'
+      link: Узнать подробнее
   comment_mailer:
     notify_user_about_new_comment:
       subject: 'Вам оставили комментарий!'
       content: 'Пользователь %{name} оставил Вам комментарий:'
+      link: Узнать подробнее
   question_mailer:
     notify_subscriber_about_new_question_in_category:
       subject: Новый вопрос в категории %{name}!
       content_new_question_in_category: 'Появился новый вопрос в категории %{name}! Заходи и смотри:'
       content_all_questions_in_category: 'Посмортеть все вопросы в категории:'
+      link: Узнать подробнее
   navbar:
     home: Главная
     questions: Вопросы
