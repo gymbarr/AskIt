@@ -17,32 +17,27 @@ RSpec.describe Runners::NotifyCategorySubscriberJob, type: :job do
   describe '#perform_now' do
     context 'when valid parameters were passed' do
       subject(:job) { described_class.perform_now(question.id, subscriber.id) }
+      let(:mailer) { double('QuestionMailer') }
 
       it 'calls on QuestionMailer' do
-        allow(QuestionMailer).to receive_message_chain(:with,
-                                                       :notify_subscriber_about_new_question_in_category,
-                                                       :deliver_now)
+        allow(QuestionMailer).to receive(:with).with(hash_including(question: question,
+                                                                    user: subscriber)).and_return(mailer)
+
+        expect(mailer).to receive_message_chain(:notify_subscriber_about_new_question_in_category,
+                                                :deliver_now)
         subject
-        expect(QuestionMailer).to have_received(:with).with(hash_including(question: question,
-                                                                           user: subscriber))
       end
     end
 
     context 'when invalid parameters were passed' do
       it 'does not call on QuestionMailer with non existing subscriber' do
-        allow(QuestionMailer).to receive_message_chain(:with,
-                                                       :notify_subscriber_about_new_question_in_category,
-                                                       :deliver_now)
+        expect(QuestionMailer).not_to receive(:with)
         described_class.perform_now(question.id, 999)
-        expect(QuestionMailer).not_to have_received(:with)
       end
 
       it 'does not call on QuestionMailer with non existing question' do
-        allow(QuestionMailer).to receive_message_chain(:with,
-                                                       :notify_subscriber_about_new_question_in_category,
-                                                       :deliver_now)
+        expect(QuestionMailer).not_to receive(:with)
         described_class.perform_now(999, subscriber.id)
-        expect(QuestionMailer).not_to have_received(:with)
       end
     end
   end
