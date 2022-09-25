@@ -14,9 +14,9 @@ RSpec.describe Category, type: :model do
 
     include_examples 'invalid object'
 
-    it_behaves_like 'with error' do
+    it_behaves_like 'with errors' do
       let(:attr) { :name }
-      let(:error) { ['can\'t be blank', 'is too short (minimum is 3 characters)'] }
+      let(:errors) { ['can\'t be blank', 'is too short (minimum is 3 characters)'] }
     end
   end
 
@@ -25,9 +25,9 @@ RSpec.describe Category, type: :model do
     let(:attrs) { { name: category2.name } }
     subject(:category) { build :category, **attrs }
 
-    it_behaves_like 'with error' do
+    it_behaves_like 'with errors' do
       let(:attr) { :name }
-      let(:error) { ['has already been taken'] }
+      let(:errors) { ['has already been taken'] }
     end
   end
 

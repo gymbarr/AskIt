@@ -14,14 +14,14 @@ RSpec.describe Subscription, type: :model do
 
     include_examples 'invalid object'
 
-    it_behaves_like 'with error' do
+    it_behaves_like 'with errors' do
       let(:attr) { :user }
-      let(:error) { ['must exist'] }
+      let(:errors) { ['must exist'] }
     end
 
-    it_behaves_like 'with error' do
+    it_behaves_like 'with errors' do
       let(:attr) { :category }
-      let(:error) { ['must exist'] }
+      let(:errors) { ['must exist'] }
     end
   end
 
