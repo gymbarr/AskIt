@@ -52,3 +52,40 @@ end
 
   FactoryBot.create(:comment, comment_type, user: user, repliable: repliable)
 end
+
+Question.all.each do |question|
+  5.times do
+<<<<<<< HEAD
+    user = User.all.sample
+    FactoryBot.create(:answer, user: user, repliable: question)
+  end
+end
+
+100.times do
+  repliable = Reply.all.sample
+  comment_type = repliable.type == 'Answer' ? :for_answer : :for_comment
+  user = User.all.sample
+
+  FactoryBot.create(:comment, comment_type, user: user, repliable: repliable)
+end
+=======
+    answer = question.answers.build
+    answer.body = Faker::Hipster.sentence(word_count: 3)
+    answer.user = User.all.sample
+
+    answer.save
+
+    20.times do
+      comment = Comment.new
+      comment.repliable_id = answer.id
+      comment.repliable_type = answer.type
+      comment.type = 'Comment'
+      comment.parent = comment.repliable
+      comment.body = Faker::Hipster.sentence(word_count: 3)
+      comment.user = User.all.sample
+
+      comment.save
+    end
+  end
+end
+>>>>>>> 32c2b3a ( modify seeds, modify questions controller)

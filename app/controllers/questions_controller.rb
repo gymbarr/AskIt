@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
 
   def show
     @pagy, @answers = pagy(question.answers.order(created_at: :desc), items: 2)
-    @comments_per_page = 1
+    @comments_per_page = 5
 
     render 'answers/loaded_answers' if params[:page]
   end
@@ -63,7 +63,7 @@ class QuestionsController < ApplicationController
   end
 
   def question
-    @question ||= Question.find(params[:id])
+    @question ||= Question.includes(answers: :comments).find(params[:id])
   end
 
   def authorize_question!
