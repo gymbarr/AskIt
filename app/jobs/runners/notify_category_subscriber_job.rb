@@ -1,6 +1,6 @@
 module Runners
   class NotifyCategorySubscriberJob < ApplicationJob
-    queue_as :notifiers
+    queue_as :runners_notifiers
 
     def perform(question_id, subscriber_id)
       question = Question.find_by_id(question_id)

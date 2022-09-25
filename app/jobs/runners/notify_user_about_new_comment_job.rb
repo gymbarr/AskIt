@@ -1,6 +1,6 @@
 module Runners
   class NotifyUserAboutNewCommentJob < ApplicationJob
-    queue_as :notifiers
+    queue_as :runners_notifiers
 
     def perform(comment_id)
       comment = Comment.find_by_id(comment_id)
