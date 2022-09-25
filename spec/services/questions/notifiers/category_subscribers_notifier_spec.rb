@@ -7,7 +7,7 @@ RSpec.describe Questions::Notifiers::CategorySubscribersNotifier, type: :model d
 
     it 'enqueues job NotifyCategorySubscribersJob' do
       expect { subject }
-        .to have_enqueued_job(Kickers::NotifyCategorySubscribersJob).with(question.id).on_queue('default')
+        .to have_enqueued_job(Kickers::NotifyCategorySubscribersJob).with(question.id).on_queue('kickers_notifiers')
     end
   end
 end

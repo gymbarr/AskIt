@@ -10,7 +10,7 @@ RSpec.describe Comments::Notifiers::NewCommentNotifier, type: :model do
 
       it 'enqueues job NotifyUserAboutNewCommentJob' do
         expect { subject }
-          .to have_enqueued_job(Runners::NotifyUserAboutNewCommentJob).with(comment.id).on_queue('notifiers')
+          .to have_enqueued_job(Runners::NotifyUserAboutNewCommentJob).with(comment.id).on_queue('runners_notifiers')
       end
     end
 
