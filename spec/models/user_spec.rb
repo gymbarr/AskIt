@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    let(:user) { create :user }
+    subject(:user) { create :user }
     let(:question) { create :question, :with_categories, user: user }
     let(:answer) { create :answer, user: user, repliable: question }
     let(:comment) { create :comment, user: user, repliable: answer }
@@ -50,23 +50,23 @@ RSpec.describe User, type: :model do
     let!(:subscription) { create :subscription, user: user, category: category }
 
     it 'has questions' do
-      expect(user.questions).to contain_exactly(question)
+      expect(subject.questions).to contain_exactly(question)
     end
 
     it 'has answers as replies' do
-      expect(user.replies).to include(answer)
+      expect(subject.replies).to include(answer)
     end
 
     it 'has comments as replies' do
-      expect(user.replies).to include(comment)
+      expect(subject.replies).to include(comment)
     end
 
     it 'has subscriptions' do
-      expect(user.subscriptions).to contain_exactly(subscription)
+      expect(subject.subscriptions).to contain_exactly(subscription)
     end
 
     it 'has subscription_categories' do
-      expect(user.subscription_categories).to contain_exactly(category)
+      expect(subject.subscription_categories).to contain_exactly(category)
     end
   end
 end

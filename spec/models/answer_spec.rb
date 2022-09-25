@@ -33,19 +33,19 @@ RSpec.describe Answer, type: :model do
   describe 'associations' do
     let(:user) { create :user }
     let(:question) { create :question, :with_categories }
-    let(:answer) { create :answer, user: user, repliable: question }
+    subject(:answer) { create :answer, user: user, repliable: question }
     let(:comment) { create :comment, repliable: answer }
 
     it 'has a user' do
-      expect(answer.user).to eq(user)
+      expect(subject.user).to eq(user)
     end
 
     it 'has a repliable' do
-      expect(answer.repliable).to eq(question)
+      expect(subject.repliable).to eq(question)
     end
 
     it 'has comments' do
-      expect(answer.comments).to contain_exactly(comment)
+      expect(subject.comments).to contain_exactly(comment)
     end
   end
 end

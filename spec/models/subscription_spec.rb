@@ -28,14 +28,14 @@ RSpec.describe Subscription, type: :model do
   describe 'associations' do
     let(:user) { create :user }
     let(:category) { create :category }
-    let(:subscription) { create :subscription, user: user, category: category }
+    subject(:subscription) { create :subscription, user: user, category: category }
 
     it 'has a user' do
-      expect(subscription.user).to eq(user)
+      expect(subject.user).to eq(user)
     end
 
     it 'has a category' do
-      expect(subscription.category).to eq(category)
+      expect(subject.category).to eq(category)
     end
   end
 end
