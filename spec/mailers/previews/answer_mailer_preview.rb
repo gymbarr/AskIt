@@ -1,9 +1,17 @@
 # Preview all emails at http://localhost:3000/rails/mailers/answer_mailer
 class AnswerMailerPreview < ActionMailer::Preview
   def notify_user_about_new_answer
-    question = Question.first
-    user = User.first
-    replier = User.last
+    user = User.find_or_create_by(email: 'g-barr@mail.ru') do |new_user|
+      new_user.username = 'Andrey'
+      new_user.password = 'password'
+    end
+
+    replier = User.find_or_create_by(email: 'andrewtoms@mail.ru') do |new_user|
+      new_user.username = 'Andrew Toms'
+      new_user.password = 'password'
+    end
+
+    question = FactoryBot.create(:question, :with_categories, user: user)
 
     AnswerMailer.with(question: question,
                       user: user,
