@@ -6,34 +6,44 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# FactoryBot.create_list(:category, 10)
+User.find_or_create_by(email: 'g-barr@mail.ru') do |user|
+  user.username = 'Andrey'
+  user.password = 'password'
+end
 
-# all_categories = Category.all
+User.find_or_create_by(email: 'andryuh2a@mail.ru') do |user|
+  user.username = 'Andryuh2a'
+  user.password = 'password'
+end
 
-# 10.times do
-#   user = User.all.sample
+User.find_or_create_by(email: 'andrewtoms@mail.ru') do |user|
+  user.username = 'Andrew Toms'
+  user.password = 'password'
+end
 
-#   categories = all_categories.sample(1 + rand(all_categories.count))
-#   FactoryBot.create(:question, user: user, categories: categories)
-# end
+3.times do
+  FactoryBot.create(:category)
+end
 
-# 50.times do
-#   question = Question.all.sample
-#   user = User.all.sample
+all_categories = Category.all
 
-#   FactoryBot.create(:answer, repliable: question, user: user)
-# end
+10.times do
+  user = User.all.sample
+  categories = all_categories.sample(1 + rand(all_categories.count))
+  FactoryBot.create(:question, user: user, categories: categories)
+end
 
-# 20.times do
-#   answer = Answer.all.sample
-#   user = User.all.sample
+Question.all.each do |question|
+  5.times do
+    user = User.all.sample
+    FactoryBot.create(:answer, user: user, repliable: question)
+  end
+end
 
-#   FactoryBot.create(:comment, repliable: answer, parent: answer, user: user)
-# end
+100.times do
+  repliable = Reply.all.sample
+  comment_type = repliable.type == 'Answer' ? :for_answer : :for_comment
+  user = User.all.sample
 
-# 20.times do
-#   comment = Comment.all.sample
-#   user = User.all.sample
-
-#   FactoryBot.create(:comment, :for_comment, repliable: comment, parent: comment, user: user)
-# end
+  FactoryBot.create(:comment, comment_type, user: user, repliable: repliable)
+end
