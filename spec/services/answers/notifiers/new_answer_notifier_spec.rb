@@ -9,7 +9,7 @@ RSpec.describe Answers::Notifiers::NewAnswerNotifier, type: :model do
 
       it 'enqueues job NotifyUserAboutNewAnswerJob' do
         expect { subject }
-          .to have_enqueued_job(Runners::NotifyUserAboutNewAnswerJob).with(answer.id).on_queue('notifiers')
+          .to have_enqueued_job(Runners::NotifyUserAboutNewAnswerJob).with(answer.id).on_queue('runners_notifiers')
       end
     end
 
