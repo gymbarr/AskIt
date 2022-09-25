@@ -10,32 +10,29 @@ RSpec.describe Runners::NotifyUserAboutNewAnswerJob, type: :job do
 
     it 'matches with enqueued job' do
       expect { job }
-        .to have_enqueued_job(described_class).with(answer.id).on_queue('notifiers')
+        .to have_enqueued_job(described_class).with(answer.id).on_queue('runners_notifiers')
     end
   end
 
   describe '#perform_now' do
     context 'when valid parameters were passed' do
       subject(:job) { described_class.perform_now(answer.id) }
+      let(:mailer) { double('AnswerMailer') }
 
       it 'calls on AnswerMailer' do
-        allow(AnswerMailer).to receive_message_chain(:with,
-                                                     :notify_user_about_new_answer,
-                                                     :deliver_now)
+        allow(AnswerMailer).to receive(:with).with(question: question,
+                                                   user: question.user,
+                                                   replier: answer.user).and_return(mailer)
+
+        expect(mailer).to receive_message_chain(:notify_user_about_new_answer, :deliver_now)
         subject
-        expect(AnswerMailer).to have_received(:with).with(question: question,
-                                                          user: question.user,
-                                                          replier: answer.user)
       end
     end
 
     context 'when invalid parameters were passed' do
       it 'does not call on AnswerMailer with non existing answer' do
-        allow(AnswerMailer).to receive_message_chain(:with,
-                                                     :notify_user_about_new_answer,
-                                                     :deliver_now)
+        expect(AnswerMailer).not_to receive(:with)
         described_class.perform_now(999)
-        expect(AnswerMailer).not_to have_received(:with)
       end
     end
   end

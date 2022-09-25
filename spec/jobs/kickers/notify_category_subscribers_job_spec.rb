@@ -9,7 +9,7 @@ RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
 
     it 'matches with enqueued job' do
       expect { subject }
-        .to have_enqueued_job(described_class).with(question.id).on_queue('low')
+        .to have_enqueued_job(described_class).with(question.id).on_queue('kickers_notifiers')
     end
   end
 
@@ -27,12 +27,16 @@ RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
     end
 
     context 'when invalid parameters were passed' do
-      let(:question) { create :question, :with_categories, subscribers_per_category: 0 }
+      let(:question) { create :question, :with_categories }
 
       it 'does not enqueue NotifyCategorySubscriberJob with non existing question' do
         described_class.perform_now(999)
         expect(Runners::NotifyCategorySubscriberJob).not_to have_been_enqueued
       end
+    end
+
+    context 'when invalid parameters inside the method were found' do
+      let(:question) { create :question, :with_categories, subscribers_per_category: 0 }
 
       it 'does not enqueue NotifyCategorySubscriberJob with non existing subscribers' do
         described_class.perform_now(question.id)

@@ -10,7 +10,7 @@ RSpec.describe Runners::NotifyCategorySubscriberJob, type: :job do
 
     it 'matches with enqueued job' do
       expect { job }
-        .to have_enqueued_job(described_class).with(question.id, subscriber.id).on_queue('notifiers')
+        .to have_enqueued_job(described_class).with(question.id, subscriber.id).on_queue('runners_notifiers')
     end
   end
 
