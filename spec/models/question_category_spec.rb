@@ -28,14 +28,14 @@ RSpec.describe QuestionCategory, type: :model do
   describe 'associations' do
     let(:category) { create :category }
     let(:question) { create :question, categories: [category] }
-    let(:question_category) { QuestionCategory.find_by(question: question, category: category) }
+    subject(:question_category) { QuestionCategory.find_by(question: question, category: category) }
 
     it 'has a question' do
-      expect(question_category.question).to eq(question)
+      expect(subject.question).to eq(question)
     end
 
     it 'has a category' do
-      expect(question_category.category).to eq(category)
+      expect(subject.category).to eq(category)
     end
   end
 end
