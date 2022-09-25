@@ -14,14 +14,14 @@ RSpec.describe User, type: :model do
 
     include_examples 'invalid object'
 
-    it_behaves_like 'with error' do
+    it_behaves_like 'with errors' do
       let(:attr) { :username }
-      let(:error) { ['can\'t be blank', 'is too short (minimum is 3 characters)'] }
+      let(:errors) { ['can\'t be blank', 'is too short (minimum is 3 characters)'] }
     end
 
-    it_behaves_like 'with error' do
+    it_behaves_like 'with errors' do
       let(:attr) { :email }
-      let(:error) { ['can\'t be blank'] }
+      let(:errors) { ['can\'t be blank'] }
     end
   end
 
@@ -30,14 +30,14 @@ RSpec.describe User, type: :model do
     let(:attrs) { { username: user2.username, email: user2.email } }
     subject(:user) { build :user, **attrs }
 
-    it_behaves_like 'with error' do
+    it_behaves_like 'with errors' do
       let(:attr) { :username }
-      let(:error) { ['has already been taken'] }
+      let(:errors) { ['has already been taken'] }
     end
 
-    it_behaves_like 'with error' do
+    it_behaves_like 'with errors' do
       let(:attr) { :email }
-      let(:error) { ['has already been taken'] }
+      let(:errors) { ['has already been taken'] }
     end
   end
 

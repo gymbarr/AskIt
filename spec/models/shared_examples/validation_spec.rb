@@ -12,9 +12,9 @@ shared_examples 'invalid object' do
   end
 end
 
-shared_examples 'with error' do
-  it 'has error' do
+shared_examples 'with errors' do
+  it 'has errors' do
     subject.valid?
-    expect(subject.errors[attr]).to eq(error)
+    expect(subject.errors[attr]).to eq(errors)
   end
 end
