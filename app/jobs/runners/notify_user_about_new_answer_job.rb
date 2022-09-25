@@ -1,6 +1,6 @@
 module Runners
   class NotifyUserAboutNewAnswerJob < ApplicationJob
-    queue_as :notifiers
+    queue_as :runners_notifiers
 
     def perform(answer_id)
       answer = Answer.find_by_id(answer_id)

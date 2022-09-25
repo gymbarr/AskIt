@@ -7,4 +7,7 @@ production:
 :max_retries: 1
 
 :queues:
-  - default
+  - [critical, 4]
+  - [runners_notifiers, 3]
+  - [kickers_notifiers, 2]
+  - [default, 1]
