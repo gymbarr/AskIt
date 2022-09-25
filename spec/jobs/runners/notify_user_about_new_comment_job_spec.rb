@@ -11,32 +11,29 @@ RSpec.describe Runners::NotifyUserAboutNewCommentJob, type: :job do
 
     it 'matches with enqueued job' do
       expect { job }
-        .to have_enqueued_job(described_class).with(comment.id).on_queue('notifiers')
+        .to have_enqueued_job(described_class).with(comment.id).on_queue('runners_notifiers')
     end
   end
 
   describe '#perform_now' do
     context 'when valid parameters were passed' do
       subject(:job) { described_class.perform_now(comment.id) }
+      let(:mailer) { double('CommentMailer') }
 
       it 'calls on CommentMailer' do
-        allow(CommentMailer).to receive_message_chain(:with,
-                                                      :notify_user_about_new_comment,
-                                                      :deliver_now)
+        allow(CommentMailer).to receive(:with).with(question: question,
+                                                    user: answer.user,
+                                                    replier: comment.user).and_return(mailer)
+
+        expect(mailer).to receive_message_chain(:notify_user_about_new_comment, :deliver_now)
         subject
-        expect(CommentMailer).to have_received(:with).with(question: question,
-                                                           user: answer.user,
-                                                           replier: comment.user)
       end
     end
 
     context 'when invalid parameters were passed' do
       it 'does not call on CommentMailer with non existing comment' do
-        allow(CommentMailer).to receive_message_chain(:with,
-                                                      :notify_user_about_new_comment,
-                                                      :deliver_now)
+        expect(CommentMailer).not_to receive(:with)
         described_class.perform_now(999)
-        expect(CommentMailer).not_to have_received(:with)
       end
     end
   end
