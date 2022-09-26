@@ -1,5 +1,5 @@
 <%= turbo_frame_tag(
-      "categories-page-#{@pagy.next }",
+      "categories-page-#{@pagy.next}",
       loading: :lazy,
       src: pagy_url_for(@pagy, @pagy.next),
       target: "_top" 
