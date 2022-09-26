@@ -39,8 +39,10 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @pagy, @questions = pagy category.questions.order(created_at: :desc)
+    @pagy, @questions = pagy(category.questions.order(created_at: :desc), items: 5)
     @subscription = Subscription.find_by(user: current_user, category: category)
+
+    render 'loaded_category_questions' if params[:page]
   end
 
   private
