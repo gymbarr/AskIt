@@ -32,7 +32,6 @@ en:
     index:
       title: Categories
       new_category: New category
-      questions_count: question
       subscribed: Subscribed
     show:
       title: Category
@@ -51,6 +50,8 @@ en:
       success: Category was updated successfully!
     destroy:
       success: The category was successfully deleted!
+    category:
+      questions_count: question
   questions:
     index:
       title: All questions

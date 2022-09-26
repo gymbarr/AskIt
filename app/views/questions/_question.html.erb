@@ -3,7 +3,9 @@
     <div class="card-header">
       <%= question.user.username %>
       <% if question.categories.any? %>
-        <%= render question.categories %>
+        <% question.categories.each do |category| %>
+          <%= render 'categories/category_badge', category: category %>
+        <% end %>
       <% end %>
     </div>
 

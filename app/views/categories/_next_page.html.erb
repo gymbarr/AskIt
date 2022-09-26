@@ -1,0 +1,8 @@
+<%= turbo_frame_tag(
+      "categories-page-#{@pagy.next }",
+      loading: :lazy,
+      src: pagy_url_for(@pagy, @pagy.next),
+      target: "_top" 
+    ) do %>
+  <div class="text-muted">Loading...</div>
+<% end %>

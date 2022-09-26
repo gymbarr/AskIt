@@ -33,7 +33,9 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @pagy, @categories = pagy Category.all
+    @pagy, @categories = pagy(Category.order(created_at: :desc), items: 10)
+
+    render 'loaded_categories' if params[:page]
   end
 
   def show
