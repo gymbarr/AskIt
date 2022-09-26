@@ -135,6 +135,9 @@ en:
   pages:
     index:
       title: Welcome to AskIt!
+  shared:
+    next_page:
+      loading: Loading...
   global:
     button:
       delete: Delete

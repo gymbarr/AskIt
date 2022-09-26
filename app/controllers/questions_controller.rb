@@ -5,7 +5,6 @@ class QuestionsController < ApplicationController
 
   def index
     @pagy, @questions = pagy(Question.order(created_at: :desc), items: 5)
-
     render 'loaded_questions' if params[:page]
   end
 
