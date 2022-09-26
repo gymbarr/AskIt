@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @pagy, @answers = pagy(question.answers.order(created_at: :desc), items: 2)
+    @pagy, @answers = pagy(question.answers.order(created_at: :desc), items: 5)
     @comments_per_page = 5
 
     render 'answers/loaded_answers' if params[:page]
