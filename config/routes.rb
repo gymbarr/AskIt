@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     root 'pages#index'
 
-    devise_for :users
+    # devise_for :users
+    devise_for :users, controllers: {
+      sessions: 'sessions'
+    }
     post 'change_locale', to: 'user_locales#change_locale', as: 'change_user_locale'
 
     authenticate :user, lambda {|u| u.has_role? Role.admin_user_role } do
