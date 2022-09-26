@@ -135,6 +135,9 @@ ru:
   pages:
     index:
       title: Добро пожаловать на AskIt!
+  shared:
+    next_page:
+      loading: Загрузка...
   global:
     button:
       delete: Удалить

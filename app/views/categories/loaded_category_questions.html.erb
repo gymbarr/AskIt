@@ -1,4 +1,4 @@
 <%= turbo_frame_tag "category-questions-page-#{@pagy.page}" do %>
   <%= render @questions %>
-  <%= render 'categories/category_questions_next_page' %>
+  <%= render 'shared/next_page', subject: 'category-questions' %>
 <% end %>

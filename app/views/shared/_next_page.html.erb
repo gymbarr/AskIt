@@ -1,8 +1,8 @@
 <%= turbo_frame_tag(
-      "questions-page-#{@pagy.next}",
+      "#{subject}-page-#{@pagy.next}",
       loading: :lazy,
       src: pagy_url_for(@pagy, @pagy.next),
       target: "_top" 
     ) do %>
-  <div class="text-muted">Loading...</div>
+  <div class="text-muted"><%= t('.loading') %></div>
 <% end %>
