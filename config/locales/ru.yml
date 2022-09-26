@@ -32,7 +32,6 @@ ru:
     index:
       title: Категории
       new_category: Новая категория
-      questions_count: вопрос
       subscribed: Вы подписаны
     show:
       title: Категория
@@ -51,6 +50,8 @@ ru:
       success: Категория успешно отредактирована!
     destroy:
       success: Категория успешно удалена!
+    category:
+      questions_count: вопрос
   questions:
     index:
       title: Все вопросы
