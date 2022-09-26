@@ -30,13 +30,19 @@
         <% unless current_user&.voted_for? @question %>
           <span class="ps-3">
             <span class="pe-2">
-              <%= link_to (fa_icon "arrow-up"), question_vote_up_path(@question),
-                          method: :post,
-                          class: "btn btn-secondary" %>
+              <%= button_to question_vote_up_path(@question),
+                            class: "btn btn-secondary",
+                            data: { turbo: false },
+                            form: {style: 'display:inline-block;'} do %>
+                <%= fa_icon "arrow-up" %>
+              <% end %>
             </span>
-            <%= link_to (fa_icon "arrow-down"), question_vote_down_path(@question),
-                        method: :post,
-                        class: "btn btn-secondary" %>
+            <%= button_to question_vote_down_path(@question),
+                          class: "btn btn-secondary",
+                          data: { turbo: false },
+                          form: {style: 'display:inline-block;'} do %>
+              <%= fa_icon "arrow-down" %>
+            <% end %>
           </span>
         <% end %>
       </div>
