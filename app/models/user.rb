@@ -2,6 +2,7 @@ class User < ApplicationRecord
   USERNAME_MIN_LENGTH = 3
   USERNAME_MAX_LENGTH = 40
 
+  after_create :assign_default_role
   rolify
 
   has_many :questions, dependent: :destroy
