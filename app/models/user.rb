@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  after_create :assign_default_role
   rolify
 
   has_many :questions, dependent: :destroy
@@ -17,7 +16,17 @@ class User < ApplicationRecord
                        uniqueness: { case_sensitive: false },
                        length: { minimum: 3, maximum: 40 }
 
+  after_create :assign_default_role
+
+  validate :must_have_a_role, on: :update
+
+  private
+
   def assign_default_role
-    self.add_role(:newuser) if self.roles.blank?
+    self.add_role(:new_user) if self.roles.blank?
+  end
+
+  def must_have_a_role
+    errors.add(:roles, 'must have at least 1 role') unless roles.any?
   end
 end
