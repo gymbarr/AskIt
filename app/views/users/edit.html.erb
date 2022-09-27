@@ -1,5 +1,37 @@
-<%= form_with(model: @user) do |form| %>
-  <%= form.collection_check_boxes :role_ids, Role.all, :id, :name %>
-  <%= @user.errors[:roles] %>
-  <%= form.button :submit %>
-<% end %>
+<div class="row justify-content-md-center">
+  <div class="col-md-6">
+    <h2 class="pb-4"><%= t('.title') %></h2>
+
+    <%= form_with(model: @user) do |f| %>
+      <fieldset disabled>
+        <div class="mb-3">
+          <%= f.label :email, class: 'form-label' %>
+          <%= f.email_field :email, autocomplete: 'email', class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :username, class: "form-label" %>
+          <%= f.text_field :username, autocomplete: 'username', class: 'form-control' %>
+        </div>
+      </fieldset>
+
+      <%= f.label :role_ids, class: "form-label" %>
+      <div class="mb-4">
+        <%= f.collection_check_boxes :role_ids, Role.all, :id, :name do |b| %>
+          <span class="me-3">
+            <%= b.check_box(class: "form-check-input") %>
+            <%= b.label %>
+          </span>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+				<%= f.submit t('.update'), class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+
+    <div class="mt-4">
+      <%= link_to t('.cancel_account'), user_path(@user), data: { confirm: t('global.dialog.you_sure') }, method: :delete %>
+    </div>
+  </div>
+</div>
