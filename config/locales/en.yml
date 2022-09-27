@@ -5,7 +5,26 @@ en:
     attributes:
       user:
         email: Email
-        username: Username   
+        username: Username
+        role_ids: Roles   
+  users:
+    index:
+      title: Users
+      username: Username
+      email: Email
+      roles: Roles
+      actions: Actions
+      edit_profile: Edit profile
+    edit:
+      title: Edit profile
+      update: Update
+      cancel_account: Cancel account.
+    update:
+      success: User was successfully updated
+      alert: Something went wrong
+    destroy:
+      success: User was successfully deleted
+      alert: Something went wrong
   categories:
     index:
       title: Categories
@@ -101,6 +120,7 @@ en:
     home: Home
     questions: Questions
     categories: Categories
+    users: Users
     sign_in: Sign In
     sign_up: Sign Up
     sign_out: Sign Out

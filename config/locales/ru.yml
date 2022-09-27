@@ -6,6 +6,25 @@ ru:
       user:
         email: Адрес почты
         username: Имя пользователя
+        role_ids: Права доступа
+  users:
+    index:
+      title: Пользователи
+      username: Имя пользователя
+      email: Адрес почты
+      roles: Права доступа
+      actions: Действия
+      edit_profile: Редактировать профиль
+    edit:
+      title: Редактировать профиль
+      update: Обновить
+      cancel_account: Удалить учетную запись.
+    destroy:
+      success: Пользователь успешно удален
+      alert: Что-то пошло не так
+    update:
+      success: Пользователь успешно обновлен
+      alert: Что-то пошло не так
   categories:
     index:
       title: Категории
@@ -101,6 +120,7 @@ ru:
     home: Главная
     questions: Вопросы
     categories: Категории
+    users: Пользователи
     sign_in: Вход
     sign_up: Регистрация
     sign_out: Выход

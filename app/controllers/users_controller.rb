@@ -15,6 +15,15 @@ class UsersController < ApplicationController
     @users = User.order(created_at: :desc)
   end
 
+  def destroy
+    if user.destroy
+      redirect_to users_path, notice: t('.success')
+    else
+      flash[:alert] = t('.alert')
+      redirect_back fallback_location: root_path
+    end
+  end
+
   private
 
   def user_params
