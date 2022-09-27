@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_create :assign_default_role
   rolify
 
   has_many :questions, dependent: :destroy
@@ -15,4 +16,8 @@ class User < ApplicationRecord
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: { minimum: 3, maximum: 40 }
+
+  def assign_default_role
+    self.add_role(:newuser) if self.roles.blank?
+  end
 end
