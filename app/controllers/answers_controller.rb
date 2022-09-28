@@ -1,5 +1,8 @@
 class AnswersController < ApplicationController
   include Answers
+  before_action :authorize_answer!
+  after_action :verify_authorized
+
   def create
     answer = Answer.new(user: current_user, **answer_params)
 
@@ -54,5 +57,9 @@ class AnswersController < ApplicationController
 
   def question
     @question ||= Question.find(params[:question_id])
+  end
+
+  def authorize_answer!
+    authorize(@answer || Answer)
   end
 end
