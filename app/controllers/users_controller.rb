@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :user, only: %i[edit]
+  before_action :authorize_user!
+  after_action :verify_authorized
 
   def edit; end
 
@@ -32,5 +34,9 @@ class UsersController < ApplicationController
 
   def user
     @user ||= User.find(params[:id])
+  end
+
+  def authorize_user!
+    authorize(@user || User)
   end
 end
