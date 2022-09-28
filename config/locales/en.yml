@@ -6,7 +6,10 @@ en:
       user:
         email: Email
         username: Username
-        role_ids: Roles   
+        role_ids: Roles  
+  authorization:
+    user_not_authorized: 
+      alert: You are not authorized to perform this action.
   users:
     index:
       title: Users

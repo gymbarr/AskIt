@@ -4,6 +4,8 @@ class ApplicationPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
+    raise Pundit::NotAuthorizedError, 'You need to sign in or sign up before continuing.' unless user
+
     @user = user
     @record = record
   end
@@ -38,6 +40,8 @@ class ApplicationPolicy
 
   class Scope
     def initialize(user, scope)
+      raise Pundit::NotAuthorizedError, 'You need to sign in or sign up before continuing.' unless user
+
       @user = user
       @scope = scope
     end

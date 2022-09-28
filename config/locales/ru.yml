@@ -7,6 +7,9 @@ ru:
         email: Адрес почты
         username: Имя пользователя
         role_ids: Права доступа
+  authorization:
+    user_not_authorized: 
+      alert: У Вас нет прав на выполнение этого действия.
   users:
     index:
       title: Пользователи
