@@ -33,6 +33,7 @@ gem 'devise-i18n'
 gem 'devise-bootstrap5'
 gem 'dotenv-rails'
 gem "rolify"
+gem "pundit", "~> 2.2"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
