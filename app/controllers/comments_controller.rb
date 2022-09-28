@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
   include Comments
+  before_action :authorize_comment!
+  after_action :verify_authorized
+
   def create
     comment = Comment.new(user: current_user, **comment_params)
     comment.parent = comment.repliable
@@ -45,5 +48,9 @@ class CommentsController < ApplicationController
 
   def question
     @question ||= Question.find(params[:question_id])
+  end
+
+  def authorize_comment!
+    authorize(@comment || Comment)
   end
 end
