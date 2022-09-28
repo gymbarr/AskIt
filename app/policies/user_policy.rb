@@ -5,4 +5,20 @@ class UserPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def edit?
+    update?
+  end
+
+  def update?
+    @user.has_role? :admin
+  end
+
+  def index?
+    @user.has_role? :admin
+  end
+
+  def destroy?
+    @user.has_role? :admin
+  end
 end
