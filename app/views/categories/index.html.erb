@@ -1,6 +1,8 @@
 <h1><%= t('.title') %></h1>
 
-<%= link_to t('.new_category'), new_category_path, class:"btn btn-outline-primary" %>
+<% if policy(:category).new? %>
+  <%= link_to t('.new_category'), new_category_path, class:"btn btn-outline-primary" %>
+<% end %>
 
 <% @categories.each do |category| %>
   <div class="pt-3">
