@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
+  include Authorship
   belongs_to :user
   has_many :answers, as: :repliable, dependent: :destroy
   has_many :question_categories, dependent: :destroy
