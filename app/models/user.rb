@@ -20,6 +20,10 @@ class User < ApplicationRecord
 
   validate :must_have_a_role, on: :update
 
+  def author?(obj)
+    obj.user == self
+  end
+
   private
 
   def assign_default_role

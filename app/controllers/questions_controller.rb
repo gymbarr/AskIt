@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
   include Questions
   before_action :question, only: %i[edit]
+  before_action :authorize_question!
+  after_action :verify_authorized
 
   def index
     @questions = Question.order(created_at: :desc)
@@ -58,5 +60,9 @@ class QuestionsController < ApplicationController
 
   def question
     @question ||= Question.find(params[:id])
+  end
+
+  def authorize_question!
+    authorize(@question || Question)
   end
 end
