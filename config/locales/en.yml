@@ -21,7 +21,7 @@ en:
     edit:
       title: Edit profile
       update: Update
-      cancel_account: Cancel account.
+      cancel_account: Cancel this account.
     update:
       success: User was successfully updated
       alert: Something went wrong
