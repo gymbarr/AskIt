@@ -19,9 +19,14 @@ RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
       let(:question) { create :question, :with_categories, subscribers_per_category: 5 }
 
       it 'calls on NotifyCategorySubscriberJob for all subscribers' do
-        subject
-        question.subscribers.each do |subscriber|
-          expect(Runners::NotifyCategorySubscriberJob).to have_been_enqueued.with(question.id, subscriber.id)
+        expect { subject }
+          .to have_enqueued_job(Runners::NotifyCategorySubscriberJob).exactly(5)
+                                                                     .times
+                                                                     .with do |question_id, subscriber_id|
+          expect(question_id).to eq(question.id)
+          question.subscribers.each do |subscriber|
+            expect(subscriber_id).to eq(subscriber.id)
+          end
         end
       end
     end

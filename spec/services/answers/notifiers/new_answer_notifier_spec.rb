@@ -18,8 +18,7 @@ RSpec.describe Answers::Notifiers::NewAnswerNotifier, type: :model do
       let(:answer) { create :answer, repliable: question, user: question.user }
 
       it 'does not enqueue job NotifyUserAboutNewAnswerJob' do
-        subject
-        expect(Runners::NotifyUserAboutNewAnswerJob).not_to have_been_enqueued
+        expect { subject }.not_to have_enqueued_job(Runners::NotifyUserAboutNewAnswerJob)
       end
     end
   end
