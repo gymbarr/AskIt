@@ -19,8 +19,7 @@ RSpec.describe Comments::Notifiers::NewCommentNotifier, type: :model do
       let(:comment) { create :comment, repliable: answer, user: answer.user }
 
       it 'does not enqueue job NotifyUserAboutNewCommentJob' do
-        subject
-        expect(Runners::NotifyUserAboutNewCommentJob).not_to have_been_enqueued
+        expect { subject }.not_to have_enqueued_job(Runners::NotifyUserAboutNewCommentJob)
       end
     end
   end

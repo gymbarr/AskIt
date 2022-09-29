@@ -110,18 +110,18 @@ en:
     notify_user_about_new_answer:
       subject: You've got a new reply to your question!
       content: 'User %{name} left an answer to your question:'
-      link: Check it!
+      check_link: Check it!
   comment_mailer:
     notify_user_about_new_comment:
       subject: You've got a new comment!
       content: 'User %{name} left a comment to you:'
-      link: Check it
+      check_link: Check it
   question_mailer:
     notify_subscriber_about_new_question_in_category:
       subject: New question in the %{name} category!
       content_new_question_in_category: 'There is a new questions in the %{name} category! Check it out:'
       content_all_questions_in_category: 'See all questions in the category:'
-      link: Check it
+      check_link: Check it
   navbar:
     home: Home
     questions: Questions

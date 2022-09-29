@@ -1,6 +1,6 @@
 <h4><%= t('mailer_common.greeting', name: @user.username) %><h4>
  
 <p><%= t('.content', name: @replier.username) %></p>
-<p><%= link_to t('.link'), question_url(@question, locale: I18n.locale) %></p>
+<p><%= link_to t('.check_link'), question_url(@question, locale: I18n.locale) %></p>
 
 <p><%= t('mailer_common.farewell') %></p>
