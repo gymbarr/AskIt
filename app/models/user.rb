@@ -18,19 +18,15 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
-  validate :must_have_a_role, on: :update
+  validates :roles, presence: true, on: :update
 
   def author?(obj)
-    obj.user == self
+    obj.authored_by? self
   end
 
   private
 
   def assign_default_role
     self.add_role(:new_user) if self.roles.blank?
-  end
-
-  def must_have_a_role
-    errors.add(:roles, 'must have at least 1 role') unless roles.any?
   end
 end
