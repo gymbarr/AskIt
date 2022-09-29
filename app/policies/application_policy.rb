@@ -38,6 +38,16 @@ class ApplicationPolicy
     false
   end
 
+  private
+
+  def is_admin?
+    @user.has_role?(:admin)
+  end
+
+  def is_author?
+    @user.author?(record)
+  end
+
   class Scope
     def initialize(user, scope)
       raise Pundit::NotAuthorizedError, 'You need to sign in or sign up before continuing.' unless user

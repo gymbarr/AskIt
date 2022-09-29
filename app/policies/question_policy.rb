@@ -11,11 +11,11 @@ class QuestionPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.has_role?(:admin) || @user.author?(record)
+    is_admin? || is_author?
   end
 
   def destroy?
-    @user.has_role?(:admin) || @user.author?(record)
+    is_admin? || is_author?
   end
 
   def index?
