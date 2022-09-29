@@ -11,14 +11,14 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.has_role? :admin
+    is_admin?
   end
 
   def index?
-    @user.has_role? :admin
+    is_admin?
   end
 
   def destroy?
-    @user.has_role? :admin
+    is_admin?
   end
 end
