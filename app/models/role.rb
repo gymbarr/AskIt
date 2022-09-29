@@ -16,7 +16,7 @@ class Role < ApplicationRecord
 
   class << self
     def basic_user
-      find_by name: BASIC_USER_ROLE_NAME
+      BASIC_USER_ROLE_NAME
     end
   end
 end
