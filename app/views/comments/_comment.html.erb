@@ -18,12 +18,12 @@
         <%= button_tag t('global.button.reply'),
                 class:"btn btn-outline-primary btn-sm",
                 onclick: "showForm(#{comment.id}, 'reply')" %>
-        <% if policy(comment).edit? %>
+        <% if can_edit?(comment) %>
           <%= button_tag t('global.button.edit'),
                   class:"btn btn-outline-primary btn-sm",
                   onclick: "showForm(#{comment.id}, 'edit')" %>
         <% end %>
-        <% if policy(comment).destroy? %>
+        <% if can_destroy?(comment) %>
           <%= link_to t('global.button.delete'), comment_path(comment), method: :delete,
                       data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
         <% end %>

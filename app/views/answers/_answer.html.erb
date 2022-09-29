@@ -6,12 +6,12 @@
     <%= button_tag t('global.button.reply'),
                 class:"btn btn-outline-primary btn-sm",
                 onclick: "showForm(#{answer.id}, 'reply')" %>
-    <% if policy(answer).edit? %>
+    <% if can_edit?(answer) %>
       <%= button_tag t('global.button.edit'),
                   class:"btn btn-outline-primary btn-sm",
                   onclick: "showForm(#{answer.id}, 'edit')" %>
     <% end %>
-    <% if policy(answer).destroy? %>
+    <% if can_destroy?(answer) %>
       <%= link_to t('global.button.delete'), answer_path(answer), method: :delete,
                   data: { confirm: t('global.dialog.you_sure') }, class:"btn btn-outline-danger btn-sm" %>
     <% end %>

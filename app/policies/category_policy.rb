@@ -11,7 +11,7 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def create?
-    @user.has_role? :admin
+    is_admin?
   end
 
   def edit?
@@ -19,11 +19,11 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def update?
-    @user.has_role? :admin
+    is_admin?
   end
 
   def destroy?
-    @user.has_role? :admin
+    is_admin?
   end
 
   def index?
