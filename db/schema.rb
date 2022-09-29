@@ -81,7 +81,6 @@ ActiveRecord::Schema.define(version: 2022_09_29_122232) do
     t.string "locale", default: "en", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["role"], name: "index_users_on_role"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
