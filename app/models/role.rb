@@ -15,8 +15,14 @@ class Role < ApplicationRecord
   scopify
 
   class << self
-    def basic_user
+    def basic_user_role
       BASIC_USER_ROLE_NAME
+    end
+  end
+
+  class << self
+    def admin_user_role
+      ADMIN_USER_ROLE_NAME
     end
   end
 end
