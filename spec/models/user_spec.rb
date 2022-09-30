@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'when invalid attributes' do
-    let(:attrs) { { username: nil, email: nil, password: nil } }
+    let(:attrs) { { username: nil, email: nil, password: nil, roles: [] } }
     subject(:user) { build :user, **attrs }
 
     include_examples 'invalid object'
@@ -21,6 +21,11 @@ RSpec.describe User, type: :model do
 
     it_behaves_like 'with errors' do
       let(:attr) { :email }
+      let(:errors) { ['can\'t be blank'] }
+    end
+
+    it_behaves_like 'with errors' do
+      let(:attr) { :password }
       let(:errors) { ['can\'t be blank'] }
     end
   end
@@ -41,8 +46,18 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'associations' do
+  context 'when invalid attributes on update' do
     subject(:user) { create :user }
+
+    it_behaves_like 'with errors on update' do
+      let(:attr) { :roles }
+      let(:errors) { ['can\'t be blank'] }
+    end
+  end
+
+  describe 'associations' do
+    let(:role) { create :role }
+    subject(:user) { create :user, roles: [role] }
     let(:question) { create :question, :with_categories, user: user }
     let(:answer) { create :answer, user: user, repliable: question }
     let(:comment) { create :comment, user: user, repliable: answer }
@@ -67,6 +82,10 @@ RSpec.describe User, type: :model do
 
     it 'has subscription_categories' do
       expect(subject.subscription_categories).to contain_exactly(category)
+    end
+
+    it 'has roles' do
+      expect(subject.roles).to contain_exactly(role)
     end
   end
 end
