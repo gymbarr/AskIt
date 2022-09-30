@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe QuestionPolicy do
   subject { described_class.new(user, question) }
 
-  let(:article) { Article.create }
-
   context 'being an owner' do
     let(:user) { create :user }
     let(:question) { create :question, :with_categories, user: user }
