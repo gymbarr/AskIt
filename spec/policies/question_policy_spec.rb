@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe QuestionPolicy do
   subject { described_class.new(user, question) }
 
-  context 'being an owner' do
+  context 'being an author of the question' do
     let(:user) { create :user }
     let(:question) { create :question, :with_categories, user: user }
 
@@ -17,7 +17,7 @@ RSpec.describe QuestionPolicy do
     it { is_expected.to permit_actions(%i[index show new create edit update destroy vote_up vote_down]) }
   end
 
-  context 'being not an administrator and not an owner' do
+  context 'being not an administrator and not an author of the question' do
     let(:user) { create :user }
     let(:question) { create :question, :with_categories }
 
