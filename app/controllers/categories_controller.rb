@@ -49,8 +49,11 @@ class CategoriesController < ApplicationController
   def category
     @category ||= Category.find(params[:id])
   end
+<<<<<<< HEAD
 
   def authorize_category!
     authorize(@category || Category)
   end
+=======
+>>>>>>> 3dafe5a (add categories helper method)
 end
