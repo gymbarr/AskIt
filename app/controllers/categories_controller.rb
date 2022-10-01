@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-  helper_method :already_subscribed?, :category
   before_action :authorize_category!
   after_action :verify_authorized
 
@@ -49,12 +48,6 @@ class CategoriesController < ApplicationController
 
   def category
     @category ||= Category.find(params[:id])
-  end
-
-  def already_subscribed?(category)
-    return unless current_user
-
-    Subscription.find_by(category: category, user: current_user)
   end
 
   def authorize_category!
