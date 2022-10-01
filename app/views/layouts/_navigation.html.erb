@@ -15,11 +15,6 @@
         <li class="nav-item">
           <%= link_to t('navbar.categories'), categories_path, class:"nav-link" %>
         </li>
-        <% if current_user&.has_role?(:admin) %>
-          <li class="nav-item">
-            <%= link_to t('navbar.users'), users_path, class:"nav-link" %>
-          </li>
-        <% end %>
       </ul>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -49,7 +44,7 @@
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= current_user.has_role?(:admin) ? "#{current_user.username} (Admin)" : current_user.username %>
+              <%= is_admin? ? "#{current_user.username} (Admin)" : current_user.username %>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><%= link_to t('navbar.edit_profile'), edit_user_registration_path, class:"nav-link" %></li>
