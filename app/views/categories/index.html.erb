@@ -1,6 +1,6 @@
 <h1><%= t('.title') %></h1>
 
-<% if policy(:category).new? %>
+<% if can_build?(:category) %>
   <%= link_to t('.new_category'), new_category_path, class:"btn btn-outline-primary" %>
 <% end %>
 
