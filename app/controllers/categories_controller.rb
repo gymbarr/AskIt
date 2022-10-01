@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :category, only: %i[edit]
   before_action :authorize_category!
   after_action :verify_authorized
 
