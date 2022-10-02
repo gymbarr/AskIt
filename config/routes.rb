@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     post 'answers/:id/vote_down', to: 'answers#vote_down', as: :answer_vote_down
 
     resources :comments, except: %i[index show]
+    post 'answers/:id/load_more_comment', to: 'comments#load_more_comments', as: :load_more_comments
 
     resources :categories do
       resources :subscriptions, only: %i[create destroy]

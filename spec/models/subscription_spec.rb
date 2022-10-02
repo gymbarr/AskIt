@@ -12,6 +12,8 @@ RSpec.describe Subscription, type: :model do
     let(:attrs) { { user: nil, category: nil } }
     subject(:subscription) { build :subscription, **attrs }
 
+    include_examples 'invalid object'
+
     it_behaves_like 'with errors' do
       let(:attr) { :user }
       let(:errors) { ['must exist'] }
@@ -36,6 +38,7 @@ RSpec.describe Subscription, type: :model do
       expect(subject.category).to eq(category)
     end
   end
+<<<<<<< HEAD
 
   describe 'associations' do
     let(:user) { create :user }
@@ -51,3 +54,6 @@ RSpec.describe Subscription, type: :model do
     end
   end
 end
+=======
+end
+>>>>>>> e289848 (correct issues after merge with modify-tests-for-services-jobs-mailers)

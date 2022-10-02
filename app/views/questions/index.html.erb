@@ -4,4 +4,6 @@
   <%= link_to t('.new_question'), new_question_path, class:"btn btn-outline-primary" %>
 </div>
 
-<%= render 'question' %>
+<%= render @questions %>
+
+<%= render 'shared/next_page', subject: 'questions' %>

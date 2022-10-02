@@ -1,4 +1,4 @@
-<%= form_with model: @question do |f| %>
+<%= form_with(model: @question, local: true) do |f| %>
   <div class="mb-3">
     <%= f.text_field :title, required: true, minlength: 2, placeholder: t('questions.new.question_title'),
                      class:"form-control" %>

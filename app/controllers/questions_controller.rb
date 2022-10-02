@@ -4,11 +4,15 @@ class QuestionsController < ApplicationController
   after_action :verify_authorized
 
   def index
-    @questions = Question.order(created_at: :desc)
+    @pagy, @questions = pagy(Question.order(created_at: :desc), items: 5)
+    render 'loaded_questions' if params[:page]
   end
 
   def show
-    @replies = question.answers.order(created_at: :desc).flat_map(&:subtree)
+    @pagy, @answers = pagy(question.answers.order(created_at: :desc), items: 5)
+    @comments_per_page = 5
+
+    render 'answers/loaded_answers' if params[:page]
   end
 
   def new
@@ -30,7 +34,7 @@ class QuestionsController < ApplicationController
 
   def update
     if question.update(question_params)
-      redirect_to question_path(question), notice: t('.success')
+      redirect_to question_path(question, format: :html), notice: t('.success')
     else
       redirect_to edit_question_path(question), alert: t('.alert')
     end
@@ -38,7 +42,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     question.destroy
-    redirect_to questions_path, notice: t('.success')
+    redirect_to questions_path(format: :html), notice: t('.success')
   end
 
   def vote_up
@@ -58,7 +62,7 @@ class QuestionsController < ApplicationController
   end
 
   def question
-    @question ||= Question.find(params[:id])
+    @question ||= Question.includes(answers: :comments).find(params[:id])
   end
 
   def authorize_question!

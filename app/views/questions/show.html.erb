@@ -1,11 +1,13 @@
 <h1><%= t('.title') %></h1>
 
-<div class="py-3">
+<div class="pt-3">
   <div class="card">
     <div class="card-header">
       <%= @question.user.username %>
       <% if @question.categories.any? %>
-        <%= render @question.categories %>
+        <% @question.categories.each do |category| %>
+          <%= render 'categories/category_badge', category: category %>
+        <% end %>
       <% end %>
     </div>
 
@@ -28,13 +30,19 @@
         <% unless current_user&.voted_for? @question %>
           <span class="ps-3">
             <span class="pe-2">
-              <%= link_to (fa_icon "arrow-up"), question_vote_up_path(@question),
-                          method: :post, 
-                          class: "btn btn-secondary" %>
+              <%= button_to question_vote_up_path(@question),
+                            class: "btn btn-secondary",
+                            data: { turbo: false },
+                            form: {style: 'display:inline-block;'} do %>
+                <%= fa_icon "arrow-up" %>
+              <% end %>
             </span>
-            <%= link_to (fa_icon "arrow-down"), question_vote_down_path(@question),
-                        method: :post,
-                        class: "btn btn-secondary" %>
+            <%= button_to question_vote_down_path(@question),
+                          class: "btn btn-secondary",
+                          data: { turbo: false },
+                          form: {style: 'display:inline-block;'} do %>
+              <%= fa_icon "arrow-down" %>
+            <% end %>
           </span>
         <% end %> 
       </div>
@@ -44,17 +52,21 @@
 
 <%= render 'shared/reply_form', { reply: @question.answers.build } %>
 
-<% unless @replies.empty? %>
-  <h2 class="py-3"><%= t('.answers') %></h2>
+<% unless @answers.empty? %>
+  <h2 class="pb-3"><%= t('.answers') %></h2>
 <% end %>
 
-<% @replies.each do |reply| %>
-  <% if reply.is_a?(Answer) %>
-    <%= render 'answers/answer', { answer: reply } %>
-  <% else %>
-    <%= render 'comments/comment', { comment: reply } %>
+<% @answers.each do |answer| %>
+  <%= render 'answers/answer', { answer: answer } %>
+
+  <% answer.descendants.first(@comments_per_page).each do |comment| %>
+    <%= render 'comments/comment', { comment: comment } %>
   <% end %>
+
+  <%= render 'comments/loaded_comments', { answer: answer } %>
 <% end %>
+
+<%= render 'shared/next_page', subject: 'answers' %>
 
 <script>
   function showForm(id, action) {

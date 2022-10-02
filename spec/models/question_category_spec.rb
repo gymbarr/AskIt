@@ -12,6 +12,8 @@ RSpec.describe QuestionCategory, type: :model do
     let(:attrs) { { question: nil, category: nil } }
     subject(:question_category) { build :question_category, **attrs }
 
+    include_examples 'invalid object'
+
     it_behaves_like 'with errors' do
       let(:attr) { :question }
       let(:errors) { ['must exist'] }

@@ -1,12 +1,13 @@
-<% @questions.each do |question| %>
-  <div class="py-3">
-    <div class="card">
-      <div class="card-header">
-        <%= question.user.username %>
-        <% if question.categories.any? %>
-          <%= render question.categories %>
+<div class="py-3">
+  <div class="card">
+    <div class="card-header">
+      <%= question.user.username %>
+      <% if question.categories.any? %>
+        <% question.categories.each do |category| %>
+          <%= render 'categories/category_badge', category: category %>
         <% end %>
-      </div>
+      <% end %>
+    </div>
 
       <div class="card-body">
         <h5 class="card-title"><%= question.title %></h5>
@@ -21,9 +22,8 @@
         <% end %>
       </div>
 
-      <div class="card-footer text-muted">
-        <%= format_timestamp(question.created_at) %>
-      </div>
+    <div class="card-footer text-muted">
+      <%= format_timestamp(question.created_at) %>
     </div>
   </div>
-<% end %>
+</div>

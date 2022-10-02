@@ -5,8 +5,6 @@ class Question < ApplicationRecord
   BODY_MIN_LENGTH = 2
 
   include Authorship
-  TITLE_MIN_LENGTH = 2
-  BODY_MIN_LENGTH = 2
 
   belongs_to :user
   has_many :answers, as: :repliable, dependent: :destroy

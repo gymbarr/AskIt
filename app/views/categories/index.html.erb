@@ -1,21 +1,9 @@
 <h1><%= t('.title') %></h1>
 
-<% if policy(:category).new? %>
+<% if can_build?(:category) %>
   <%= link_to t('.new_category'), new_category_path, class:"btn btn-outline-primary" %>
 <% end %>
 
-<% @categories.each do |category| %>
-  <div class="pt-3">
-    <div class="card text-center">
-      <div class="card-body mt-2">
-        <h5 class="card-title"><%= link_to category.name, category_path(category) %></h5>
-        <%= pluralize(category.questions.count, t('.questions_count')) %>
-        <% if already_subscribed?(category) %>
-          <br><span class="badge rounded-pill text-bg-secondary"><%= t('.subscribed') %></span>
-        <% end %>
-      </div>
-    </div>
-  </div>
-<% end %>
+<%= render @categories %>
 
-<%== pagination @pagy %>
+<%= render 'shared/next_page', subject: 'categories' %>
