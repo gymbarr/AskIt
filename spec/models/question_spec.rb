@@ -63,4 +63,32 @@ RSpec.describe Question, type: :model do
       expect(subject.subscribers).to contain_exactly(user)
     end
   end
+
+  describe 'associations' do
+    let(:category) { create :category, :with_subscribers }
+    let(:user) { create :user }
+    let(:question) { create :question, user: user, categories: [category] }
+    let(:answer) { create :answer, repliable: question }
+    let(:question_category) { QuestionCategory.find_by(question: question, category: category) }
+
+    it 'has a user' do
+      expect(question.user).to eq(user)
+    end
+
+    it 'has categories' do
+      expect(question.categories).to contain_exactly(category)
+    end
+
+    it 'has answers' do
+      expect(question.answers).to contain_exactly(answer)
+    end
+
+    it 'has question_categories' do
+      expect(question.question_categories).to contain_exactly(question_category)
+    end
+
+    it 'has subscribers' do
+      expect(question.subscribers).to contain_exactly(category.subscribers)
+    end
+  end
 end
