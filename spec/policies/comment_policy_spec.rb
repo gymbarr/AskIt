@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'policies/shared_examples/authentication_spec'
 
 RSpec.describe CommentPolicy do
   subject { described_class.new(user, comment) }
@@ -23,5 +24,12 @@ RSpec.describe CommentPolicy do
 
     it { is_expected.to permit_actions(%i[create]) }
     it { is_expected.to forbid_actions(%i[update destroy]) }
+  end
+
+  context 'being a not authenticated user' do
+    subject { described_class.new(nil, comment) }
+    let(:comment) { create :comment }
+
+    include_examples 'not authenticated user'
   end
 end

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'policies/shared_examples/authentication_spec'
 
 RSpec.describe QuestionPolicy do
   subject { described_class.new(user, question) }
@@ -23,5 +24,12 @@ RSpec.describe QuestionPolicy do
 
     it { is_expected.to permit_actions(%i[index show new create vote_up vote_down]) }
     it { is_expected.to forbid_actions(%i[edit update destroy]) }
+  end
+
+  context 'being a not authenticated user' do
+    subject { described_class.new(nil, question) }
+    let(:question) { create :question, :with_categories }
+
+    include_examples 'not authenticated user'
   end
 end
