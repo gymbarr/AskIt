@@ -136,6 +136,8 @@ en:
     sign_up: Sign Up
     sign_out: Sign Out
     edit_profile: Edit profile
+    administration: Administration
+    admin: Admin
   pages:
     index:
       title: Welcome to AskIt!
