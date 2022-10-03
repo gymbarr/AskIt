@@ -1,8 +1,9 @@
 class CommentsController < ApplicationController
-  before_action :authorize_comment!
+  before_action :authorize_comment!, only: %i[update destroy]
   after_action :verify_authorized
 
   def create
+    authorize(Comment)
     comment = Comment.new(user: current_user, **comment_params)
     comment.parent = comment.repliable
 
@@ -36,6 +37,7 @@ class CommentsController < ApplicationController
   end
 
   def load_more_comments
+    authorize(Comment)
     @question = answer.repliable
     @pagy_comments, @comments = pagy_countless(answer.descendants.order(created_at: :asc), items: 5)
 
@@ -64,6 +66,6 @@ class CommentsController < ApplicationController
   end
 
   def authorize_comment!
-    authorize(@comment || Comment)
+    authorize(comment)
   end
 end
