@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'policies/shared_examples/authentication_spec'
 
 RSpec.describe AnswerPolicy do
   subject { described_class.new(user, answer) }
@@ -23,5 +24,12 @@ RSpec.describe AnswerPolicy do
 
     it { is_expected.to permit_actions(%i[create vote_up vote_down]) }
     it { is_expected.to forbid_actions(%i[update destroy]) }
+  end
+
+  context 'being a not authenticated user' do
+    subject { described_class.new(nil, answer) }
+    let(:answer) { create :answer }
+
+    include_examples 'not authenticated user'
   end
 end

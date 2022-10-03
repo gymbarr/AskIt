@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'policies/shared_examples/authentication_spec'
 
 RSpec.describe CategoryPolicy do
   subject { described_class.new(user, category) }
@@ -16,5 +17,12 @@ RSpec.describe CategoryPolicy do
 
     it { is_expected.to permit_actions(%i[index show]) }
     it { is_expected.to forbid_actions(%i[new create edit update destroy]) }
+  end
+
+  context 'being a not authenticated user' do
+    subject { described_class.new(nil, category) }
+    let(:category) { create :category }
+
+    include_examples 'not authenticated user'
   end
 end
