@@ -1,13 +1,14 @@
 class CategoriesController < ApplicationController
-  before_action :category, only: %i[edit]
-  before_action :authorize_category!
+  before_action :authorize_category!, only: %i[edit update destroy show]
   after_action :verify_authorized
 
   def new
+    authorize(Category)
     @category = Category.new
   end
 
   def create
+    authorize(Category)
     @category = Category.new(category_params)
 
     if @category.save
@@ -33,6 +34,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
+    authorize(Category)
     @pagy, @categories = pagy(Category.order(created_at: :desc), items: 10)
 
     render 'loaded_categories' if params[:page]
@@ -56,6 +58,6 @@ class CategoriesController < ApplicationController
   end
 
   def authorize_category!
-    authorize(@category || Category)
+    authorize(category)
   end
 end

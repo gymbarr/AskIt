@@ -1,9 +1,9 @@
 class QuestionsController < ApplicationController
-  before_action :question, only: %i[edit]
-  before_action :authorize_question!
+  before_action :authorize_question!, only: %i[show edit update destroy vote_up vote_down]
   after_action :verify_authorized
 
   def index
+    authorize(Question)
     @pagy, @questions = pagy(Question.order(created_at: :desc), items: 5)
     render 'loaded_questions' if params[:page]
   end
@@ -16,10 +16,12 @@ class QuestionsController < ApplicationController
   end
 
   def new
+    authorize(Question)
     @question = Question.new
   end
 
   def create
+    authorize(Question)
     question = current_user.questions.build(question_params)
 
     if question.save
@@ -66,6 +68,6 @@ class QuestionsController < ApplicationController
   end
 
   def authorize_question!
-    authorize(@question || Question)
+    authorize(question)
   end
 end

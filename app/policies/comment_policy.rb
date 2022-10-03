@@ -17,4 +17,8 @@ class CommentPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def load_more_comments?
+    true
+  end
 end

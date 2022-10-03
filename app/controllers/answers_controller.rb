@@ -1,8 +1,9 @@
 class AnswersController < ApplicationController
-  before_action :authorize_answer!
+  before_action :authorize_answer!, only: %i[update destroy vote_up vote_down]
   after_action :verify_authorized
 
   def create
+    authorize(Answer)
     answer = Answer.new(user: current_user, **answer_params)
 
     if answer.save
@@ -59,6 +60,6 @@ class AnswersController < ApplicationController
   end
 
   def authorize_answer!
-    authorize(@answer || Answer)
+    authorize(answer)
   end
 end
