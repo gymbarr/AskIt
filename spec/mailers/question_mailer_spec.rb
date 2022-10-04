@@ -22,7 +22,7 @@ RSpec.describe QuestionMailer, type: :mailer do
 
     it 'renders the subject' do
       expect(subject.subject)
-        .to eq("#{I18n.t('question_mailer.notify_subscriber_about_new_question_in_category.subject', name: categories_name)} | AskIt")
+        .to eq("#{I18n.t('question_mailer.notify_subscriber_about_new_question_in_category.subject', name: categories_name).truncate(40)} | AskIt")
     end
 
     it 'renders the body' do
