@@ -88,6 +88,8 @@ ru:
       alert: Что-то пошло не так
     destroy:
       success: Ответ успешно удален!
+    answer:
+      rating: Рейтинг
   comments:
     create:
       success: Комментарий успешно добавлен!
@@ -97,6 +99,8 @@ ru:
       alert: Что-то пошло не так
     destroy:
       success: Комментарий успешно удален!
+    comment:
+      replied_to_link: Отвечено пользователю
   subscriptions:
     create:
       success: Подписка на категорию оформлена!
@@ -148,5 +152,6 @@ ru:
       reply: Ответить
       enter: Ввод
       show: Показать
+      show_more: Показать больше
     dialog:
       you_sure: Вы уверены?

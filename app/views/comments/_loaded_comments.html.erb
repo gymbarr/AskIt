@@ -8,7 +8,7 @@
     <div id="load-more-comments-button-<%= answer.id %>">
       <% if answer.descendants.size > @comments_per_page %>
         <div class="mt-2">
-          <%= button_to "Show more", load_more_comments_path(answer_id: answer.id, page: 2), 
+          <%= button_to t('global.button.show_more'), load_more_comments_path(answer_id: answer.id, page: 2), 
                         class:"btn btn-outline-primary" %>
         </div>
       <% end %>

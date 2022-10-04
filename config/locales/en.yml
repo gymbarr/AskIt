@@ -88,6 +88,8 @@ en:
       alert: Something went wrong
     destroy:
       success: Answer was successfully deleted!
+    answer:
+      rating: Rating
   comments:
     create:
       success: Comment was successfully added!
@@ -97,6 +99,8 @@ en:
       alert: Something went wrong
     destroy:
       success: Comment was successfully deleted!
+    comment:
+      replied_to_link: Replied to
   subscriptions:
     create:
       success: Subscribed successfully!
@@ -148,5 +152,6 @@ en:
       reply: Reply
       enter: Enter
       show: Show
+      show_more: Show more
     dialog:
       you_sure: Are you sure?
