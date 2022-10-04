@@ -4,13 +4,13 @@ module Internationalization
   extend ActiveSupport::Concern
 
   included do
-    around_action :switch_locale
+    before_action :switch_locale
 
     private
 
-    def switch_locale(&action)
+    def switch_locale
       locale = locale_from_url || locale_from_headers || I18n.default_locale
-      I18n.with_locale locale, &action
+      I18n.locale = locale
     end
 
     # Adapted from https://github.com/rack/rack-contrib/blob/master/lib/rack/contrib/locale.rb
