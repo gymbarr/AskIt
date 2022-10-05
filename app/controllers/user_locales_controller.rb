@@ -5,7 +5,7 @@ class UserLocalesController < ApplicationController
 
     current_user&.update(locale: locale)
     prev_path = request.referer
-    new_path = prev_path.gsub(/http:\/\/#{Regexp.quote(host)}\/\w+/, "http://#{host}/#{locale}")
+    new_path = prev_path.gsub(%r{http://#{Regexp.quote(host)}/\w+}, "http://#{host}/#{locale}")
 
     redirect_to new_path
   end
