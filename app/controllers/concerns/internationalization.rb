@@ -9,7 +9,11 @@ module Internationalization
     private
 
     def switch_locale
-      locale = locale_from_url || locale_from_http_headers || I18n.default_locale
+      locale = if user_signed_in?
+                 current_user.locale
+               else
+                 locale_from_url || locale_from_http_headers || I18n.default_locale
+               end
       I18n.locale = locale
     end
 
