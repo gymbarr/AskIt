@@ -19,14 +19,16 @@ RSpec.describe AnswerMailer, type: :mailer do
     end
 
     context 'when locale is en' do
-      it 'renders the subject' do
+      before do
         I18n.locale = :en
+      end
+
+      it 'renders the subject' do
         expect(subject.subject)
           .to eq("You've got a new reply to your question! | AskIt")
       end
 
       it 'renders the body' do
-        I18n.locale = :en
         expect(subject.text_part.body.encoded)
           .to match(/left an answer to your question:/)
         expect(subject.html_part.body.encoded)
@@ -35,14 +37,16 @@ RSpec.describe AnswerMailer, type: :mailer do
     end
 
     context 'when locale is ru' do
-      it 'renders the subject' do
+      before do
         I18n.locale = :ru
+      end
+
+      it 'renders the subject' do
         expect(subject.subject)
           .to eq('Вам оставили ответ на Ваш вопрос! | AskIt')
       end
 
       it 'renders the body' do
-        I18n.locale = :ru
         expect(subject.text_part.body.encoded)
           .to match(/оставил ответ на Ваш вопрос:/)
         expect(subject.html_part.body.encoded)

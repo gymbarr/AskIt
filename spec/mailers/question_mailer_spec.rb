@@ -21,14 +21,16 @@ RSpec.describe QuestionMailer, type: :mailer do
     end
 
     context 'when locale is en' do
-      it 'renders the subject' do
+      before do
         I18n.locale = :en
+      end
+
+      it 'renders the subject' do
         expect(subject.subject)
           .to eq("New question in the #{categories_name} category!".truncate(40) + " | AskIt")
       end
 
       it 'renders the body' do
-        I18n.locale = :en
         expect(subject.text_part.body.encoded)
           .to match(/There is a new questions/)
         expect(subject.html_part.body.encoded)
@@ -37,14 +39,16 @@ RSpec.describe QuestionMailer, type: :mailer do
     end
 
     context 'when locale is ru' do
-      it 'renders the subject' do
+      before do
         I18n.locale = :ru
+      end
+
+      it 'renders the subject' do
         expect(subject.subject)
           .to eq("Новый вопрос в категории #{categories_name}!".truncate(40) + " | AskIt")
       end
 
       it 'renders the body' do
-        I18n.locale = :ru
         expect(subject.text_part.body.encoded)
           .to match(/Появился новый вопрос в категории/)
         expect(subject.html_part.body.encoded)
