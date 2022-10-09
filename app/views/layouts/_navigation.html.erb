@@ -44,14 +44,16 @@
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= is_admin? ? "#{current_user.username} (Admin)" : current_user.username %>
+              <%= is_admin? ? "#{current_user.username} (#{t('navbar.admin')})" : current_user.username %>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
+              <% if is_admin? %>
+                <li><%= link_to t('navbar.administration'), admin_root_path, class:"nav-link", target: :_blank %></li>
+              <% end %>
               <li><%= link_to t('navbar.edit_profile'), edit_user_registration_path, class:"nav-link" %></li>
               <li><hr class="dropdown-divider"></li>
               <li><%= button_to t('navbar.sign_out'), destroy_user_session_path, method: :delete,
-                                'data-turbo': false,
-                                class:"nav-link" %></li>
+                                'data-turbo': false, class: "btn btn-link nav-link" %></li>
             </ul>
           </li>
         <% else %>

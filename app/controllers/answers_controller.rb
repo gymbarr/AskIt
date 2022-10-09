@@ -55,6 +55,16 @@ class AnswersController < ApplicationController
     end
   end
 
+  def load_more_answers
+    @pagy_answers, @answers = pagy_countless(question.answers.order(created_at: :desc), items: 2)
+    @comments_per_page = 1
+
+    respond_to do |format|
+      format.html # GET
+      format.turbo_stream # POST
+    end
+  end
+
   private
 
   def answer_params

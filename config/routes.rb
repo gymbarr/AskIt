@@ -9,12 +9,11 @@ Rails.application.routes.draw do
     devise_for :users
     resources :users
 
-    resources :questions do
-      collection do
-        post :index
-        post ':id', to: 'questions#show'
-      end
+    authenticate :user, lambda {|u| u.has_role? Role.admin_user_role } do
+      ActiveAdmin.routes(self)
     end
+
+    resources :questions
 
     post 'questions/:id/vote_up', to: 'questions#vote_up', as: :question_vote_up
     post 'questions/:id/vote_down', to: 'questions#vote_down', as: :question_vote_down
