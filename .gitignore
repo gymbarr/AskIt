@@ -41,4 +41,4 @@ yarn-debug.log*
 .yarn-integrity
 
 # Local project files.
-.env*
+.env
