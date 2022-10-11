@@ -18,14 +18,40 @@ RSpec.describe AnswerMailer, type: :mailer do
       expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
-    it 'renders the subject' do
-      expect(subject.subject)
-        .to eq("#{I18n.t('answer_mailer.notify_user_about_new_answer.subject')} | AskIt")
+    context 'when locale is en' do
+      before do
+        I18n.locale = :en
+      end
+
+      it 'renders the subject' do
+        expect(subject.subject)
+          .to eq("You've got a new reply to your question! | AskIt")
+      end
+
+      it 'renders the body' do
+        expect(subject.text_part.body.encoded)
+          .to match(/left an answer to your question:/)
+        expect(subject.html_part.body.encoded)
+          .to match(/left an answer to your question:/)
+      end
     end
 
-    it 'renders the body' do
-      expect(subject.body.encoded)
-        .to match("#{I18n.t('answer_mailer.notify_user_about_new_answer.content', name: replier.username)}")
+    context 'when locale is ru' do
+      before do
+        I18n.locale = :ru
+      end
+
+      it 'renders the subject' do
+        expect(subject.subject)
+          .to eq('Вам оставили ответ на Ваш вопрос! | AskIt')
+      end
+
+      it 'renders the body' do
+        expect(subject.text_part.body.encoded)
+          .to match(/оставил ответ на Ваш вопрос:/)
+        expect(subject.html_part.body.encoded)
+          .to match(/оставил ответ на Ваш вопрос:/)
+      end
     end
   end
 end

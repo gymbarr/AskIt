@@ -20,14 +20,40 @@ RSpec.describe QuestionMailer, type: :mailer do
       expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
-    it 'renders the subject' do
-      expect(subject.subject)
-        .to eq("#{I18n.t('question_mailer.notify_subscriber_about_new_question_in_category.subject', name: categories_name)} | AskIt")
+    context 'when locale is en' do
+      before do
+        I18n.locale = :en
+      end
+
+      it 'renders the subject' do
+        expect(subject.subject)
+          .to eq("New question in the #{categories_name} category!".truncate(40) + " | AskIt")
+      end
+
+      it 'renders the body' do
+        expect(subject.text_part.body.encoded)
+          .to match(/There is a new questions/)
+        expect(subject.html_part.body.encoded)
+          .to match(/There is a new questions/)
+      end
     end
 
-    it 'renders the body' do
-      expect(subject.body.encoded)
-        .to match("#{I18n.t('question_mailer.notify_subscriber_about_new_question_in_category.content_all_questions_in_category')}")
+    context 'when locale is ru' do
+      before do
+        I18n.locale = :ru
+      end
+
+      it 'renders the subject' do
+        expect(subject.subject)
+          .to eq("Новый вопрос в категории #{categories_name}!".truncate(40) + " | AskIt")
+      end
+
+      it 'renders the body' do
+        expect(subject.text_part.body.encoded)
+          .to match(/Появился новый вопрос в категории/)
+        expect(subject.html_part.body.encoded)
+          .to match(/Появился новый вопрос в категории/)
+      end
     end
   end
 end
