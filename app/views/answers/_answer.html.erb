@@ -38,11 +38,11 @@
       </span>
     <% end %>
     <div class="reply-form hidden" id="reply_form_<%= answer.id %>">
-      <%= render 'questions/reply_form.html', { reply: answer.comments.build } %>
+      <%= render 'shared/reply_form', { reply: answer.comments.build } %>
     </div>
 
     <div class="reply-form hidden" id="edit_form_<%= answer.id %>">
-      <%= render 'questions/reply_form.html', { reply: answer } %>
+      <%= render 'shared/reply_form', { reply: answer } %>
     </div>
   </div>
 </div>
