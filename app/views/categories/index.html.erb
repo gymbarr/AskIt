@@ -1,9 +1,5 @@
 <h1><%= t('.title') %></h1>
 
-<% if can_build?(:category) %>
-  <%= link_to t('.new_category'), new_category_path, class:"btn btn-outline-primary" %>
-<% end %>
-
 <%= render @categories %>
 
 <%= render 'shared/next_page', subject: 'categories' %>
