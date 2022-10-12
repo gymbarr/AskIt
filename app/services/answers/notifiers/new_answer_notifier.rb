@@ -6,6 +6,7 @@ module Answers
       attr_reader :question, :answer
 
       def initialize(answer)
+        super
         @answer = answer
       end
 

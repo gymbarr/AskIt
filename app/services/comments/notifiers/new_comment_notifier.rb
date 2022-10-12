@@ -6,6 +6,7 @@ module Comments
       attr_reader :question, :comment
 
       def initialize(comment)
+        super
         @comment = comment
       end
 

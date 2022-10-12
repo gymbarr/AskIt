@@ -6,7 +6,7 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def create?
-    is_admin?
+    admin?
   end
 
   def edit?
@@ -14,11 +14,11 @@ class CategoryPolicy < ApplicationPolicy
   end
 
   def update?
-    is_admin?
+    admin?
   end
 
   def destroy?
-    is_admin?
+    admin?
   end
 
   def index?
