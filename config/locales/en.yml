@@ -2,11 +2,25 @@ en:
   en: English
   ru: Russian
   activerecord:
+    models:
+        answer: Answer
+        category: Category
+        comment: Comment
+        question: Question
+        role: Role
+        subscription: Subscription
+        user: User
     attributes:
       user:
         email: Email
         username: Username
-        role_ids: Roles  
+        roles: Roles
+        locale: Locale
+      category:
+        name: Name
+        questions_count: Questions count
+        created_at: Created at
+        updated_at: Updated at
   authorization:
     user_not_authorized: 
       alert: You are not authorized to perform this action.
