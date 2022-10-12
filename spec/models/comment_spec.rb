@@ -11,8 +11,9 @@ RSpec.describe Comment, type: :model do
   end
 
   context 'when invalid attributes' do
-    let(:attrs) { { body: nil, user: nil, repliable: nil, parent: nil } }
     subject(:comment) { build :comment, **attrs }
+
+    let(:attrs) { { body: nil, user: nil, repliable: nil, parent: nil } }
 
     include_examples 'invalid object'
 

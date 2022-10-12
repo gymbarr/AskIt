@@ -28,6 +28,7 @@ RSpec.describe AnswerPolicy do
 
   context 'being a not authenticated user' do
     subject { described_class.new(nil, answer) }
+
     let(:answer) { create :answer }
 
     include_examples 'not authenticated user'

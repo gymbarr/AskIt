@@ -9,8 +9,9 @@ RSpec.describe Category, type: :model do
   end
 
   context 'when invalid attributes' do
-    let(:attrs) { { name: nil } }
     subject(:category) { build :category, **attrs }
+
+    let(:attrs) { { name: nil } }
 
     include_examples 'invalid object'
 
@@ -21,9 +22,10 @@ RSpec.describe Category, type: :model do
   end
 
   context 'when attributes are not unique' do
+    subject(:category) { build :category, **attrs }
+
     let(:category2) { create :category }
     let(:attrs) { { name: category2.name } }
-    subject(:category) { build :category, **attrs }
 
     it_behaves_like 'with errors' do
       let(:attr) { :name }
@@ -33,6 +35,7 @@ RSpec.describe Category, type: :model do
 
   describe 'associations' do
     subject(:category) { create :category }
+
     let(:subscription) { create :subscription, category: category }
     let(:question) { create :question, categories: [category] }
     let(:question_category) { QuestionCategory.find_by(question: question, category: category) }

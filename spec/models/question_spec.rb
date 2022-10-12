@@ -9,8 +9,9 @@ RSpec.describe Question, type: :model do
   end
 
   context 'when invalid attributes' do
-    let(:attrs) { { title: nil, body: nil, user: nil, categories_count: 0 } }
     subject(:question) { build :question, :with_categories, **attrs }
+
+    let(:attrs) { { title: nil, body: nil, user: nil, categories_count: 0 } }
 
     include_examples 'invalid object'
 
@@ -36,12 +37,13 @@ RSpec.describe Question, type: :model do
   end
 
   describe 'associations' do
-    let(:category) { create :category }
-    let(:user) { create :user }
     subject(:question) { create :question, user: user, categories: [category] }
+
+    let(:category) { create :category }
     let(:answer) { create :answer, repliable: question }
     let(:question_category) { QuestionCategory.find_by(question: question, category: category) }
     let!(:subscription) { create :subscription, user: user, category: category }
+    let(:user) { create :user }
 
     it 'has a user' do
       expect(subject.user).to eq(user)

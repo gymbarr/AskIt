@@ -28,6 +28,7 @@ RSpec.describe CommentPolicy do
 
   context 'being a not authenticated user' do
     subject { described_class.new(nil, comment) }
+
     let(:comment) { create :comment }
 
     include_examples 'not authenticated user'

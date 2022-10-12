@@ -1,11 +1,7 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe QuestionMailer, type: :mailer do
   describe '#notify_subscriber_about_new_question_in_category' do
-    let(:question) { create :question, :with_categories }
-    let(:categories) { question.categories }
-    let(:categories_name) { categories.map(&:name).join(', ') }
-    let(:user) { create :user }
     subject(:mail) do
       described_class.with(question: question,
                            user: user,
@@ -14,6 +10,11 @@ RSpec.describe QuestionMailer, type: :mailer do
                      .notify_subscriber_about_new_question_in_category
                      .deliver_now
     end
+
+    let(:question) { create :question, :with_categories }
+    let(:categories) { question.categories }
+    let(:categories_name) { categories.map(&:name).join(', ') }
+    let(:user) { create :user }
 
     it 'sends email to the receiver emailname' do
       expect(subject.to[0]).to eq(user.email)
@@ -27,7 +28,7 @@ RSpec.describe QuestionMailer, type: :mailer do
 
       it 'renders the subject' do
         expect(subject.subject)
-          .to eq("New question in the #{categories_name} category!".truncate(40) + " | AskIt")
+          .to eq("New question in the #{categories_name} category!".truncate(40) + ' | AskIt')
       end
 
       it 'renders the body' do
@@ -42,11 +43,12 @@ RSpec.describe QuestionMailer, type: :mailer do
       before do
         I18n.locale = :ru
       end
+
       let(:user) { create :user, locale: 'ru' }
 
       it 'renders the subject' do
         expect(subject.subject)
-          .to eq("Новый вопрос в категории #{categories_name}!".truncate(40) + " | AskIt")
+          .to eq("Новый вопрос в категории #{categories_name}!".truncate(40) + ' | AskIt')
       end
 
       it 'renders the body' do

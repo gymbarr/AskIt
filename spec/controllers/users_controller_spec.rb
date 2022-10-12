@@ -2,10 +2,11 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   describe 'POST /change_locale' do
+    subject(:change_locale_request) { post :change_locale, params: { locale: new_locale } }
+
     let(:old_locale) { 'en' }
     let(:new_locale) { 'ru' }
     let(:user) { create :user, locale: old_locale }
-    subject(:change_locale_request) { post :change_locale, params: { locale: new_locale } }
 
     context 'when authenticated user' do
       it 'changes the users locale' do

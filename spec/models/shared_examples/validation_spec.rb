@@ -8,7 +8,7 @@ end
 
 shared_examples 'invalid object' do
   it 'is invalid' do
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
   end
 end
 

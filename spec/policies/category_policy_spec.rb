@@ -21,6 +21,7 @@ RSpec.describe CategoryPolicy do
 
   context 'being a not authenticated user' do
     subject { described_class.new(nil, category) }
+
     let(:category) { create :category }
 
     include_examples 'not authenticated user'

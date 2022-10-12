@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   private
 
   def back_with_anchor(anchor: '')
-    "#{request.referrer}##{anchor}"
+    "#{request.referer}##{anchor}"
   end
 end

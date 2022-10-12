@@ -18,6 +18,7 @@ RSpec.describe Runners::NotifyUserAboutNewCommentJob, type: :job do
   describe '#perform_now' do
     context 'when valid parameters were passed' do
       subject(:job) { described_class.perform_now(comment.id) }
+
       let(:mailer) { double('CommentMailer') }
 
       it 'calls on CommentMailer' do

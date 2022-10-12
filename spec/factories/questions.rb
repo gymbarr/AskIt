@@ -11,7 +11,9 @@ FactoryBot.define do
         subscribers_per_category { 0 }
       end
 
-      categories { create_list(:category, categories_count, :with_subscribers, subscribers_count: subscribers_per_category) }
+      categories do
+        create_list(:category, categories_count, :with_subscribers, subscribers_count: subscribers_per_category)
+      end
     end
   end
 end

@@ -13,6 +13,7 @@ RSpec.describe SubscriptionPolicy do
 
   context 'being a not authenticated user' do
     subject { described_class.new(nil, subscription) }
+
     let(:subscription) { create :subscription }
 
     include_examples 'not authenticated user'

@@ -28,6 +28,7 @@ RSpec.describe QuestionPolicy do
 
   context 'being a not authenticated user' do
     subject { described_class.new(nil, question) }
+
     let(:question) { create :question, :with_categories }
 
     include_examples 'not authenticated user'

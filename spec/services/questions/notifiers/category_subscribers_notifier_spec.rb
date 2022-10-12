@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Questions::Notifiers::CategorySubscribersNotifier, type: :model do
   describe '.call' do
-    let(:question) { create :question, :with_categories }
     subject(:service) { described_class.call(question) }
+
+    let(:question) { create :question, :with_categories }
 
     it 'enqueues job NotifyCategorySubscribersJob' do
       expect { subject }

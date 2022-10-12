@@ -17,6 +17,7 @@ RSpec.describe Runners::NotifyCategorySubscriberJob, type: :job do
   describe '#perform_now' do
     context 'when valid parameters were passed' do
       subject(:job) { described_class.perform_now(question.id, subscriber.id) }
+
       let(:mailer) { double('QuestionMailer') }
 
       it 'calls on QuestionMailer' do

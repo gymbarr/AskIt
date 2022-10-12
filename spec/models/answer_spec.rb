@@ -9,8 +9,9 @@ RSpec.describe Answer, type: :model do
   end
 
   context 'when invalid attributes' do
-    let(:attrs) { { body: nil, user: nil, repliable: nil } }
     subject(:answer) { build :answer, **attrs }
+
+    let(:attrs) { { body: nil, user: nil, repliable: nil } }
 
     include_examples 'invalid object'
 
@@ -31,10 +32,11 @@ RSpec.describe Answer, type: :model do
   end
 
   describe 'associations' do
-    let(:user) { create :user }
-    let(:question) { create :question, :with_categories }
     subject(:answer) { create :answer, user: user, repliable: question }
+
+    let(:user) { create :user }
     let(:comment) { create :comment, repliable: answer }
+    let(:question) { create :question, :with_categories }
 
     it 'has a user' do
       expect(subject.user).to eq(user)

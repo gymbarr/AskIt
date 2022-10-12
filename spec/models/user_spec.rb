@@ -9,8 +9,9 @@ RSpec.describe User, type: :model do
   end
 
   context 'when invalid attributes' do
-    let(:attrs) { { username: nil, email: nil, password: nil, roles: [] } }
     subject(:user) { build :user, **attrs }
+
+    let(:attrs) { { username: nil, email: nil, password: nil, roles: [] } }
 
     include_examples 'invalid object'
 
@@ -31,9 +32,10 @@ RSpec.describe User, type: :model do
   end
 
   context 'when attributes are not unique' do
+    subject(:user) { build :user, **attrs }
+
     let(:user2) { create :user }
     let(:attrs) { { username: user2.username, email: user2.email } }
-    subject(:user) { build :user, **attrs }
 
     it_behaves_like 'with errors' do
       let(:attr) { :username }
@@ -56,8 +58,9 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    let(:role) { create :role }
     subject(:user) { create :user, roles: [role] }
+
+    let(:role) { create :role }
     let(:question) { create :question, :with_categories, user: user }
     let(:answer) { create :answer, user: user, repliable: question }
     let(:comment) { create :comment, user: user, repliable: answer }

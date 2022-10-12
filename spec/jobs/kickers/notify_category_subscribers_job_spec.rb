@@ -4,8 +4,9 @@ RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
   include ActiveJob::TestHelper
 
   describe '#perform_later' do
-    let(:question) { create :question, :with_categories, subscribers_per_category: 5 }
     subject(:job) { described_class.perform_later(question.id) }
+
+    let(:question) { create :question, :with_categories, subscribers_per_category: 5 }
 
     it 'matches with enqueued job' do
       expect { subject }
@@ -16,6 +17,7 @@ RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
   describe '#perform_now' do
     context 'when valid parameters were passed' do
       subject(:job) { described_class.perform_now(question.id) }
+
       let(:question) { create :question, :with_categories, subscribers_per_category: 5 }
 
       it 'calls on NotifyCategorySubscriberJob for all subscribers' do

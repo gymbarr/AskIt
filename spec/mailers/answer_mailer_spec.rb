@@ -1,10 +1,7 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe AnswerMailer, type: :mailer do
   describe '#notify_user_about_new_answer' do
-    let(:question) { create :question, :with_categories }
-    let(:user) { question.user }
-    let(:replier) { create :user }
     subject(:mail) do
       described_class.with(question: question,
                            user: user,
@@ -12,6 +9,10 @@ RSpec.describe AnswerMailer, type: :mailer do
                      .notify_user_about_new_answer
                      .deliver_now
     end
+
+    let(:question) { create :question, :with_categories }
+    let(:user) { question.user }
+    let(:replier) { create :user }
 
     it 'sends email to the receiver emailname' do
       expect(subject.to[0]).to eq(user.email)
@@ -40,6 +41,7 @@ RSpec.describe AnswerMailer, type: :mailer do
       before do
         I18n.locale = :ru
       end
+
       let(:user) { create :user, locale: 'ru' }
 
       it 'renders the subject' do
