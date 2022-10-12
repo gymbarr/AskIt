@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     root 'pages#index'
 
     devise_for :users
-    resources :users
+    post 'change_locale', to: 'users#change_locale', as: 'change_user_locale'
 
     authenticate :user, lambda {|u| u.has_role? Role.admin_user_role } do
       ActiveAdmin.routes(self)
