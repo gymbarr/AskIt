@@ -1,9 +1,6 @@
 <h1><%= t('.title') %>: <%= @category.name %></h1>
 
 <div class="pt-4">
-  <% if can_edit?(@category) %>
-    <%= link_to t('.edit_category'), edit_category_path(@category), class:"btn btn-outline-primary" %>
-  <% end %>
   <% if already_subscribed?(@category) %>
     <%= link_to t('.unsubscribe'), category_subscription_path(@category, @subscription), method: :delete, 
                             class: "btn btn-danger" %>
