@@ -72,4 +72,8 @@ RSpec.configure do |config|
 
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
+
+  config.before :each do
+    I18n.locale = I18n.default_locale
+  end
 end
