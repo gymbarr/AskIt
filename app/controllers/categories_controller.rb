@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
   before_action :authorize_category!, only: %i[show]
   after_action :verify_authorized

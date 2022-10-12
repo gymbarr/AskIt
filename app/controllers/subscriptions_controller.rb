@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubscriptionsController < ApplicationController
   before_action :authorize_subscription!, only: %i[destroy]
   after_action :verify_authorized

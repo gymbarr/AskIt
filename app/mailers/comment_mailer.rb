@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentMailer < ApplicationMailer
   def notify_user_about_new_comment
     @question = params[:question]

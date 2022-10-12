@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'models/shared_examples/validation_spec'
 
@@ -27,7 +29,7 @@ RSpec.describe QuestionCategory, type: :model do
   end
 
   describe 'associations' do
-    subject(:question_category) { QuestionCategory.find_by(question: question, category: category) }
+    subject(:question_category) { described_class.find_by(question: question, category: category) }
 
     let(:category) { create :category }
     let(:question) { create :question, categories: [category] }

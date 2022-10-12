@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :authorize_comment!, only: %i[update destroy]
   after_action :verify_authorized

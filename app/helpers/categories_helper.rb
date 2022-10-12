@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CategoriesHelper
   def already_subscribed?(category)
     return unless current_user

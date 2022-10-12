@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswerMailer < ApplicationMailer
   def notify_user_about_new_answer
     @question = params[:question]

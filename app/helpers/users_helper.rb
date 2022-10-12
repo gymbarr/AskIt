@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   def is_admin?
     return unless user_signed_in?

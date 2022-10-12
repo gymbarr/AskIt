@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Reply < ApplicationRecord
   include Authorship
   belongs_to :user

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class QuestionMailer < ApplicationMailer
   def notify_subscriber_about_new_question_in_category
     @question = params[:question]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswerPolicy < ApplicationPolicy
   def update?
     is_admin? || is_author?

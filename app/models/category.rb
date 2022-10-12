@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Category < ApplicationRecord
   NAME_MIN_LENGTH = 3
   NAME_MAX_LENGTH = 40

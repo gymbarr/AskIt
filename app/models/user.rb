@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   USERNAME_MIN_LENGTH = 3
   USERNAME_MAX_LENGTH = 40

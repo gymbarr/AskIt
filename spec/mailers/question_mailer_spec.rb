@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe QuestionMailer, type: :mailer do
@@ -28,7 +30,7 @@ RSpec.describe QuestionMailer, type: :mailer do
 
       it 'renders the subject' do
         expect(subject.subject)
-          .to eq("New question in the #{categories_name} category!".truncate(40) + ' | AskIt')
+          .to eq("#{"New question in the #{categories_name} category!".truncate(40)} | AskIt")
       end
 
       it 'renders the body' do
@@ -48,7 +50,7 @@ RSpec.describe QuestionMailer, type: :mailer do
 
       it 'renders the subject' do
         expect(subject.subject)
-          .to eq("Новый вопрос в категории #{categories_name}!".truncate(40) + ' | AskIt')
+          .to eq("#{"Новый вопрос в категории #{categories_name}!".truncate(40)} | AskIt")
       end
 
       it 'renders the body' do
