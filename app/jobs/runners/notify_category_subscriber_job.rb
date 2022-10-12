@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 module Runners
   class NotifyCategorySubscriberJob < ApplicationJob
     queue_as :runners_notifiers
 
     def perform(question_id, subscriber_id)
-      question = Question.find_by_id(question_id)
+      question = Question.find_by(id: question_id)
       return unless question
 
-      user = User.find_by_id(subscriber_id)
+      user = User.find_by(id: subscriber_id)
       return unless user
 
       categories = question.categories.where(id: user.subscription_categories)

@@ -2,6 +2,7 @@
 
 class Reply < ApplicationRecord
   include Authorship
+
   belongs_to :user
   belongs_to :repliable, polymorphic: true
   validates :body, presence: true
