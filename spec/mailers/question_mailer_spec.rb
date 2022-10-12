@@ -42,6 +42,7 @@ RSpec.describe QuestionMailer, type: :mailer do
       before do
         I18n.locale = :ru
       end
+      let(:user) { create :user, locale: 'ru' }
 
       it 'renders the subject' do
         expect(subject.subject)
