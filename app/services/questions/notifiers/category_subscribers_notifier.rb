@@ -6,7 +6,6 @@ module Questions
       attr_reader :question
 
       def initialize(question)
-        super
         @question = question
       end
 
