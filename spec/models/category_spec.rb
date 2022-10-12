@@ -44,19 +44,19 @@ RSpec.describe Category, type: :model do
     let(:subscriber) { subscription.user }
 
     it 'has question_categories' do
-      expect(subject.question_categories).to contain_exactly(question_category)
+      expect(category.question_categories).to contain_exactly(question_category)
     end
 
     it 'has questions' do
-      expect(subject.questions).to contain_exactly(question)
+      expect(category.questions).to contain_exactly(question)
     end
 
     it 'has subscriptions' do
-      expect(subject.subscriptions).to contain_exactly(subscription)
+      expect(category.subscriptions).to contain_exactly(subscription)
     end
 
     it 'has subscribers' do
-      expect(subject.subscribers).to contain_exactly(subscriber)
+      expect(category.subscribers).to contain_exactly(subscriber)
     end
   end
 end

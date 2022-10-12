@@ -19,7 +19,7 @@ RSpec.describe QuestionMailer, type: :mailer do
     let(:user) { create :user }
 
     it 'sends email to the receiver emailname' do
-      expect(subject.to[0]).to eq(user.email)
+      expect(mail.to[0]).to eq(user.email)
       expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
@@ -29,14 +29,14 @@ RSpec.describe QuestionMailer, type: :mailer do
       end
 
       it 'renders the subject' do
-        expect(subject.subject)
+        expect(mail.subject)
           .to eq("#{"New question in the #{categories_name} category!".truncate(40)} | AskIt")
       end
 
       it 'renders the body' do
-        expect(subject.text_part.body.encoded)
+        expect(mail.text_part.body.encoded)
           .to match(/There is a new questions/)
-        expect(subject.html_part.body.encoded)
+        expect(mail.html_part.body.encoded)
           .to match(/There is a new questions/)
       end
     end
@@ -49,14 +49,14 @@ RSpec.describe QuestionMailer, type: :mailer do
       let(:user) { create :user, locale: 'ru' }
 
       it 'renders the subject' do
-        expect(subject.subject)
+        expect(mail.subject)
           .to eq("#{"Новый вопрос в категории #{categories_name}!".truncate(40)} | AskIt")
       end
 
       it 'renders the body' do
-        expect(subject.text_part.body.encoded)
+        expect(mail.text_part.body.encoded)
           .to match(/Появился новый вопрос в категории/)
-        expect(subject.html_part.body.encoded)
+        expect(mail.html_part.body.encoded)
           .to match(/Появился новый вопрос в категории/)
       end
     end

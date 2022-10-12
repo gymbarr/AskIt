@@ -8,11 +8,11 @@ RSpec.describe UserPolicy do
 
   let(:user) { create :user }
 
-  context 'being an authenticated user' do
+  context 'when the user authenticated' do
     it { is_expected.to permit_actions(%i[change_locale]) }
   end
 
-  context 'being a not authenticated user' do
+  context 'when the user not authenticated' do
     subject { described_class.new(nil, user) }
 
     include_examples 'not authenticated user'

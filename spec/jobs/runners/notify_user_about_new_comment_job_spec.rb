@@ -21,7 +21,7 @@ RSpec.describe Runners::NotifyUserAboutNewCommentJob, type: :job do
     context 'when valid parameters were passed' do
       subject(:job) { described_class.perform_now(comment.id) }
 
-      let(:mailer) { double('CommentMailer') }
+      let(:mailer) { instance_double(CommentMailer) }
 
       it 'calls on CommentMailer' do
         allow(CommentMailer).to receive(:with).with(question: question,
@@ -29,7 +29,7 @@ RSpec.describe Runners::NotifyUserAboutNewCommentJob, type: :job do
                                                     replier: comment.user).and_return(mailer)
 
         expect(mailer).to receive_message_chain(:notify_user_about_new_comment, :deliver_now)
-        subject
+        job
       end
     end
 

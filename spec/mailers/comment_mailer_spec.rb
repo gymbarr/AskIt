@@ -17,7 +17,7 @@ RSpec.describe CommentMailer, type: :mailer do
     let(:replier) { create :user }
 
     it 'sends email to the receiver emailname' do
-      expect(subject.to[0]).to eq(user.email)
+      expect(mail.to[0]).to eq(user.email)
       expect(ActionMailer::Base.deliveries.count).to eq(1)
     end
 
@@ -27,14 +27,14 @@ RSpec.describe CommentMailer, type: :mailer do
       end
 
       it 'renders the subject' do
-        expect(subject.subject)
+        expect(mail.subject)
           .to eq("You've got a new comment! | AskIt")
       end
 
       it 'renders the body' do
-        expect(subject.text_part.body.encoded)
+        expect(mail.text_part.body.encoded)
           .to match(/left a comment to you:/)
-        expect(subject.html_part.body.encoded)
+        expect(mail.html_part.body.encoded)
           .to match(/left a comment to you:/)
       end
     end
@@ -47,14 +47,14 @@ RSpec.describe CommentMailer, type: :mailer do
       let(:user) { create :user, locale: 'ru' }
 
       it 'renders the subject' do
-        expect(subject.subject)
+        expect(mail.subject)
           .to eq('Вам оставили комментарий! | AskIt')
       end
 
       it 'renders the body' do
-        expect(subject.text_part.body.encoded)
+        expect(mail.text_part.body.encoded)
           .to match(/оставил Вам комментарий:/)
-        expect(subject.html_part.body.encoded)
+        expect(mail.html_part.body.encoded)
           .to match(/оставил Вам комментарий:/)
       end
     end

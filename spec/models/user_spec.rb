@@ -70,27 +70,27 @@ RSpec.describe User, type: :model do
     let!(:subscription) { create :subscription, user: user, category: category }
 
     it 'has questions' do
-      expect(subject.questions).to contain_exactly(question)
+      expect(user.questions).to contain_exactly(question)
     end
 
     it 'has answers as replies' do
-      expect(subject.replies).to include(answer)
+      expect(user.replies).to include(answer)
     end
 
     it 'has comments as replies' do
-      expect(subject.replies).to include(comment)
+      expect(user.replies).to include(comment)
     end
 
     it 'has subscriptions' do
-      expect(subject.subscriptions).to contain_exactly(subscription)
+      expect(user.subscriptions).to contain_exactly(subscription)
     end
 
     it 'has subscription_categories' do
-      expect(subject.subscription_categories).to contain_exactly(category)
+      expect(user.subscription_categories).to contain_exactly(category)
     end
 
     it 'has roles' do
-      expect(subject.roles).to contain_exactly(role)
+      expect(user.roles).to contain_exactly(role)
     end
   end
 end

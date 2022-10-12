@@ -35,11 +35,11 @@ RSpec.describe Subscription, type: :model do
     let(:category) { create :category }
 
     it 'has a user' do
-      expect(subject.user).to eq(user)
+      expect(subscription.user).to eq(user)
     end
 
     it 'has a category' do
-      expect(subject.category).to eq(category)
+      expect(subscription.category).to eq(category)
     end
   end
 end

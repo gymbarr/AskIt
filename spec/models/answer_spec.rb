@@ -18,7 +18,7 @@ RSpec.describe Answer, type: :model do
     include_examples 'invalid object'
 
     it_behaves_like 'with errors' do
-      let!(:attr) { :body }
+      let(:attr) { :body }
       let(:errors) { ['can\'t be blank'] }
     end
 
@@ -41,15 +41,15 @@ RSpec.describe Answer, type: :model do
     let(:question) { create :question, :with_categories }
 
     it 'has a user' do
-      expect(subject.user).to eq(user)
+      expect(answer.user).to eq(user)
     end
 
     it 'has a repliable' do
-      expect(subject.repliable).to eq(question)
+      expect(answer.repliable).to eq(question)
     end
 
     it 'has comments' do
-      expect(subject.comments).to contain_exactly(comment)
+      expect(answer.comments).to contain_exactly(comment)
     end
   end
 end

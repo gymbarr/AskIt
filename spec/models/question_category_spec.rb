@@ -35,11 +35,11 @@ RSpec.describe QuestionCategory, type: :model do
     let(:question) { create :question, categories: [category] }
 
     it 'has a question' do
-      expect(subject.question).to eq(question)
+      expect(question_category.question).to eq(question)
     end
 
     it 'has a category' do
-      expect(subject.category).to eq(category)
+      expect(question_category.category).to eq(category)
     end
   end
 end

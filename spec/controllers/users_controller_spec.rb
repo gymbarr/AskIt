@@ -14,14 +14,14 @@ RSpec.describe UsersController, type: :controller do
       it 'changes the users locale' do
         sign_in user
 
-        expect { subject }.to change(user, :locale).from(old_locale).to(new_locale)
+        expect { change_locale_request }.to change(user, :locale).from(old_locale).to(new_locale)
         expect(response).to have_http_status(:found)
       end
     end
 
     context 'when unauthenticated user' do
       it 'blocks unauthenticated access' do
-        expect { subject }.not_to change(user, :locale)
+        expect { change_locale_request }.not_to change(user, :locale)
         expect(response).to redirect_to(new_user_session_path)
       end
     end
