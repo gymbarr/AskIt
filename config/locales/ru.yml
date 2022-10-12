@@ -2,11 +2,25 @@ ru:
   en: Английский
   ru: Русский
   activerecord:
+    models:
+        answer: Ответ
+        category: Категория
+        comment: Комментарий
+        question: Вопрос
+        role: Роль
+        subscription: Подписка
+        user: Пользователь
     attributes:
       user:
         email: Адрес почты
         username: Имя пользователя
-        role_ids: Права доступа
+        roles: Права доступа
+        locale: Локаль
+      category:
+        name: Название
+        questions_count: Количество вопросов
+        created_at: Дата создания
+        updated_at: Дата обновления
   authorization:
     user_not_authorized: 
       alert: У Вас нет прав на выполнение этого действия.
