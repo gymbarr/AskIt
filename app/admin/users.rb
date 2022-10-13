@@ -3,7 +3,7 @@
 ActiveAdmin.register User do
   permit_params :email, :username, role_ids: []
 
-  includes :roles_users, :roles
+  includes %i[roles_users roles]
 
   index do
     selectable_column

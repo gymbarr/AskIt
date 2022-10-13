@@ -14,9 +14,7 @@ class CategoriesController < ApplicationController
   def show
     @pagy, @questions = pagy(category.questions
                                      .order(created_at: :desc)
-                                     .includes([:user])
-                                     .includes([:categories])
-                                     .includes([:question_categories]), items: 5)
+                                     .includes(%i[user categories question_categories]), items: 5)
     @subscription = Subscription.find_by(user: current_user, category: category)
 
     render 'loaded_category_questions' if params[:page]
