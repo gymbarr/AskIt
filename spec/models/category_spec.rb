@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'models/shared_examples/validation_spec'
 
@@ -9,8 +11,9 @@ RSpec.describe Category, type: :model do
   end
 
   context 'when invalid attributes' do
-    let(:attrs) { { name: nil } }
     subject(:category) { build :category, **attrs }
+
+    let(:attrs) { { name: nil } }
 
     include_examples 'invalid object'
 
@@ -21,9 +24,10 @@ RSpec.describe Category, type: :model do
   end
 
   context 'when attributes are not unique' do
+    subject(:category) { build :category, **attrs }
+
     let(:category2) { create :category }
     let(:attrs) { { name: category2.name } }
-    subject(:category) { build :category, **attrs }
 
     it_behaves_like 'with errors' do
       let(:attr) { :name }
@@ -33,25 +37,26 @@ RSpec.describe Category, type: :model do
 
   describe 'associations' do
     subject(:category) { create :category }
+
     let(:subscription) { create :subscription, category: category }
     let(:question) { create :question, categories: [category] }
     let(:question_category) { QuestionCategory.find_by(question: question, category: category) }
     let(:subscriber) { subscription.user }
 
     it 'has question_categories' do
-      expect(subject.question_categories).to contain_exactly(question_category)
+      expect(category.question_categories).to contain_exactly(question_category)
     end
 
     it 'has questions' do
-      expect(subject.questions).to contain_exactly(question)
+      expect(category.questions).to contain_exactly(question)
     end
 
     it 'has subscriptions' do
-      expect(subject.subscriptions).to contain_exactly(subscription)
+      expect(category.subscriptions).to contain_exactly(subscription)
     end
 
     it 'has subscribers' do
-      expect(subject.subscribers).to contain_exactly(subscriber)
+      expect(category.subscribers).to contain_exactly(subscriber)
     end
   end
 end

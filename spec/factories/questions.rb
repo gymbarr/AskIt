@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :question do
     title { Faker::Hipster.sentence(word_count: 3) }
@@ -11,7 +13,9 @@ FactoryBot.define do
         subscribers_per_category { 0 }
       end
 
-      categories { create_list(:category, categories_count, :with_subscribers, subscribers_count: subscribers_per_category) }
+      categories do
+        create_list(:category, categories_count, :with_subscribers, subscribers_count: subscribers_per_category)
+      end
     end
   end
 end

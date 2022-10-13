@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Comment < Reply
   has_many :comments, as: :repliable, dependent: :destroy
 
-  validates_presence_of :ancestry
+  validates :ancestry, presence: true
 end

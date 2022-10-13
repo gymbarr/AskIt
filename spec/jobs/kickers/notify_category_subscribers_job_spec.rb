@@ -1,14 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
   include ActiveJob::TestHelper
 
   describe '#perform_later' do
-    let(:question) { create :question, :with_categories, subscribers_per_category: 5 }
     subject(:job) { described_class.perform_later(question.id) }
 
+    let(:question) { create :question, :with_categories, subscribers_per_category: 5 }
+
     it 'matches with enqueued job' do
-      expect { subject }
+      expect { job }
         .to have_enqueued_job(described_class).with(question.id).on_queue('kickers_notifiers')
     end
   end
@@ -16,10 +19,11 @@ RSpec.describe Kickers::NotifyCategorySubscribersJob, type: :job do
   describe '#perform_now' do
     context 'when valid parameters were passed' do
       subject(:job) { described_class.perform_now(question.id) }
+
       let(:question) { create :question, :with_categories, subscribers_per_category: 5 }
 
       it 'calls on NotifyCategorySubscriberJob for all subscribers' do
-        expect { subject }
+        expect { job }
           .to have_enqueued_job(Runners::NotifyCategorySubscriberJob).exactly(5)
                                                                      .times
                                                                      .with do |question_id, subscriber_id|

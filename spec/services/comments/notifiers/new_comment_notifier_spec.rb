@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Comments::Notifiers::NewCommentNotifier, type: :model do
@@ -9,7 +11,7 @@ RSpec.describe Comments::Notifiers::NewCommentNotifier, type: :model do
       let(:comment) { create :comment, repliable: answer }
 
       it 'enqueues job NotifyUserAboutNewCommentJob' do
-        expect { subject }
+        expect { service }
           .to have_enqueued_job(Runners::NotifyUserAboutNewCommentJob).with(comment.id).on_queue('runners_notifiers')
       end
     end
@@ -19,7 +21,7 @@ RSpec.describe Comments::Notifiers::NewCommentNotifier, type: :model do
       let(:comment) { create :comment, repliable: answer, user: answer.user }
 
       it 'does not enqueue job NotifyUserAboutNewCommentJob' do
-        expect { subject }.not_to have_enqueued_job(Runners::NotifyUserAboutNewCommentJob)
+        expect { service }.not_to have_enqueued_job(Runners::NotifyUserAboutNewCommentJob)
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :comment, class: 'Comment', parent: :reply do
     for_answer

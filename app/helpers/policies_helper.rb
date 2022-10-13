@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PoliciesHelper
   def can_edit?(obj)
     policy(obj).edit?

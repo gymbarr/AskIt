@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   USERNAME_MIN_LENGTH = 3
   USERNAME_MAX_LENGTH = 40
@@ -32,6 +34,6 @@ class User < ApplicationRecord
   private
 
   def assign_default_role
-    self.add_role(Role.basic_user_role) if self.roles.blank?
+    add_role(Role.basic_user_role) if roles.blank?
   end
 end

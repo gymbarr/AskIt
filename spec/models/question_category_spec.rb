@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'models/shared_examples/validation_spec'
 
@@ -9,8 +11,9 @@ RSpec.describe QuestionCategory, type: :model do
   end
 
   context 'when invalid attributes' do
-    let(:attrs) { { question: nil, category: nil } }
     subject(:question_category) { build :question_category, **attrs }
+
+    let(:attrs) { { question: nil, category: nil } }
 
     include_examples 'invalid object'
 
@@ -26,16 +29,17 @@ RSpec.describe QuestionCategory, type: :model do
   end
 
   describe 'associations' do
+    subject(:question_category) { described_class.find_by(question: question, category: category) }
+
     let(:category) { create :category }
     let(:question) { create :question, categories: [category] }
-    subject(:question_category) { QuestionCategory.find_by(question: question, category: category) }
 
     it 'has a question' do
-      expect(subject.question).to eq(question)
+      expect(question_category.question).to eq(question)
     end
 
     it 'has a category' do
-      expect(subject.category).to eq(category)
+      expect(question_category.category).to eq(category)
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Role < ApplicationRecord
   BASIC_USER_ROLE_NAME = :basic
   ADMIN_USER_ROLE_NAME = :admin

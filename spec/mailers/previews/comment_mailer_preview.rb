@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Preview all emails at http://localhost:3000/rails/mailers/comment_mailer
 class CommentMailerPreview < ActionMailer::Preview
   def notify_user_about_new_comment

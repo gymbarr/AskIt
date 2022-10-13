@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Answers::Notifiers::NewAnswerNotifier, type: :model do
@@ -8,7 +10,7 @@ RSpec.describe Answers::Notifiers::NewAnswerNotifier, type: :model do
       let(:answer) { create :answer }
 
       it 'enqueues job NotifyUserAboutNewAnswerJob' do
-        expect { subject }
+        expect { service }
           .to have_enqueued_job(Runners::NotifyUserAboutNewAnswerJob).with(answer.id).on_queue('runners_notifiers')
       end
     end
@@ -18,7 +20,7 @@ RSpec.describe Answers::Notifiers::NewAnswerNotifier, type: :model do
       let(:answer) { create :answer, repliable: question, user: question.user }
 
       it 'does not enqueue job NotifyUserAboutNewAnswerJob' do
-        expect { subject }.not_to have_enqueued_job(Runners::NotifyUserAboutNewAnswerJob)
+        expect { service }.not_to have_enqueued_job(Runners::NotifyUserAboutNewAnswerJob)
       end
     end
   end

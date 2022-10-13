@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AnswersController < ApplicationController
   before_action :authorize_answer!, only: %i[update destroy vote_up vote_down]
   after_action :verify_authorized

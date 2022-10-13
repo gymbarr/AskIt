@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'models/shared_examples/validation_spec'
 
@@ -9,8 +11,9 @@ RSpec.describe Subscription, type: :model do
   end
 
   context 'when invalid attributes' do
-    let(:attrs) { { user: nil, category: nil } }
     subject(:subscription) { build :subscription, **attrs }
+
+    let(:attrs) { { user: nil, category: nil } }
 
     include_examples 'invalid object'
 
@@ -26,16 +29,17 @@ RSpec.describe Subscription, type: :model do
   end
 
   describe 'associations' do
-    let(:user) { create :user }
-    let(:category) { create :category }
     subject(:subscription) { create :subscription, user: user, category: category }
 
+    let(:user) { create :user }
+    let(:category) { create :category }
+
     it 'has a user' do
-      expect(subject.user).to eq(user)
+      expect(subscription.user).to eq(user)
     end
 
     it 'has a category' do
-      expect(subject.category).to eq(category)
+      expect(subscription.category).to eq(category)
     end
   end
 end

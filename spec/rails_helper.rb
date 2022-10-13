@@ -1,17 +1,17 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require_relative 'support/factory_bot'
 require 'pundit/rspec'
 require 'pundit/matchers'
 require_relative 'support/action_mailer'
 require_relative 'support/active_job'
-require 'pundit/rspec'
-require 'pundit/matchers'
 require 'support/controller_helpers'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -73,7 +73,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
 
-  config.before :each do
+  config.before do
     I18n.locale = I18n.default_locale
   end
 end

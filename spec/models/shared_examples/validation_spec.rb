@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 shared_examples 'valid object' do
@@ -8,7 +10,7 @@ end
 
 shared_examples 'invalid object' do
   it 'is invalid' do
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
   end
 end
 

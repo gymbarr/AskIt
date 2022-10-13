@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Answers
   module Notifiers
     class NewAnswerNotifier < ApplicationService

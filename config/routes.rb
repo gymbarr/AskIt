@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+  scope '(:locale)', locale: /#{I18n.available_locales.join("|")}/ do
     root 'pages#index'
 
     devise_for :users
     post 'change_locale', to: 'users#change_locale', as: 'change_user_locale'
 
-    authenticate :user, lambda {|u| u.has_role? Role.admin_user_role } do
+    authenticate :user, ->(u) { u.has_role? Role.admin_user_role } do
       ActiveAdmin.routes(self)
     end
 

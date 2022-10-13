@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Runners
   class NotifyUserAboutNewAnswerJob < ApplicationJob
     queue_as :runners_notifiers
 
     def perform(answer_id)
-      answer = Answer.find_by_id(answer_id)
+      answer = Answer.find_by(id: answer_id)
       return unless answer
 
       question = answer.repliable
