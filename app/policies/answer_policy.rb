@@ -2,11 +2,11 @@
 
 class AnswerPolicy < ApplicationPolicy
   def update?
-    is_admin? || is_author?
+    admin? || author?
   end
 
   def destroy?
-    is_admin? || is_author?
+    admin? || author?
   end
 
   def create?

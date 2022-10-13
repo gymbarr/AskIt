@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module UsersHelper
-  def is_admin?
+  def admin?
     return unless user_signed_in?
 
     current_user.has_role?(:admin)

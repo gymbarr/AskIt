@@ -13,3 +13,11 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'app/admin/**/*'

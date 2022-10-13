@@ -6,11 +6,11 @@ class QuestionPolicy < ApplicationPolicy
   end
 
   def update?
-    is_admin? || is_author?
+    admin? || author?
   end
 
   def destroy?
-    is_admin? || is_author?
+    admin? || author?
   end
 
   def index?

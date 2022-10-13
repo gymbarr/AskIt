@@ -40,11 +40,11 @@ class ApplicationPolicy
 
   private
 
-  def is_admin?
+  def admin?
     @user.has_role?(:admin)
   end
 
-  def is_author?
+  def author?
     @user.author?(record)
   end
 
