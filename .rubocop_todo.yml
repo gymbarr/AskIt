@@ -11,12 +11,6 @@
 Metrics/AbcSize:
   Max: 26
 
-# Offense count: 3
-# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods, inherit_mode.
-# AllowedMethods: refine
-Metrics/BlockLength:
-  Max: 45
-
 # Offense count: 6
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods.
 Metrics/MethodLength:
@@ -34,20 +28,10 @@ RSpec/MessageChain:
     - 'spec/jobs/runners/notify_user_about_new_answer_job_spec.rb'
     - 'spec/jobs/runners/notify_user_about_new_comment_job_spec.rb'
 
-# Offense count: 4
-# Configuration parameters: .
-# SupportedStyles: have_received, receive
-RSpec/MessageSpies:
-  EnforcedStyle: receive
-
-# Offense count: 12
-RSpec/MultipleExpectations:
-  Max: 3
-
 # Offense count: 1
 # Configuration parameters: AllowSubject.
-RSpec/MultipleMemoizedHelpers:
-  Max: 6
+# RSpec/MultipleMemoizedHelpers:
+#   Max: 6
 
 # Offense count: 1
 # Configuration parameters: Database, Include.

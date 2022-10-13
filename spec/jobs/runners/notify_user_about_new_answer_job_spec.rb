@@ -34,7 +34,9 @@ RSpec.describe Runners::NotifyUserAboutNewAnswerJob, type: :job do
 
     context 'when invalid parameters were passed' do
       it 'does not call on AnswerMailer with non existing answer' do
-        expect(AnswerMailer).not_to receive(:with)
+        allow(AnswerMailer).to receive(:with)
+
+        expect(AnswerMailer).not_to have_received(:with)
         described_class.perform_now(999)
       end
     end

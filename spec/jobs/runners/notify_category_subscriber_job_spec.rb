@@ -34,12 +34,16 @@ RSpec.describe Runners::NotifyCategorySubscriberJob, type: :job do
 
     context 'when invalid parameters were passed' do
       it 'does not call on QuestionMailer with non existing subscriber' do
-        expect(QuestionMailer).not_to receive(:with)
+        allow(QuestionMailer).to receive(:with)
+
+        expect(QuestionMailer).not_to have_received(:with)
         described_class.perform_now(question.id, 999)
       end
 
       it 'does not call on QuestionMailer with non existing question' do
-        expect(QuestionMailer).not_to receive(:with)
+        allow(QuestionMailer).to receive(:with)
+
+        expect(QuestionMailer).not_to have_received(:with)
         described_class.perform_now(999, subscriber.id)
       end
     end

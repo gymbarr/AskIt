@@ -10,14 +10,33 @@ require:
 AllCops:
   NewCops: enable
   TargetRubyVersion: 2.7
+  Exclude:
+    - "db/schema.rb"
+    - "Gemfile"
+    - "lib/tasks/*.rake"
+    - "bin/*"
+    - "config/puma.rb"
+    - "config/spring.rb"
+    - "config/environments/development.rb"
+    - "config/environments/production.rb"
+    - "spec/spec_helper.rb"
 
 Style/Documentation:
   Enabled: false
 
+# Disable checks for the presence of constructors without calls to `super` for services
 Lint/MissingSuper:
   Exclude:
     - 'app/services/**/*'
 
+# Disable cop that checks block length
 Metrics/BlockLength:
   Exclude:
+      #  for active admin files
     - 'app/admin/**/*'
+      # Specs can be pretty large in terms of block length
+    - 'spec/**/*'
+
+# Disables "Too many expectations." in specs
+RSpec/MultipleExpectations:
+  Enabled: false
