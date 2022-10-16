@@ -35,7 +35,9 @@ RSpec.describe Runners::NotifyUserAboutNewCommentJob, type: :job do
 
     context 'when invalid parameters were passed' do
       it 'does not call on CommentMailer with non existing comment' do
-        expect(CommentMailer).not_to receive(:with)
+        allow(CommentMailer).to receive(:with)
+
+        expect(CommentMailer).not_to have_received(:with)
         described_class.perform_now(999)
       end
     end

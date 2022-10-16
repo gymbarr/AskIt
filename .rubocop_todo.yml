@@ -11,12 +11,6 @@
 Metrics/AbcSize:
   Max: 26
 
-# Offense count: 3
-# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods, inherit_mode.
-# AllowedMethods: refine
-Metrics/BlockLength:
-  Max: 45
-
 # Offense count: 6
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods.
 Metrics/MethodLength:
@@ -33,16 +27,6 @@ RSpec/MessageChain:
     - 'spec/jobs/runners/notify_category_subscriber_job_spec.rb'
     - 'spec/jobs/runners/notify_user_about_new_answer_job_spec.rb'
     - 'spec/jobs/runners/notify_user_about_new_comment_job_spec.rb'
-
-# Offense count: 4
-# Configuration parameters: .
-# SupportedStyles: have_received, receive
-RSpec/MessageSpies:
-  EnforcedStyle: receive
-
-# Offense count: 12
-RSpec/MultipleExpectations:
-  Max: 3
 
 # Offense count: 1
 # Configuration parameters: AllowSubject.
@@ -65,13 +49,6 @@ Rails/CreateTableWithTimestamps:
     - 'db/migrate/20220819071701_create_question_categories.rb'
     - 'db/migrate/20220927115917_rolify_create_roles.rb'
 
-# Offense count: 2
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: slashes, arguments
-Rails/FilePath:
-  Exclude:
-    - 'config/environments/development.rb'
-
 # Offense count: 1
 # Configuration parameters: Include.
 # Include: app/models/**/*.rb
@@ -89,11 +66,6 @@ Rails/I18nLocaleAssignment:
     - 'spec/mailers/question_mailer_spec.rb'
     - 'spec/rails_helper.rb'
 
-# Offense count: 1
-Rails/OutputSafety:
-  Exclude:
-    - 'app/helpers/application_helper.rb'
-
 # Offense count: 4
 # Configuration parameters: Include.
 # Include: db/**/*.rb
@@ -103,14 +75,6 @@ Rails/ReversibleMigration:
     - 'db/migrate/20220822140531_drop_comments.rb'
     - 'db/migrate/20220830195557_drop_table_users.rb'
     - 'db/migrate/20221004134450_drop_table_active_admin_comments.rb'
-
-# Offense count: 2
-# Configuration parameters: Include.
-# Include: app/models/**/*.rb
-Rails/UniqueValidationWithoutIndex:
-  Exclude:
-    - 'app/models/category.rb'
-    - 'app/models/user.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
