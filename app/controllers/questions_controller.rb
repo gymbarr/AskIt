@@ -6,12 +6,15 @@ class QuestionsController < ApplicationController
 
   def index
     authorize(Question)
-    @pagy, @questions = pagy(Question.order(created_at: :desc), items: 5)
+    @pagy, @questions = pagy(Question.order(created_at: :desc)
+                                     .includes(%i[user categories question_categories]), items: 5)
     render 'loaded_questions' if params[:page]
   end
 
   def show
-    @pagy, @answers = pagy(question.answers.order(created_at: :desc), items: 5)
+    @pagy, @answers = pagy(question.answers
+                                   .order(created_at: :desc)
+                                   .includes(%i[user]), items: 5)
     @comments_per_page = 5
 
     render 'answers/loaded_answers' if params[:page]
@@ -66,7 +69,7 @@ class QuestionsController < ApplicationController
   end
 
   def question
-    @question ||= Question.includes(answers: :comments).find(params[:id])
+    @question ||= Question.find(params[:id])
   end
 
   def authorize_question!

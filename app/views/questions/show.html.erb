@@ -59,7 +59,7 @@
 <% @answers.each do |answer| %>
   <%= render 'answers/answer', { answer: answer } %>
 
-  <% answer.descendants.first(@comments_per_page).each do |comment| %>
+  <% answer.descendants.includes(%i[user]).first(@comments_per_page).each do |comment| %>
     <%= render 'comments/comment', { comment: comment } %>
   <% end %>
 
