@@ -40,3 +40,19 @@ Metrics/BlockLength:
 # Disables "Too many expectations." in specs
 RSpec/MultipleExpectations:
   Enabled: false
+
+# Configuration parameters: AllowedMethods, AllowedPatterns, IgnoredMethods, CountRepeatedAttributes.
+Metrics/AbcSize:
+  Max: 26
+
+# Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods.
+Metrics/MethodLength:
+  Max: 15
+
+# Configuration parameters: CountAsOne.
+RSpec/ExampleLength:
+  Max: 10
+
+# Configuration parameters: AllowSubject.
+RSpec/MultipleMemoizedHelpers:
+  Max: 6
