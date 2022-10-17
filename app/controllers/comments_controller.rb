@@ -43,7 +43,9 @@ class CommentsController < ApplicationController
   def load_more_comments
     authorize(Comment)
     @question = answer.repliable
-    @pagy_comments, @comments = pagy_countless(answer.descendants.order(created_at: :asc), items: COMMENTS_PER_PAGE)
+    @pagy_comments, @comments = pagy_countless(answer.descendants
+                                                     .order(created_at: :asc)
+                                                     .includes(%i[user]), items: COMMENTS_PER_PAGE)
 
     respond_to do |format|
       format.html # GET
