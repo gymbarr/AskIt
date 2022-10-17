@@ -1,21 +1,25 @@
 # frozen_string_literal: true
 
 class QuestionsController < ApplicationController
+  QUESTIONS_PER_PAGE = 5
+  ANSWERS_PER_PAGE = 5
+  COMMENTS_PER_PAGE = 5
+
   before_action :authorize_question!, only: %i[show edit update destroy vote_up vote_down]
   after_action :verify_authorized
 
   def index
     authorize(Question)
     @pagy, @questions = pagy(Question.order(created_at: :desc)
-                                     .includes(%i[user categories question_categories]), items: 5)
+                                     .includes(%i[user categories question_categories]), items: QUESTIONS_PER_PAGE)
     render 'loaded_questions' if params[:page]
   end
 
   def show
     @pagy, @answers = pagy(question.answers
                                    .order(created_at: :desc)
-                                   .includes(%i[user]), items: 5)
-    @comments_per_page = 5
+                                   .includes(%i[user]), items: ANSWERS_PER_PAGE)
+    @comments_per_page = COMMENTS_PER_PAGE
 
     render 'answers/loaded_answers' if params[:page]
   end

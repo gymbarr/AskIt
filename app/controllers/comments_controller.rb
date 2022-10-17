@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  COMMENTS_PER_PAGE = 5
+
   before_action :authorize_comment!, only: %i[update destroy]
   after_action :verify_authorized
 
@@ -41,7 +43,7 @@ class CommentsController < ApplicationController
   def load_more_comments
     authorize(Comment)
     @question = answer.repliable
-    @pagy_comments, @comments = pagy_countless(answer.descendants.order(created_at: :asc), items: 5)
+    @pagy_comments, @comments = pagy_countless(answer.descendants.order(created_at: :asc), items: COMMENTS_PER_PAGE)
 
     respond_to do |format|
       format.html # GET
