@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AddDeviseTrackableColumnsToUsers < ActiveRecord::Migration[6.0]
+  # rubocop:disable Rails/BulkChangeTable
   def change
     add_column :users, :sign_in_count, :integer, default: 0, null: false
     add_column :users, :current_sign_in_at, :datetime
@@ -8,4 +9,5 @@ class AddDeviseTrackableColumnsToUsers < ActiveRecord::Migration[6.0]
     add_column :users, :current_sign_in_ip, :string
     add_column :users, :last_sign_in_ip, :string
   end
+  # rubocop:enable Rails/BulkChangeTable
 end
