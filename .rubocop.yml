@@ -41,6 +41,10 @@ Metrics/BlockLength:
 RSpec/MultipleExpectations:
   Enabled: false
 
+Rails/I18nLocaleAssignment:
+  Exclude:
+    - 'spec/**/*.rb'
+
 # Configuration parameters: AllowedMethods, AllowedPatterns, IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
   Max: 26
