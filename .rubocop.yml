@@ -60,3 +60,6 @@ RSpec/ExampleLength:
 # Configuration parameters: AllowSubject.
 RSpec/MultipleMemoizedHelpers:
   Max: 6
+
+RSpec/MessageChain:
+  Enabled: false

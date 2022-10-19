@@ -5,10 +5,3 @@
 # one by one as the offenses are removed from the code base.
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
-
-# Offense count: 3
-RSpec/MessageChain:
-  Exclude:
-    - 'spec/jobs/runners/notify_category_subscriber_job_spec.rb'
-    - 'spec/jobs/runners/notify_user_about_new_answer_job_spec.rb'
-    - 'spec/jobs/runners/notify_user_about_new_comment_job_spec.rb'
