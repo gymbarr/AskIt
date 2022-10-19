@@ -67,7 +67,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = ENV.fetch('ACTION_MAILER_DELIVERY_METHOD').to_sym
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: ENV.fetch('HOST') }
+  config.action_mailer.default_url_options = { host: ENV.fetch('APP_URL') }
 
   config.action_mailer.smtp_settings = {
     address: ENV.fetch('SMTP_ADDRESS'),
