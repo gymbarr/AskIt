@@ -46,7 +46,6 @@ en:
     index:
       title: Categories
       new_category: New category
-      subscribed: Subscribed
     show:
       title: Category
       edit_category: Edit category
@@ -65,7 +64,8 @@ en:
     destroy:
       success: The category was successfully deleted!
     category:
-      questions_count: question
+      questions_count: Questions count
+      subscribed: Subscribed
   questions:
     index:
       title: All questions
