@@ -1,0 +1,18 @@
+# config/redis.yml
+
+default: &default
+  host: <%= ENV.fetch("REDIS_HOST") %>
+  port: <%= ENV.fetch("REDIS_PORT") %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  username: <%= ENV.fetch("REDIS_USERNAME") %>
+  password: <%= ENV.fetch("REDIS_PASSWORD") %>
+  database: <%= ENV.fetch("REDIS_DATABASE") %>
+  ssl: <%= ENV.fetch("REDIS_SSL") %>
