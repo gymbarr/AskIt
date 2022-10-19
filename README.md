@@ -1,20 +1,22 @@
-# Project Name
+# AskIt
 > A simple application for getting answers for exciting you questions
+
 > created with Ruby on Rails and Bootstrap
+
 > Live demo [_here_](https://oyster-app-rnsx2.ondigitalocean.app/). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
-* [Setup](#setup)
-* [Usage](#usage)
+* [Prerequisite](#prerequisite)
+* [Getting Started](#getting-started)
+* [Configurations](#configurations)
+* [Sending emails](#sending-emails)
+* [Roles and Administration](#roles-and-administration)
 * [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
-<!-- * [License](#license) -->
 
 
 ## General Information
@@ -32,13 +34,8 @@ This application is a minimalistic version of (https://stackoverflow.com/) web-r
 - Infinit scrolling pagination with Hotwire and Turbo
 - Sending emails to users as background jobs using Redis and Sidekiq
 - Nested answers and comments with vote up/down feature
-- Roles for users and administration GUI using Rolify and ActiveAdmin gem
+- Roles for users and administration GUI using Rolify and ActiveAdmin gems
 - Subscribing to categories and notification users by email about new questions
-
-
-## Screenshots
-![Example screenshot](./img/screenshot.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
 
 
 ## Prerequisite
@@ -52,7 +49,7 @@ This application is a minimalistic version of (https://stackoverflow.com/) web-r
 
 ## Getting Started
 
-- **Clone the repo from github**
+**Clone the repo from github**
 
         $ git clone https://github.com/gymbarr/AskIt.git
 
@@ -62,65 +59,110 @@ This application is a minimalistic version of (https://stackoverflow.com/) web-r
 
         $ yarn install
 
-- **Setup database credentials as shown in the ActiveRecord section this next command or create the database manually**
+**Create `.env` file in the root folder of the project and past to it content of the `.env.example` file**
 
+**Setup database credentials as shown in the ActiveRecord section this next command or create the database manually**
 
         $ rails db:create
 
-- **Run the migrations**
+**Run the migrations**
 
         $ rails db:migrate
 
-- **After setting configurations below**
+**After setting configurations below**
 
        $ rails server
 
-- **Viewing in the browser**
+**Viewing in the browser**
 
        http://localhost:3000
 
-## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
+## Configurations
 
-Proceed to describe how to install / setup one's local environment / get started with the project.
+### ActiveRecord
+
+Set credentials for your database by filling variables with blank values under `# database PostgreSQL variables`
+
+```env
+# .env
+# database PostgreSQL variables
+
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=
+DB_PASSWORD=
+DB_RAILS_MAX_THREADS=5
+DB_NAME_DEVELOPMENT=askit-db-development
+DB_NAME_TEST=askit-db-test
+DB_NAME_PRODUCTION=askit-db-production
+```
+
+### Action Mailer
+
+Set credentials for your mailing server by filling variables with blank values under `# mailer variables`
+
+```env
+# .env
+# mailer variables
+
+ACTION_MAILER_DELIVERY_METHOD=smtp
+SMTP_ADDRESS=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=
+SMTP_PASSWORD=
+SMTP_SECURED_PASSWORD=
+SMTP_AUTHENTICATION=plain
+```
 
 
-## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
+## Sending emails
 
-`write-your-code-here`
+The application maintain notifications by email sending for some scenarios:
+- User subscribed to the category. When other users create questions in this category subscriber receive notifications;
+- The user got reply to the subject (question, answer, comment). The repliable user will receive a notification.
+
+To turn on notifications by emails you need first to configure SMTP settings as shown in the Action Mailer section.
+
+Sending emails perfoms in background jobs using Redis database and Sidekiq worker. So, the next step is to start these services
+
+Start Redis server, for example, using homebrew:
+
+        $ brew services start redis
+
+Make sure the rails server is running, start Sidekiq with necessary queues in parameters:
+
+        $ bundle exec sidekiq -q kickers_notifiers -q runners_notifiers
+
+
+## Roles and Administration
+
+The application has two types of roles:
+- basic user (add to every user after sign up)
+- admin user
+
+Add admin role to user:
+
+```ruby
+user = User.find(1)
+user.add_role Role.admin_user_role
+```
+
+Admin users has acces to administration GUI:
+
+        http://localhost:3000/admin
+
+And to Sidekiq web interface:
+
+        http://localhost:3000/sidekiq
 
 
 ## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
-
-
-## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
-
-Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
-
-To do:
-- Feature to be added 1
-- Feature to be added 2
+Project is: _complete_
 
 
 ## Acknowledgements
-Give credit here.
-- This project was inspired by...
-- This project was based on [this tutorial](https://www.example.com).
-- Many thanks to...
+Many thanks to [@romatehanov](https://github.com/romatehanov) for supporting and code review
 
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
-
-
-<!-- Optional -->
-<!-- ## License -->
-<!-- This project is open source and available under the [... License](). -->
-
-<!-- You don't have to include all sections - just the one's relevant to your project -->
+Created by [@Andrey Timakhovich](https://www.linkedin.com/in/andrey-timakhovich-5a2429169/) - feel free to contact me!
