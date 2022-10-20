@@ -1,9 +1,9 @@
 # AskIt
-> A simple application for getting answers for exciting you questions
+A simple application for getting answers for exciting you questions.
 
-> created with Ruby on Rails and Bootstrap
+Created with Ruby on Rails and Bootstrap.
 
-> Live demo [_here_](https://oyster-app-rnsx2.ondigitalocean.app/). <!-- If you have the project hosted somewhere, include the link here. -->
+> Live demo [_here_](https://oyster-app-rnsx2.ondigitalocean.app/).
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -31,11 +31,11 @@ This application is a minimalistic version of (https://stackoverflow.com/) web-r
 
 
 ## Features
-- Infinit scrolling pagination with Hotwire and Turbo
+- Infinit scrolling pagination with Rails Hotwire and Turbo
 - Sending emails to users as background jobs using Redis and Sidekiq
 - Nested answers and comments with vote up/down feature
 - Roles for users and administration GUI using Rolify and ActiveAdmin gems
-- Subscribing to categories and notification users by email about new questions
+- Subscribing to categories and notifying users by email about new questions
 
 
 ## Prerequisite
@@ -118,8 +118,8 @@ SMTP_AUTHENTICATION=plain
 ## Sending emails
 
 The application maintain notifications by email sending for some scenarios:
-- User subscribed to the category. When other users create questions in this category subscriber receive notifications;
-- The user got reply to the subject (question, answer, comment). The repliable user will receive a notification.
+- Some user subscribed to the category. When other users create questions in this category the subscriber receive notifications;
+- Some user got reply to his subject (question, answer, comment). The repliable user will receive a notification.
 
 To turn on notifications by emails you need first to configure SMTP settings as shown in the Action Mailer section.
 
