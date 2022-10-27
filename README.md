@@ -161,7 +161,7 @@ Project is: _complete_
 
 
 ## Acknowledgements
-Many thanks to [@romatehanov](https://github.com/romatehanov) for supporting and code review
+Many thanks to [@totsamyroma](https://github.com/totsamyroma) for supporting and code review
 
 
 ## Contact
