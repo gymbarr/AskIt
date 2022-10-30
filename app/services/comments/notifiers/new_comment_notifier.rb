@@ -3,7 +3,7 @@
 module Comments
   module Notifiers
     class NewCommentNotifier < ApplicationService
-      attr_reader :question, :comment
+      attr_reader :comment
 
       def initialize(comment)
         @comment = comment

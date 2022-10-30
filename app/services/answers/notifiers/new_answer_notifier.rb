@@ -3,7 +3,7 @@
 module Answers
   module Notifiers
     class NewAnswerNotifier < ApplicationService
-      attr_reader :question, :answer
+      attr_reader :answer
 
       def initialize(answer)
         @answer = answer

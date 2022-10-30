@@ -41,7 +41,7 @@ class ApplicationPolicy
   private
 
   def admin?
-    @user.has_role?(:admin)
+    @user.has_role?(Role.admin_user_role)
   end
 
   def author?

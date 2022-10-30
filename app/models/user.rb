@@ -23,8 +23,6 @@ class User < ApplicationRecord
                        uniqueness: { case_sensitive: false },
                        length: { minimum: USERNAME_MIN_LENGTH, maximum: USERNAME_MAX_LENGTH }
 
-  after_create :assign_default_role
-
   validates :roles, presence: true, on: :update
 
   def author?(obj)

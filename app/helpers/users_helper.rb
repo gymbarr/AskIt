@@ -4,6 +4,6 @@ module UsersHelper
   def admin?
     return unless user_signed_in?
 
-    current_user.has_role?(:admin)
+    current_user.has_role?(Role.admin_user_role)
   end
 end
