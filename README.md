@@ -165,4 +165,4 @@ Many thanks to [@totsamyroma](https://github.com/totsamyroma) for supporting and
 
 
 ## Contact
-Created by [@Andrey Timakhovich](https://www.linkedin.com/in/andrey-timakhovich-5a2429169/) - feel free to contact me!
+Created by [@Andrey Timakhovich](https://www.linkedin.com/in/andrey-timakhovich/) - feel free to contact me!
